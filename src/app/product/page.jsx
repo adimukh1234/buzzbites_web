@@ -234,7 +234,7 @@ export default function ProductPage() {
                 
                 {/* 3D Model */}
                 <Spline
-                  scene="https://prod.spline.design/xy8peGBv-xACXzFT/scene.splinecode"
+                  scene="/tech_inspired_3_d_assets_location.spline"
                   data-lenis-prevent
                   style={{ 
                     width: '150%', 

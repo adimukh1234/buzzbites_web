@@ -21,8 +21,8 @@ export default function SplineBackground() {
     <>
       <div className="fixed inset-0 w-full h-full -z-10">
         <Spline 
-          scene="https://prod.spline.design/pr54my4R4q3Ypo3H/scene.splinecode" 
-          style={{ width: '100%', height: '100%' }}
+          scene="/web_3_agency_saas_hero_section.spline" 
+          style={{ width: '100%', height: '100%', transform: 'translateY(-100px) scale(1.2)' }}
           onLoad={handleLoad}
           onError={handleError}
         />
