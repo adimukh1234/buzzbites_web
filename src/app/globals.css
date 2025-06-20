@@ -938,6 +938,56 @@
   background-size: 30px 30px;
   mask-image: radial-gradient(circle at center, black, transparent 80%);
 }
+
+/* Smooth scroll and animations */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Parallax section styling */
+.parallax-section {
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+/* Mouse parallax styling */
+.mouse-parallax {
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* Scroll reveal animations */
+.scroll-reveal {
+  will-change: transform, opacity;
+}
+
+/* Enhanced 3D feel with perspective */
+.perspective-container {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.depth-element {
+  transform: translateZ(0);
+  will-change: transform;
+}
 }
 
 /* Tailwind v3 Utilities */

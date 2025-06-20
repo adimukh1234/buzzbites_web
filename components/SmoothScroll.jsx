@@ -7,8 +7,8 @@ export default function SmoothScroll({ children }) {
   useEffect(() => {
     // Initialize Lenis with optimized settings for smooth scrolling
     const lenis = new Lenis({
-      duration: 1.2, // Animation duration for buttery smooth feel
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing function
+      duration: 1.6, // Longer duration for even smoother feel
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing function for buttery smooth motion
       smooth: true,
       smoothTouch: false, // Disable on touch to prevent conflicts
       touchMultiplier: 2,
@@ -16,7 +16,7 @@ export default function SmoothScroll({ children }) {
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       normalizeWheel: true,
-      wheelMultiplier: 1,
+      wheelMultiplier: 0.8, // Slightly reduced for more controlled scrolling
       autoResize: true,
     });
 
