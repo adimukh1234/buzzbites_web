@@ -1,5 +1,6 @@
 'use client';
 import FuturisticOverlay from './FuturisticOverlay';
+import ScrambleButton from './ScrambleButton';
 
 export default function Dashboard() {
   return (
@@ -35,7 +36,10 @@ export default function Dashboard() {
                   <span className="text-white font-satoshi font-medium">{imp.name}</span>
                   <span className="text-xs font-satoshi text-gray-400 ml-2">Users</span>
                 </div>
-                <button className="text-xs px-3 py-1 rounded-full bg-yellow-500 text-white font-satoshi font-bold shadow-glow hover:bg-yellow-600 transition">Launch importer</button>
+                <ScrambleButton 
+                  text="Launch importer" 
+                  className="text-xs px-3 py-1 rounded-full bg-yellow-500 text-white font-satoshi font-bold shadow-glow hover:bg-yellow-600 transition"
+                />
               </div>
             ))}
           </div>

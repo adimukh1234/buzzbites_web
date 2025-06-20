@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import Spline from '@splinetool/react-spline';
+import ScrambleNavButton from './ScrambleNavButton';
 
 const sections = [
   {
@@ -65,11 +66,12 @@ export default function TitleStack() {
                 {displayContent?.description || defaultContent.description}
               </p>
             </motion.div>
-          </AnimatePresence>          {/* Simple Title List with white bars */}
-          <div className="flex flex-col gap-1 mt-12">
+          </AnimatePresence>          {/* Simple Title List with white bars */}          <div className="flex flex-col gap-1 mt-12">
             {sections.map((section) => (
-              <button
+              <ScrambleNavButton
                 key={section.id}
+                section={section}
+                hoveredSection={hoveredSection}
                 onMouseEnter={() => setHoveredSection(section.id)}
                 onMouseLeave={() => setHoveredSection(null)}
                 className={`text-left py-4 px-0 transition-all duration-300 relative group ${
@@ -79,27 +81,7 @@ export default function TitleStack() {
                     ? 'text-gray-600 opacity-30'
                     : 'text-gray-400 opacity-100'
                 }`}
-              >                <span className="text-2xl md:text-3xl font-satoshi font-bold block transition-colors duration-300 relative pb-2">
-                  {section.label}
-                  {/* White bar that appears on hover - exactly like Scale.com */}
-                  <motion.div
-                    initial={{ width: 0, opacity: 0 }}
-                    animate={{ 
-                      width: hoveredSection === section.id ? '100%' : '0%',
-                      opacity: hoveredSection === section.id ? 1 : 0
-                    }}
-                    transition={{ 
-                      duration: 0.4, 
-                      ease: [0.25, 1, 0.5, 1],
-                      opacity: { duration: 0.2 }
-                    }}
-                    className="absolute bottom-0 left-0 h-[1px] bg-white"
-                    style={{
-                      transformOrigin: 'left center'
-                    }}
-                  />
-                </span>
-              </button>
+              />
             ))}
           </div>
 

@@ -3,6 +3,7 @@ import Dashboard from '../../components/Dashboard';
 import FeatureCards from '../../components/FeatureCards';
 import SplineBackground from '../../components/SplineBackground';
 import NavBar from '../../components/NavBar';
+import InstaconProduct from '../../components/InstaconProduct';
 
 import './globals.css';
 
@@ -13,9 +14,9 @@ export default function Home() {
       <main className="main-content">
         <SplineBackground />
         <HeroSection />
+        <InstaconProduct />
         <Dashboard />
         <FeatureCards />
-        
       </main>
     </>
   );

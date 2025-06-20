@@ -908,6 +908,36 @@
     filter: brightness(1.5);
   }
 }
+
+/* Tech corner effects */
+.tech-corner-lt {
+  background: linear-gradient(45deg, rgba(234, 179, 8, 0.3), transparent 60%);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.tech-corner-rt {
+  background: linear-gradient(-45deg, rgba(234, 179, 8, 0.3), transparent 60%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+.tech-corner-lb {
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.3), transparent 60%);
+  clip-path: polygon(0 0, 0 100%, 100% 100%);
+}
+
+.tech-corner-rb {
+  background: linear-gradient(-135deg, rgba(234, 179, 8, 0.3), transparent 60%);
+  clip-path: polygon(100% 0, 0 100%, 100% 100%);
+}
+
+/* Circuit lines effect */
+.circuit-lines {
+  background-image: 
+    linear-gradient(to right, rgba(234, 179, 8, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(234, 179, 8, 0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+  mask-image: radial-gradient(circle at center, black, transparent 80%);
+}
 }
 
 /* Tailwind v3 Utilities */

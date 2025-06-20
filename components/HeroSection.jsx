@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import FuturisticOverlay from './FuturisticOverlay';
+import ScrambleButton from './ScrambleButton';
 
 export default function HeroSection() {
   const [loaded, setLoaded] = useState(false);
@@ -70,10 +71,12 @@ export default function HeroSection() {
         <p className={`text-lg md:text-xl font-satoshi font-regular text-gray-300 max-w-2xl mx-auto mt-4 mb-8 leading-relaxed transition-all duration-1000 delay-1300 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
            From a bold media-tech vision to a powerful in-house product-<br />
           <span className="opacity-90">we build tools that transform how teams work.</span>
-        </p>
-          <div className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000 delay-1600 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <button className="glow text-base font-satoshi font-medium">Read More</button>
-          <button className="glow text-base font-satoshi font-bold bg-yellow-500 hover:bg-yellow-600">Book a Demo &rarr;</button>
+        </p>          <div className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000 delay-1600 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        
+          <ScrambleButton 
+            text="Explore Instacon →" 
+            className="glow text-base font-satoshi font-bold bg-yellow-500 hover:bg-yellow-600"
+          />
         </div>
       </div>
     </section>

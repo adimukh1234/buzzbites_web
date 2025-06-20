@@ -5,6 +5,7 @@ import FuturisticOverlay from "../../components/FuturisticOverlay";
 export const metadata = {
   title: "BuzzBites",
   description: "Fine-tuning and RLHF solutions for enterprise AI",
+  
 };
 
 export default function RootLayout({ children }) {
