@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import FuturisticOverlay from './FuturisticOverlay';
 
 export default function HeroSection() {
   const [loaded, setLoaded] = useState(false);
@@ -13,12 +14,10 @@ export default function HeroSection() {
 
     return () => clearTimeout(timer);
   }, []);
-
-  return (    <section className="relative flex flex-col items-center justify-center min-h-[80vh] w-full text-center pt-20 pb-16 overflow-hidden bg-gradient-to-b from-black/20 to-black/40">
-      {/* Futuristic background overlays */}
-      <div className="tech-grid absolute inset-0 opacity-20 pointer-events-none"></div>
-      <div className="data-numbers absolute inset-0 opacity-10 pointer-events-none"></div>
-      
+  return (    
+    <section className="relative flex flex-col items-center justify-center min-h-[80vh] w-full text-center pt-20 pb-16 overflow-hidden bg-gradient-to-b from-black/20 to-black/40">
+      {/* Enhanced futuristic background overlays for hero section */}
+      <FuturisticOverlay opacity="medium" className="z-0" />
       <div className="relative z-10 flex flex-col items-center gap-8">
         <div className={`flex flex-col items-center mb-8 transition-all duration-1000 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="logo-container relative mb-6">
@@ -53,7 +52,7 @@ export default function HeroSection() {
             
             {/* Tech circuit lines */}
             <div className={`circuit-lines absolute inset-0 transition-all duration-2500 ${loaded ? 'opacity-70' : 'opacity-0'}`}></div>
-          </div>          <div className={`tech-title-container text-3xl font-bold tracking-wider transition-all duration-1000 delay-700 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          </div>          <div className={`tech-title-container text-3xl font-satoshi font-black tracking-wider transition-all duration-1000 delay-700 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="tech-title-background"></div>
             <span className="text-white relative z-10">BUZZ</span>
             <span className="text-yellow-400 relative z-10">
@@ -63,20 +62,18 @@ export default function HeroSection() {
             <div className="tech-title-line"></div>
           </div>
         </div>
-        
-        <h1 className={`text-4xl md:text-6xl font-bold text-white leading-tight drop-shadow-lg max-w-4xl transition-all duration-1000 delay-1000 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h1 className={`text-4xl md:text-6xl font-satoshi font-bold text-white leading-tight drop-shadow-lg max-w-4xl transition-all duration-1000 delay-1000 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           Building tech shaping the future of <br />
           <span className="text-yellow-500 inline-block mt-2"> Workforce Intelligence.</span>
         </h1>
         
-        <p className={`text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mt-4 mb-8 leading-relaxed transition-all duration-1000 delay-1300 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          Gain clarity and harness the power of your data with BuzzBites.<br />
-          <span className="opacity-90">Our intuitive dashboard provides real-time analytics and insights.</span>
+        <p className={`text-lg md:text-xl font-satoshi font-regular text-gray-300 max-w-2xl mx-auto mt-4 mb-8 leading-relaxed transition-all duration-1000 delay-1300 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+           From a bold media-tech vision to a powerful in-house product-<br />
+          <span className="opacity-90">we build tools that transform how teams work.</span>
         </p>
-        
-        <div className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000 delay-1600 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <button className="glow text-base">Read More</button>
-          <button className="glow text-base bg-yellow-500 hover:bg-yellow-600">Book a Demo &rarr;</button>
+          <div className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000 delay-1600 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <button className="glow text-base font-satoshi font-medium">Read More</button>
+          <button className="glow text-base font-satoshi font-bold bg-yellow-500 hover:bg-yellow-600">Book a Demo &rarr;</button>
         </div>
       </div>
     </section>

@@ -58,11 +58,10 @@ export default function TitleStack() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2, ease: 'easeOut' }}
-            >
-              <h2 className="text-5xl md:text-6xl font-bold text-white leading-tight mb-6 text-center">
+            >              <h2 className="text-5xl md:text-6xl font-satoshi font-black text-white leading-tight mb-6 text-center">
                 {displayContent?.title || defaultContent.title}
               </h2>
-              <p className="text-xl text-gray-400 leading-relaxed max-w-lg">
+              <p className="text-xl font-satoshi font-regular text-gray-400 leading-relaxed max-w-lg">
                 {displayContent?.description || defaultContent.description}
               </p>
             </motion.div>
@@ -80,8 +79,7 @@ export default function TitleStack() {
                     ? 'text-gray-600 opacity-30'
                     : 'text-gray-400 opacity-100'
                 }`}
-              >
-                <span className="text-2xl md:text-3xl font-semibold block transition-colors duration-300 relative pb-2">
+              >                <span className="text-2xl md:text-3xl font-satoshi font-bold block transition-colors duration-300 relative pb-2">
                   {section.label}
                   {/* White bar that appears on hover - exactly like Scale.com */}
                   <motion.div

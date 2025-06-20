@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import Link from 'next/link';
+import FuturisticOverlay from './FuturisticOverlay';
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
@@ -59,15 +60,15 @@ const NavBar = () => {
   };
 
   return (
-    <>
-      {/* Tailwind v4 Fixed Left Menu */}      <div 
+    <>      {/* Tailwind v4 Fixed Left Menu */}      <div 
         ref={fixedMenuRef} 
-        className="fixed top-0 left-0 w-30 h-screen z-20 flex flex-col justify-between items-center py-8 backdrop-blur-lg border-r border-[var(--color-border)]"
+        className="fixed top-0 left-0 w-30 h-screen z-20 flex flex-col justify-between items-center py-8 backdrop-blur-lg border-r border-[var(--color-border)] overflow-hidden"
         style={{
           background: 'linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(13, 13, 13, 0.97))',
           containerType: 'inline-size'
         }}
       >
+        <FuturisticOverlay opacity="low" className="opacity-60" />
         {/* Top Section */}
         <div className="w-full flex justify-center">          <button
             ref={menuButtonRef}
@@ -130,9 +131,7 @@ const NavBar = () => {
         <div className="text-xs text-center opacity-100 tracking-wider uppercase" style={{fontFamily: "var(--font-heading)"}}>
           <p className="-rotate-90">© 2025</p>
         </div>
-      </div>
-
-      {/* Tailwind v4 Fullscreen Overlay Menu */}      <div 
+      </div>      {/* Tailwind v4 Fullscreen Overlay Menu */}      <div 
         ref={menuOverlayRef} 
         className={`fixed inset-0 z-10 overflow-hidden backdrop-blur-2xl transition-transform duration-[800ms] ${
           isMenuOpen ? 'translate-x-0' : '-translate-x-full'
@@ -142,6 +141,9 @@ const NavBar = () => {
           transitionTimingFunction: 'var(--ease-expo-out)'
         }}
       >
+        {/* Enhanced Futuristic Overlays */}
+        <FuturisticOverlay opacity="medium" className="z-0" />
+        
         {/* Gradient Overlay */}        <div 
           className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] pointer-events-none opacity-100 z-0 animate-[gradientFlow_20s_infinite_alternate_ease-in-out]"
           style={{

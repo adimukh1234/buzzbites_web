@@ -1,15 +1,6 @@
-import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "../../components/SmoothScroll";
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import FuturisticOverlay from "../../components/FuturisticOverlay";
 
 export const metadata = {
   title: "BuzzBites",
@@ -20,6 +11,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        {/* Global futuristic background overlays */}
+        <FuturisticOverlay opacity="low" className="z-0 fixed" />
+        
         <SmoothScroll>
           <div className="relative z-10">
             {children}

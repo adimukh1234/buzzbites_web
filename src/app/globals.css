@@ -1,9 +1,99 @@
+/* Satoshi Font Declarations - Must come before all other CSS */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Variable.woff2') format('woff2');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-VariableItalic.woff2') format('woff2');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: italic;
+}
+
 /* Tailwind CSS v3 */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Import Fonts */
+/* Satoshi Font Utilities */
+@layer utilities {
+  .font-satoshi {
+    font-family: 'Satoshi', sans-serif;
+  }
+
+  .font-light {
+    font-weight: 300;
+  }
+
+  .font-regular {
+    font-weight: 400;
+  }
+
+  .font-medium {
+    font-weight: 500;
+  }
+
+  .font-bold {
+    font-weight: 700;
+  }
+
+  .font-black {
+    font-weight: 900;
+  }
+
+  .font-italic {
+    font-style: italic;
+  }
+
+  /* Text Size Utilities with Satoshi */
+  .display-text {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+  }
+
+  .heading-text {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .body-text {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 400;
+  }
+
+  .caption-text {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+
+  /* Special Text Styles with Satoshi */
+  .tech-title {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .cyber-text {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .accent-text {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 500;
+    font-style: italic;
+  }
+}
 
 /* Tailwind v3 Custom Properties */
 :root {
@@ -17,9 +107,9 @@
   --color-border: #333333; /* Dark gray for borders */
   
   /* Typography */
-  --font-display: "Boldonse", serif;
-  --font-heading: "EB Garamond", serif;
-  --font-body: "Inter", sans-serif;
+  --font-display: "Satoshi", sans-serif;
+  --font-heading: "Satoshi", sans-serif;
+  --font-body: "Satoshi", sans-serif;
   
   /* Animation tokens */
   --duration-fast: 0.3s;
@@ -37,7 +127,7 @@
   body {
     background: linear-gradient(to bottom right, #0d0d0d, #1a1a1a);
     color: white;
-    font-family: var(--font-body);
+    font-family: "Satoshi", sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
     background-color: var(--color-primary);
@@ -583,28 +673,65 @@
     background-image:
       linear-gradient(rgba(255, 255, 0, 0.1) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 0, 0.1) 1px, transparent 1px);
-    background-size: 40px 40px;
+    background-size: 50px 50px;
     opacity: 0.1;
     animation: gridPulse 10s ease-in-out infinite;
+    z-index: 0;
   }
 
   @keyframes gridPulse {
     0%, 100% {
       opacity: 0.1;
-      background-size: 40px 40px;
+      background-size: 50px 50px;
     }
     50% {
       opacity: 0.15;
-      background-size: 42px 42px;
+      background-size: 52px 52px;
     }
+  }
+
+  /* Circuit Overlay */
+  .circuit-overlay {
+    background-image: 
+      radial-gradient(circle at 30% 20%, rgba(255, 255, 0, 0.03) 1px, transparent 1px),
+      radial-gradient(circle at 70% 60%, rgba(255, 255, 0, 0.03) 1px, transparent 1px),
+      radial-gradient(circle at 40% 80%, rgba(255, 255, 0, 0.03) 1px, transparent 1px),
+      radial-gradient(circle at 80% 10%, rgba(255, 255, 0, 0.03) 1px, transparent 1px);
+    background-size: 300px 300px, 250px 250px, 200px 200px, 350px 350px;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.1;
+  }
+
+  .circuit-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(45deg, transparent 98%, rgba(255, 255, 0, 0.1) 2%),
+      linear-gradient(135deg, transparent 98%, rgba(255, 255, 0, 0.1) 2%);
+    background-size: 30px 30px;
+    opacity: 0.5;
+  }
+
+  .circuit-overlay::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20,20 L20,40 L40,40 M60,20 L60,40 L80,40 M20,60 L20,80 L40,80 M80,60 L60,80 M60,60 L80,80' stroke='%23ffff00' stroke-width='0.5' fill='none' opacity='0.2'/%3E%3C/svg%3E");
+    background-size: 100px 100px;
+    opacity: 0.2;
   }
 
   /* Data Numbers Animation */
   .data-numbers {
-    overflow: hidden;
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'%3E%3Cstyle%3E @keyframes fade %7B 0%25, 100%25 %7B opacity: 0; %7D 50%25 %7B opacity: 1; %7D %7D text %7B font-family: monospace; font-size: 10px; fill: %23ffff00; opacity: 0.5; animation: fade 3s infinite; %7D %3C/style%3E%3Ctext x='20' y='20' style='animation-delay: 0s;'%3E01010%3C/text%3E%3Ctext x='120' y='30' style='animation-delay: 0.2s;'%3E110011%3C/text%3E%3Ctext x='220' y='40' style='animation-delay: 0.4s;'%3E01001%3C/text%3E%3Ctext x='320' y='60' style='animation-delay: 0.6s;'%3E11010%3C/text%3E%3Ctext x='30' y='90' style='animation-delay: 0.8s;'%3E10101%3C/text%3E%3Ctext x='130' y='110' style='animation-delay: 1s;'%3E01010%3C/text%3E%3Ctext x='230' y='130' style='animation-delay: 1.2s;'%3E10101%3C/text%3E%3Ctext x='330' y='150' style='animation-delay: 1.4s;'%3E01010%3C/text%3E%3Ctext x='40' y='180' style='animation-delay: 1.6s;'%3E10110%3C/text%3E%3Ctext x='140' y='200' style='animation-delay: 1.8s;'%3E01101%3C/text%3E%3Ctext x='240' y='220' style='animation-delay: 2s;'%3E10101%3C/text%3E%3Ctext x='340' y='250' style='animation-delay: 2.2s;'%3E01011%3C/text%3E%3Ctext x='50' y='280' style='animation-delay: 2.4s;'%3E10101%3C/text%3E%3Ctext x='150' y='300' style='animation-delay: 2.6s;'%3E01010%3C/text%3E%3Ctext x='250' y='330' style='animation-delay: 2.8s;'%3E10101%3C/text%3E%3Ctext x='350' y='350' style='animation-delay: 3s;'%3E01010%3C/text%3E%3Ctext x='60' y='380' style='animation-delay: 3.2s;'%3E10100%3C/text%3E%3Ctext x='160' y='400' style='animation-delay: 3.4s;'%3E11010%3C/text%3E%3Ctext x='260' y='420' style='animation-delay: 3.6s;'%3E01010%3C/text%3E%3Ctext x='360' y='440' style='animation-delay: 3.8s;'%3E10101%3C/text%3E%3C/svg%3E") repeat;
     opacity: 0.05;
     animation: dataDrift 30s linear infinite;
+    z-index: 0;
   }
 
   @keyframes dataDrift {
@@ -616,57 +743,171 @@
     }
   }
 
-  /* Tech Title */
-  .tech-title-container {
-    position: relative;
-    padding: 0.5rem 1.5rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: 0.1em;
-    overflow: hidden;
-  }
-
-  .tech-title-background {
+  /* Tech Scan Line Effects */
+  .tech-scanline-container {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(255, 255, 0, 0.2);
-    transform: skew(-15deg);
+    overflow: hidden;
+    pointer-events: none;
     z-index: 1;
-    backdrop-filter: blur(4px);
   }
 
-  .tech-title-line {
+  .tech-scanline-horizontal {
     position: absolute;
-    bottom: 0;
     left: 0;
-    right: 0;
+    width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      rgba(255, 255, 0, 0.8) 20%, 
-      rgba(255, 255, 0, 1) 50%, 
-      rgba(255, 255, 0, 0.8) 80%, 
-      transparent 100%
-    );
-    z-index: 2;
-    animation: titleLineScan 3s ease-in-out infinite;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 0, 0.5), transparent);
+    animation: scanHorizontal 7s ease-in-out infinite;
+    opacity: 0.7;
   }
 
-  @keyframes titleLineScan {
+  .tech-scanline-vertical {
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, rgba(255, 255, 0, 0.5), transparent);
+    animation: scanVertical 11s ease-in-out infinite;
+    opacity: 0.5;
+  }
+
+  @keyframes scanHorizontal {
     0%, 100% {
-      transform: translateX(-100%);
+      top: -5%;
       opacity: 0;
     }
-    40%, 60% {
+    25%, 75% {
       opacity: 1;
     }
-    100% {
-      transform: translateX(100%);
-      opacity: 0;
+    50% {
+      top: 105%;
     }
   }
+
+  @keyframes scanVertical {
+    0%, 100% {
+      left: -5%;
+      opacity: 0;
+    }
+    25%, 75% {
+      opacity: 0.7;
+    }
+    50% {
+      left: 105%;
+    }
+  }
+
+  /* Tech Corner Brackets */
+  .tech-corner-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .tech-corner-lt, .tech-corner-rt, .tech-corner-lb, .tech-corner-rb {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 0, 0.6);
+    opacity: 0.4;
+  }
+
+  .tech-corner-lt {
+    top: 20px;
+    left: 20px;
+    border-right: none;
+    border-bottom: none;
+    animation: cornerPulse 3s ease-in-out infinite;
+  }
+
+  .tech-corner-rt {
+    top: 20px;
+    right: 20px;
+    border-left: none;
+    border-bottom: none;
+    animation: cornerPulse 3s ease-in-out infinite 0.75s;
+  }
+
+  .tech-corner-lb {
+    bottom: 20px;
+    left: 20px;
+    border-right: none;
+    border-top: none;
+    animation: cornerPulse 3s ease-in-out infinite 1.5s;
+  }
+
+  .tech-corner-rb {
+    bottom: 20px;
+    right: 20px;
+    border-left: none;
+    border-top: none;
+    animation: cornerPulse 3s ease-in-out infinite 2.25s;
+  }
+
+  @keyframes cornerPulse {
+    0%, 100% {
+      opacity: 0.4;
+      filter: brightness(1);
+    }
+    50% {
+      opacity: 0.7;
+      filter: brightness(1.5);
+    }
+  }
+
+  /* Micro corner brackets for buttons and smaller elements */
+.tech-corner-micro {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1px solid rgba(255, 255, 0, 0.7);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.tech-corner-micro.tech-corner-lt {
+  top: 2px;
+  left: 2px;
+  border-right: none;
+  border-bottom: none;
+  animation: microCornerPulse 2s ease-in-out infinite;
+}
+
+.tech-corner-micro.tech-corner-rt {
+  top: 2px;
+  right: 2px;
+  border-left: none;
+  border-bottom: none;
+  animation: microCornerPulse 2s ease-in-out infinite 0.5s;
+}
+
+.tech-corner-micro.tech-corner-lb {
+  bottom: 2px;
+  left: 2px;
+  border-right: none;
+  border-top: none;
+  animation: microCornerPulse 2s ease-in-out infinite 1s;
+}
+
+.tech-corner-micro.tech-corner-rb {
+  bottom: 2px;
+  right: 2px;
+  border-left: none;
+  border-top: none;
+  animation: microCornerPulse 2s ease-in-out infinite 1.5s;
+}
+
+@keyframes microCornerPulse {
+  0%, 100% {
+    opacity: 0.5;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.9;
+    filter: brightness(1.5);
+  }
+}
 }
 
 /* Tailwind v3 Utilities */

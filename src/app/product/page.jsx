@@ -2,7 +2,6 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import Header from "../../../components/Header";
 import '../globals.css';
 import Spline from '@splinetool/react-spline';
 import TitleStack from "../../../components/TitleStack";
@@ -125,10 +124,7 @@ export default function ProductPage() {
         />
       </motion.div>
 
-      {/* Header */}
-      <div className="relative z-30">
-        <Header />
-      </div>
+
 
       {/* Hero Section with Parallax */}
       <motion.section 

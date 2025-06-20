@@ -1,0 +1,73 @@
+/* Satoshi Font Utilities */
+
+.font-satoshi {
+  font-family: 'Satoshi', sans-serif;
+}
+
+.font-light {
+  font-weight: 300;
+}
+
+.font-regular {
+  font-weight: 400;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-black {
+  font-weight: 900;
+}
+
+.font-italic {
+  font-style: italic;
+}
+
+/* Text Size Utilities with Satoshi */
+.display-text {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.heading-text {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.body-text {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 400;
+}
+
+.caption-text {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+/* Special Text Styles with Satoshi */
+.tech-title {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.cyber-text {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.accent-text {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}

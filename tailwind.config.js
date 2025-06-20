@@ -8,6 +8,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Satoshi', 'sans-serif'],
+        satoshi: ['Satoshi', 'sans-serif'],
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
@@ -20,7 +24,14 @@ module.exports = {
       colors: {
         'cyber-yellow': '#ffff00',
         'cyber-gold': '#ffd700',
-      }
+      },
+      fontWeight: {
+        light: 300,
+        regular: 400,
+        medium: 500,
+        bold: 700,
+        black: 900,
+      },
     },
   },
   plugins: [],
