@@ -1,12 +1,11 @@
 import HeroSection from '../../components/HeroSection';
-import Dashboard from '../../components/Dashboard';
-import FeatureCards from '../../components/FeatureCards';
 import SplineBackground from '../../components/SplineBackground';
 import NavBar from '../../components/NavBar';
-import InstaconProduct from '../../components/InstaconProduct';
+import InstaconProduct from '../../components/InstaconProduct.fixed';
 import ScrollReveal from '../../components/ScrollReveal';
 import ParallaxSection from '../../components/ParallaxSection';
 import MouseParallax from '../../components/MouseParallax';
+import MetricCards from '../../components/MetricCards.fixed';
 
 import './globals.css';
 
@@ -25,11 +24,17 @@ export default function Home() {
         </ParallaxSection>
         
         <ScrollReveal effect="fade-up">
-          <Dashboard />
+         
         </ScrollReveal>
         
-        <ScrollReveal effect="fade-up" delay={0.2}>
-          <FeatureCards />
+        <div className="relative z-10">
+          <ScrollReveal effect="fade-up" delay={0.2}>
+            <MetricCards />
+          </ScrollReveal>
+        </div>
+        
+        <ScrollReveal effect="fade-up" delay={0.3}>
+          
         </ScrollReveal>
       </main>
     </>

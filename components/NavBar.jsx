@@ -24,7 +24,7 @@ const NavBar = () => {
       gsap.fromTo(
         fixedMenuRef.current,
         { x: -120, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.6, ease: "power2.out", delay: 0.1 }
+        { x: 0, opacity: 1, duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96], delay: 0.1 }
       );
     }
 
