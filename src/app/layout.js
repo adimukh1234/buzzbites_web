@@ -1,6 +1,7 @@
 import "./globals.css";
 import SmoothScroll from "../../components/SmoothScroll";
 import FuturisticOverlay from "../../components/FuturisticOverlay";
+import PreLoader from "../../components/PreLoader";
 
 export const metadata = {
   title: "BuzzBites",
@@ -11,7 +12,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body suppressHydrationWarning>
+        {/* Preloader - The suppressHydrationWarning above helps with client/server rendering differences */}
+        <PreLoader />
+        
         {/* Global futuristic background overlays */}
         <FuturisticOverlay opacity="low" className="z-0 fixed" />
         
