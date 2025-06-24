@@ -7,6 +7,7 @@ import ParallaxSection from '../../components/ParallaxSection';
 import MouseParallax from '../../components/MouseParallax';
 import MetricCards from '../../components/MetricCards';
 import TechScrollbar from '../../components/TechScrollbar';
+import AnimatedTimeline from '../../components/AnimatedTimeline';
 
 import './globals.css';
 
@@ -32,7 +33,7 @@ export default function Home() {
         </div>
         
         <ScrollReveal effect="fade-up" delay={0.3}>
-          
+          <AnimatedTimeline />
         </ScrollReveal>
       </main>
     </>

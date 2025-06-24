@@ -555,7 +555,6 @@ export default function MetricCards() {
     });
     return () => unsubscribe();
   }, [scrollProgressTransformed]);
-  
   // Auto-play functionality
   useEffect(() => {
     if (!isAutoPlaying || !isInView) return;
@@ -670,9 +669,7 @@ export default function MetricCards() {
         controls.current[activeIndex].triggered = true;
       }
     }
-  }, [activeIndex, isInView, forceShow]);
-
-  return (
+  }, [activeIndex, isInView, forceShow]);  return (
     <section 
       ref={sectionRef}
       className="py-16 relative overflow-hidden bg-black/90 backdrop-blur-md min-h-[600px] flex flex-col justify-center" 
@@ -695,9 +692,7 @@ export default function MetricCards() {
           } : { opacity: 0, y: 20 }}
         >
           Instacon by the Numbers
-        </motion.h2>
-        
-        <div className="relative max-w-4xl mx-auto">
+        </motion.h2>        <div className="relative max-w-4xl mx-auto">
           {/* Navigation Arrows */}
           <div className="absolute inset-y-0 left-0 md:left-4 z-50 flex items-center">
             <motion.button 
@@ -735,7 +730,7 @@ export default function MetricCards() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </motion.button>
-          </div>          {/* Stacked Cards Container */}
+          </div>{/* Stacked Cards Container */}
           <div className="relative min-h-[520px] flex items-center justify-center">
             <div className="absolute w-full max-w-2xl mx-auto">
               {metrics.map((metric, index) => (
@@ -758,16 +753,15 @@ export default function MetricCards() {
                 </div>
               ))}
             </div>
-          </div>
-          
-          {/* Indicator Dots */}
+          </div>          {/* Indicator Dots */}
           <motion.div 
             className="flex justify-center mt-10 space-x-3"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ delay: 0.7 }}
           >
-            {metrics.map((metric, index) => (              <motion.button
+            {metrics.map((metric, index) => (
+              <motion.button
                 key={index}
                 onClick={() => navigateToCard(index)}
                 className={`w-4 h-4 rounded-full transition-all duration-300`}
