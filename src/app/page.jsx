@@ -5,13 +5,15 @@ import InstaconProduct from '../../components/InstaconProduct.fixed';
 import ScrollReveal from '../../components/ScrollReveal';
 import ParallaxSection from '../../components/ParallaxSection';
 import MouseParallax from '../../components/MouseParallax';
-import MetricCards from '../../components/MetricCards.fixed';
+import MetricCards from '../../components/MetricCards';
+import TechScrollbar from '../../components/TechScrollbar';
 
 import './globals.css';
 
 export default function Home() {
   return (
     <>
+      <TechScrollbar />
       <NavBar />
       <main className="main-content">
         <SplineBackground />
@@ -22,10 +24,6 @@ export default function Home() {
         <ParallaxSection offset={0.3} direction="up">
           <InstaconProduct />
         </ParallaxSection>
-        
-        <ScrollReveal effect="fade-up">
-         
-        </ScrollReveal>
         
         <div className="relative z-10">
           <ScrollReveal effect="fade-up" delay={0.2}>
