@@ -10,6 +10,136 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+// Themed interactive button that appears after timeline is complete
+const ExploreButton = ({ visible }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isPressed, setIsPressed] = useState(false);
+  const buttonRef = useRef(null);
+  const isInView = useInView(buttonRef, { once: false, amount: 0.1 });
+  
+  // Combined visibility check - button should appear if either prop is true or it's in view
+  const shouldShow = visible || isInView;
+  
+  // Button click handler
+  const handleClick = () => {
+    setIsPressed(true);
+    
+    // Add button click effect
+    setTimeout(() => {
+      setIsPressed(false);
+      // You could add navigation logic here
+      window.open('/about', '_self'); // Example: navigate to about page
+    }, 600);
+  };
+
+  return (
+    <motion.div
+      ref={buttonRef}
+      className="flex justify-center"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ 
+        opacity: shouldShow ? 1 : 0, 
+        y: shouldShow ? 0 : 50,
+        scale: isPressed ? 0.95 : 1
+      }}
+      transition={{ 
+        duration: 0.8, 
+        type: "spring", 
+        stiffness: 100,
+        damping: 15
+      }}
+    >
+      <motion.button
+        className={`
+          relative overflow-hidden px-10 py-5 rounded-full 
+          bg-gradient-to-r from-blue-600 to-purple-600
+          text-white font-satoshi font-bold text-lg
+          shadow-lg transform transition-all duration-300
+          border-2 border-white/10 backdrop-blur-sm
+        `}
+        style={{
+          boxShadow: isHovered ? 
+            '0 0 25px 5px rgba(139, 92, 246, 0.5), inset 0 0 15px rgba(139, 92, 246, 0.5)' : 
+            '0 0 15px 2px rgba(139, 92, 246, 0.3), inset 0 0 10px rgba(139, 92, 246, 0.2)'
+        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onMouseDown={() => setIsPressed(true)}
+        onMouseUp={() => setIsPressed(false)}
+        onClick={handleClick}
+      >
+        {/* Animated particles */}
+        {isHovered && (
+          <>
+            <motion.div 
+              className="absolute top-0 left-0 w-full h-full"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {[...Array(5)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-1 h-1 rounded-full bg-white"
+                  initial={{ 
+                    x: "50%", 
+                    y: "50%", 
+                    opacity: 1
+                  }}
+                  animate={{ 
+                    x: `${50 + (Math.random() * 80 - 40)}%`, 
+                    y: `${50 + (Math.random() * 80 - 40)}%`, 
+                    opacity: 0,
+                    scale: Math.random() * 3 + 2
+                  }}
+                  transition={{ 
+                    duration: Math.random() * 1 + 0.5, 
+                    repeat: Infinity, 
+                    repeatDelay: Math.random() * 0.5
+                  }}
+                />
+              ))}
+            </motion.div>
+          </>
+        )}
+
+        {/* Button text with tech-inspired animation */}
+        <span className="relative z-10 flex items-center">
+          <span>Explore Our Whole Story</span>
+          <motion.svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            className="h-5 w-5 ml-2"
+            viewBox="0 0 20 20" 
+            fill="currentColor"
+            animate={{
+              x: isHovered ? [0, 5, 0] : 0,
+              opacity: isHovered ? [1, 0.7, 1] : 1
+            }}
+            transition={{
+              duration: 1,
+              repeat: isHovered ? Infinity : 0,
+              ease: 'easeInOut'
+            }}
+          >
+            <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+          </motion.svg>
+        </span>
+
+        {/* Animated border on press */}
+        {isPressed && (
+          <motion.div
+            className="absolute inset-0 border-2 rounded-full"
+            initial={{ opacity: 1, scale: 1 }}
+            animate={{ opacity: 0, scale: 1.2 }}
+            transition={{ duration: 0.5 }}
+            style={{ borderColor: 'rgba(147, 51, 234, 0.5)' }}
+          />
+        )}
+      </motion.button>
+    </motion.div>
+  );
+};
+
 const timelineData = [
   {
     year: '2018',
@@ -336,10 +466,13 @@ const TimelineItem = ({ item, index }) => {
 };
 
 const AnimatedTimeline = () => {
-  const containerRef = useRef(null);  const timelineLineRef = useRef(null);
+  const containerRef = useRef(null);
+  const timelineLineRef = useRef(null);
   const timelineContentRef = useRef(null);
   const [isMounted, setIsMounted] = useState(false);
-  const [particles, setParticles] = useState([]);  // Create a more aggressive scroll monitoring for the timeline line
+  const [particles, setParticles] = useState([]);
+  const [showExploreButton, setShowExploreButton] = useState(false);
+  // Create a more aggressive scroll monitoring for the timeline line
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start 80%', 'end 20%']  // Start earlier and end later for full line coverage
@@ -480,7 +613,7 @@ const AnimatedTimeline = () => {
   }, [isMounted]);
 
   // Extra guarantee that the timeline will completely fill when scrolled to bottom  // This useEffect ensures that when the second-to-last timeline item becomes visible,
-  // the timeline line reaches 100% immediately
+  // the timeline line reaches 100% immediately and the explore button appears
   useEffect(() => {
     if (!timelineLineRef.current || !isMounted) return;
     
@@ -496,10 +629,35 @@ const AnimatedTimeline = () => {
               ease: 'power2.out', // Stronger easing
               overwrite: 'auto'
             });
+            
+            // Show explore button once the timeline is complete
+            setTimeout(() => {
+              setShowExploreButton(true);
+            }, 500);
           }
         });
       },
-      { threshold: 0.2 } // Lower threshold so it triggers earlier
+      { threshold: 0.1, rootMargin: "-10% 0px" } // Lower threshold so it triggers earlier
+    );
+    
+    // Create a direct observer for the last item to ensure button is shown
+    const lastItemObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          // When last timeline item is in view, always show the button
+          if (entry.isIntersecting) {
+            gsap.to(timelineLineRef.current, { 
+              height: '100%', 
+              duration: 0.2,
+              overwrite: 'auto'
+            });
+            
+            // Force button to appear
+            setShowExploreButton(true);
+          }
+        });
+      },
+      { threshold: 0.1 } // Very low threshold to ensure triggering
     );
     
     // Find the second-to-last timeline item
@@ -507,25 +665,70 @@ const AnimatedTimeline = () => {
     if (allItems.length >= 2) {
       const secondToLastItem = allItems[allItems.length - 2]; 
       observer.observe(secondToLastItem);
+      
+      // Always observe the last item
+      const lastItem = allItems[allItems.length - 1];
+      lastItemObserver.observe(lastItem);
     }
     
     // Also observe the bottom dot as a fallback
     const bottomDot = document.querySelector('.timeline-bottom-dot');
     if (bottomDot) {
       observer.observe(bottomDot);
+      lastItemObserver.observe(bottomDot);
     }
     
+    // Set a timeout fallback to ensure button appears eventually
+    const buttonTimer = setTimeout(() => {
+      if (!showExploreButton) {
+        setShowExploreButton(true);
+      }
+    }, 5000); // Show button after 5 seconds if not already shown
+    
     return () => {
+      clearTimeout(buttonTimer);
+      
       if (allItems.length >= 2) {
         const secondToLastItem = allItems[allItems.length - 2];
+        const lastItem = allItems[allItems.length - 1];
         observer.unobserve(secondToLastItem);
+        lastItemObserver.unobserve(lastItem);
       }
       
       if (bottomDot) {
         observer.unobserve(bottomDot);
+        lastItemObserver.unobserve(bottomDot);
       }
     };
-  }, [isMounted]);
+  }, [isMounted, showExploreButton]);
+
+  // Additional effect to ensure button appears when scrolled near the bottom of the timeline
+  useEffect(() => {
+    if (!isMounted || typeof window === 'undefined') return;
+
+    const handleScroll = () => {
+      // Calculate when we're near the bottom of the timeline section
+      const section = containerRef.current;
+      if (!section) return;
+      
+      const { bottom } = section.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      
+      // If the bottom of the timeline is within 30% of the viewport height from the bottom
+      if (bottom < viewportHeight * 1.3) {
+        setShowExploreButton(true);
+      }
+    };
+
+    // Listen for scroll events
+    window.addEventListener('scroll', handleScroll);
+    
+    // Initial check
+    handleScroll();
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };  }, [isMounted]);
 
   return (
     <section ref={containerRef} className="relative min-h-screen bg-black py-20 pb-56 overflow-hidden">
@@ -656,21 +859,43 @@ const AnimatedTimeline = () => {
                 '0 0 0 0 rgba(147, 51, 234, 0)'
               ]
             }}
-            transition={{ duration: 3.5, repeat: Infinity, delay: 1.5, ease: 'easeInOut' }}
+            transition={{ duration: 3.5, repeat: Infinity, delay: 1.5, ease: 'easeInOut' }}          />
+        </div>
+        
+        {/* Add explore button at the end of the timeline content */}        <div className="mt-24 pt-8 pb-24 text-center relative z-20">          <motion.div 
+            className="w-32 h-0.5 bg-gradient-to-r from-transparent via-purple-500 to-transparent mx-auto mb-10"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: showExploreButton ? 1 : 0, opacity: showExploreButton ? 1 : 0 }}
+            transition={{ duration: 1.5, delay: 0.3 }}
           />
+          
+          {/* Add more prominence to the button */}
+          <div className="relative">
+            {/* Glowing background effect */}
+            {showExploreButton && (
+              <motion.div
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full"
+                style={{
+                  background: "radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, rgba(59, 130, 246, 0.1) 40%, transparent 70%)",
+                }}
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.2 }}
+              />
+            )}
+            <ExploreButton visible={showExploreButton} />
+          </div>
         </div>
       </div>      {/* Enhanced bottom effects */}
       <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[500px] h-80 bg-gradient-radial from-purple-600/15 via-blue-600/8 to-transparent rounded-full blur-3xl"></div>
-      <motion.div 
-        className="absolute bottom-20 left-1/4 w-24 h-24 bg-blue-400/8 rounded-full blur-2xl"
+      <motion.div        className="absolute bottom-20 left-1/4 w-24 h-24 bg-blue-400/8 rounded-full blur-2xl"
         animate={{
           y: [-15, 15, -15],
           x: [-8, 8, -8],
           scale: [1, 1.1, 1]
         }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div 
+      />      <motion.div 
         className="absolute bottom-32 right-1/4 w-20 h-20 bg-purple-400/8 rounded-full blur-2xl"
         animate={{
           y: [15, -15, 15],
