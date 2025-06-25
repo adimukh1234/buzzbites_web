@@ -66,14 +66,57 @@ export default function LetsTalkSection() {
         id: "lets-talk"
       }
     });
-    
-    // Animate background
+      // Animate background with enhanced visibility
     tl.fromTo(
       backgroundRef.current,
       { opacity: 0, scale: 0.9 },
-      { opacity: 0.6, scale: 1, duration: 0.5 }, // Faster duration
+      { opacity: 1, scale: 1, duration: 0.5 }, // Faster duration
       0
     );
+    
+    // Animate individual background layers for more dramatic effect
+    const bgElements = backgroundRef.current.querySelectorAll('div');
+    if (bgElements.length > 0) {
+      // Base gradient
+      tl.fromTo(
+        bgElements[0],
+        { opacity: 0 },
+        { opacity: 0.8, duration: 0.4 },
+        0
+      );
+      
+      // Secondary gradient
+      tl.fromTo(
+        bgElements[1],
+        { opacity: 0 },
+        { opacity: 0.7, duration: 0.4 },
+        0.05
+      );
+      
+      // Radial gradients
+      tl.fromTo(
+        [bgElements[2], bgElements[3]],
+        { opacity: 0, scale: 0.8 },
+        { opacity: 1, scale: 1, duration: 0.6, stagger: 0.1 },
+        0.1
+      );
+      
+      // Central glow
+      tl.fromTo(
+        bgElements[4],
+        { opacity: 0, scale: 0.5 },
+        { opacity: 1, scale: 1, duration: 0.7 },
+        0.2
+      );
+      
+      // Diagonal lines, color wash, and blur
+      tl.fromTo(
+        [bgElements[5], bgElements[6], bgElements[7]],
+        { opacity: 0 },
+        { opacity: [0.2, 1, 0.2], duration: 0.5, stagger: 0.1 },
+        0.3
+      );
+    }
       // Animate title using SplitText-like approach with individual spans and enhanced effects
     if (titleRef.current) {
       const titleElements = titleRef.current.querySelectorAll('.title-char');
@@ -191,23 +234,29 @@ export default function LetsTalkSection() {
         ref={backgroundRef}
         className="absolute inset-0 z-0"
       >
-        {/* Base gradient */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-purple-900/30 to-indigo-900/30 opacity-60"></div>
+        {/* Base gradient - more visible */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-purple-900/50 to-indigo-900/50 opacity-80"></div>
         
-        {/* Radial gradients for depth */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(121,74,255,0.15),transparent_70%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(29,78,216,0.15),transparent_70%)]"></div>
+        {/* Secondary gradient layer for richness */}
+        <div className="absolute inset-0 bg-gradient-to-bl from-fuchsia-800/40 to-blue-900/40 opacity-70"></div>
         
-        {/* Central glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/3 h-2/3 bg-purple-600/5 rounded-full blur-[120px] animate-pulse"></div>
+        {/* Radial gradients for depth - more intense */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(121,74,255,0.25),transparent_60%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(29,78,216,0.25),transparent_60%)]"></div>
         
-        {/* Cool diagonal lines */}
-        <div className="absolute inset-0 opacity-10 overflow-hidden">
-          <div className="absolute -inset-x-full -inset-y-full bg-[linear-gradient(45deg,rgba(168,85,247,0.1)_25%,transparent_25%,transparent_50%,rgba(168,85,247,0.1)_50%,rgba(168,85,247,0.1)_75%,transparent_75%,transparent)] bg-[length:60px_60px]"></div>
+        {/* Central glow - more prominent */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/3 h-2/3 bg-purple-600/15 rounded-full blur-[120px] animate-pulse"></div>
+        
+        {/* Cool diagonal lines - more visible */}
+        <div className="absolute inset-0 opacity-20 overflow-hidden">
+          <div className="absolute -inset-x-full -inset-y-full bg-[linear-gradient(45deg,rgba(168,85,247,0.15)_25%,transparent_25%,transparent_50%,rgba(168,85,247,0.15)_50%,rgba(168,85,247,0.15)_75%,transparent_75%,transparent)] bg-[length:60px_60px]"></div>
         </div>
         
-        {/* Blur effect overlay */}
-        <div className="absolute inset-0 backdrop-blur-[100px] opacity-30"></div>
+        {/* Additional color wash */}
+        <div className="absolute inset-0 bg-gradient-to-t from-purple-950/30 via-transparent to-indigo-950/30"></div>
+        
+        {/* Blur effect overlay - reduced to show more gradient */}
+        <div className="absolute inset-0 backdrop-blur-[80px] opacity-20"></div>
       </div>
         {/* Enhanced particles with different shapes and glows */}
       <div className="absolute inset-0 z-0">

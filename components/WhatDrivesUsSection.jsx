@@ -84,8 +84,7 @@ export default function WhatDrivesUsSection() {
         pin: false,
         id: "what-drives-us"
       }
-    });
-      // Enhanced background animation with blurred elements
+    });    // Enhanced background animation with blurred elements
     tl.fromTo(
       backgroundRef.current,
       { opacity: 0, scale: 0.9 },
@@ -99,13 +98,20 @@ export default function WhatDrivesUsSection() {
       tl.fromTo(
         bgElements[0], // Base gradient
         { opacity: 0 },
-        { opacity: 0.6, duration: 0.4 },
+        { opacity: 0.85, duration: 0.4 },
         0
+      );
+      
+      tl.fromTo(
+        bgElements[1], // Secondary gradient
+        { opacity: 0 },
+        { opacity: 0.75, duration: 0.4 },
+        0.05
       );
       
       // Animate the radial gradients
       tl.fromTo(
-        [bgElements[1], bgElements[2]],
+        [bgElements[2], bgElements[3]],
         { opacity: 0, scale: 0.8 },
         { opacity: 1, scale: 1, duration: 0.6, stagger: 0.1 },
         0.1
@@ -113,17 +119,17 @@ export default function WhatDrivesUsSection() {
       
       // Animate the central glow
       tl.fromTo(
-        bgElements[3],
+        bgElements[4],
         { opacity: 0, scale: 0.5 },
         { opacity: 1, scale: 1, duration: 0.7 },
         0.2
       );
       
-      // Animate grid and noise
+      // Animate grid, additional wash, and noise
       tl.fromTo(
-        [bgElements[4], bgElements[5]],
+        [bgElements[5], bgElements[6], bgElements[7]],
         { opacity: 0 },
-        { opacity: 0.2, duration: 0.5, stagger: 0.1 },
+        { opacity: [0.15, 1, 0.25], duration: 0.5, stagger: 0.1 },
         0.3
       );
     }
@@ -228,28 +234,34 @@ export default function WhatDrivesUsSection() {
       ref={sectionRef} 
       className="relative min-h-screen w-full flex flex-col justify-center items-center px-4 py-24 overflow-hidden"
       style={{ zIndex: 2 }}
-    >{/* Enhanced background with multiple layers */}
+    >      {/* Enhanced background with multiple layers */}
       <div 
         ref={backgroundRef}
         className="absolute inset-0 z-0"
       >
-        {/* Base gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-purple-900/20 opacity-60"></div>
+        {/* Base gradient - more visible */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/45 to-purple-900/45 opacity-85"></div>
         
-        {/* Radial gradients for depth */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(56,189,248,0.15),transparent_70%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(124,58,237,0.15),transparent_70%)]"></div>
+        {/* Secondary gradient layer for depth */}
+        <div className="absolute inset-0 bg-gradient-to-tl from-cyan-800/35 to-indigo-900/35 opacity-75"></div>
         
-        {/* Central glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/3 h-2/3 bg-blue-600/5 rounded-full blur-[120px] animate-pulse"></div>
+        {/* Radial gradients for depth - more intense */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(56,189,248,0.25),transparent_60%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(124,58,237,0.25),transparent_60%)]"></div>
         
-        {/* Grid pattern overlay */}
-        <div className="absolute inset-0 opacity-10 overflow-hidden">
-          <div className="absolute -inset-full bg-[linear-gradient(to_right,rgba(99,102,241,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(99,102,241,0.05)_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+        {/* Central glow - more prominent */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/3 h-2/3 bg-blue-600/12 rounded-full blur-[120px] animate-pulse"></div>
+        
+        {/* Grid pattern overlay - more visible */}
+        <div className="absolute inset-0 opacity-15 overflow-hidden">
+          <div className="absolute -inset-full bg-[linear-gradient(to_right,rgba(99,102,241,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(99,102,241,0.08)_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
         </div>
         
-        {/* Subtle noise texture */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=')] opacity-20"></div>
+        {/* Additional blue wash for consistency */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-950/25 via-transparent to-purple-950/25"></div>
+        
+        {/* Subtle noise texture - more visible */}
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=')] opacity-25"></div>
       </div>
         {/* Enhanced particles with different shapes, colors and effects */}
       <div className="absolute inset-0 z-0">
