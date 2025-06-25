@@ -1033,14 +1033,13 @@ export default function InstaconProduct() {
     damping: 20,
     stiffness: 100
   });
-  
   // Parallax effect for title and subtitle
   const titleY = useTransform(smoothProgress, [0, 0.5], [100, 0]);
   const titleOpacity = useTransform(smoothProgress, [0, 0.3], [0, 1]);
   
-  const subtitleY = useTransform(smoothProgress, [0, 0.6], [60, 0]);
-  const subtitleOpacity = useTransform(smoothProgress, [0.1, 0.4], [0, 1]);
-  
+  // Delay the subtitle animation to appear only after the title is fully visible
+  const subtitleY = useTransform(smoothProgress, [0.4, 0.7], [60, 0]);
+  const subtitleOpacity = useTransform(smoothProgress, [0.35, 0.6], [0, 1]);
   const isInView = useInView(containerRef, { once: false, margin: "-10% 0px" });
 
   return (
@@ -1048,20 +1047,238 @@ export default function InstaconProduct() {
       <section ref={sectionRef} className="relative w-full py-24 overflow-hidden bg-gradient-to-b from-black/20 to-black/40">
         <FuturisticOverlay opacity="medium" className="opacity-60" />
         
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center mb-16 perspective-container">
+        <div className="container mx-auto px-6 relative z-10">          <div className="max-w-4xl mx-auto text-center mb-16 perspective-container">
             <motion.div
               style={{ y: titleY, opacity: titleOpacity }}
-              className="mb-8"
+              className="mb-8 relative"
             >
-              <h2 className="text-4xl md:text-5xl font-satoshi font-black text-white mb-6 leading-tight">
-                Meet <span className="text-yellow-500">Instacon</span>: Your Field Team,{" "}
-                <span className="text-yellow-500">Fully Connected</span>
-              </h2>
+              {/* High-tech animated heading with holographic effect */}
+              <motion.h2 
+                className="text-4xl md:text-5xl font-satoshi font-black text-white mb-6 leading-tight relative z-10"
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                {/* Animated word reveals with holographic scanlines */}
+                <motion.span
+                  className="inline-block relative"
+                  initial={{ opacity: 0, rotateX: -90, z: -100 }}
+                  animate={isInView ? { 
+                    opacity: 1, 
+                    rotateX: 0, 
+                    z: 0,
+                    transition: { 
+                      duration: 0.8, 
+                      delay: 0.3,
+                      type: "spring",
+                      stiffness: 100
+                    }
+                  } : { opacity: 0, rotateX: -90, z: -100 }}
+                  style={{ transformOrigin: "center bottom" }}
+                >
+                  Meet{" "}
+                  {/* Holographic shimmer effect */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent"
+                    initial={{ x: "-100%" }}
+                    animate={isInView ? { 
+                      x: "100%",
+                      transition: { 
+                        duration: 1.5, 
+                        delay: 1.1,
+                        ease: "easeInOut"
+                      }
+                    } : { x: "-100%" }}
+                  />
+                </motion.span>
+                
+                <motion.span 
+                  className="text-yellow-500 inline-block relative glow-text"
+                  initial={{ opacity: 0, scale: 0.5, rotateY: 180 }}
+                  animate={isInView ? { 
+                    opacity: 1, 
+                    scale: 1, 
+                    rotateY: 0,
+                    transition: { 
+                      duration: 1, 
+                      delay: 0.6,
+                      type: "spring",
+                      stiffness: 120
+                    }
+                  } : { opacity: 0, scale: 0.5, rotateY: 180 }}
+                  style={{ 
+                    transformOrigin: "center",
+                    textShadow: "0 0 20px rgba(234, 179, 8, 0.8), 0 0 40px rgba(234, 179, 8, 0.4)"
+                  }}
+                >
+                  Instacon
+                  {/* Pulsing energy ring */}
+                  <motion.div
+                    className="absolute inset-0 border-2 border-yellow-500/50 rounded-lg"
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={isInView ? {
+                      scale: [0, 1.2, 1],
+                      opacity: [0, 0.8, 0],
+                      transition: {
+                        duration: 2,
+                        delay: 1.2,
+                        repeat: Infinity,
+                        repeatDelay: 3
+                      }
+                    } : { scale: 0, opacity: 0 }}
+                  />
+                </motion.span>
+                
+                <motion.span
+                  className="inline-block relative"
+                  initial={{ opacity: 0, y: 50, skewX: 45 }}
+                  animate={isInView ? { 
+                    opacity: 1, 
+                    y: 0, 
+                    skewX: 0,
+                    transition: { 
+                      duration: 0.8, 
+                      delay: 0.9,
+                      type: "spring",
+                      stiffness: 80
+                    }
+                  } : { opacity: 0, y: 50, skewX: 45 }}
+                >
+                  : Your Field Team,{" "}
+                </motion.span>
+                
+                <motion.span 
+                  className="text-yellow-500 inline-block relative"
+                  initial={{ opacity: 0, x: -100, rotateZ: -45 }}
+                  animate={isInView ? { 
+                    opacity: 1, 
+                    x: 0, 
+                    rotateZ: 0,
+                    transition: { 
+                      duration: 1, 
+                      delay: 1.2,
+                      type: "spring",
+                      stiffness: 100
+                    }
+                  } : { opacity: 0, x: -100, rotateZ: -45 }}
+                  style={{ 
+                    textShadow: "0 0 15px rgba(234, 179, 8, 0.6)"
+                  }}
+                >
+                  Fully Connected
+                  {/* Digital matrix effect */}
+                  <motion.div
+                    className="absolute -inset-2 opacity-20"
+                    initial={{ opacity: 0 }}
+                    animate={isInView ? {
+                      opacity: [0, 0.3, 0],
+                      transition: {
+                        duration: 0.3,
+                        delay: 2,
+                        repeat: 3,
+                        repeatDelay: 0.1
+                      }
+                    } : { opacity: 0 }}
+                    style={{
+                      background: `
+                        repeating-linear-gradient(
+                          0deg,
+                          transparent,
+                          transparent 2px,
+                          rgba(234, 179, 8, 0.1) 2px,
+                          rgba(234, 179, 8, 0.1) 4px
+                        )
+                      `
+                    }}
+                  />
+                </motion.span>
+              </motion.h2>
+              
+              {/* Circuit board background pattern */}
+              <motion.svg
+                className="absolute inset-0 w-full h-full pointer-events-none opacity-20"
+                viewBox="0 0 400 200"
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 0.2 } : { opacity: 0 }}
+                transition={{ duration: 1, delay: 1.5 }}
+              >
+                {/* Animated circuit paths */}
+                <motion.path
+                  d="M50,100 L150,100 L150,50 L250,50 L250,150 L350,150"
+                  fill="none"
+                  stroke="rgba(234, 179, 8, 0.6)"
+                  strokeWidth="1"
+                  strokeDasharray="4,4"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={isInView ? {
+                    pathLength: 1,
+                    opacity: 0.6,
+                    transition: {
+                      duration: 2,
+                      delay: 1.8,
+                      ease: "easeInOut"
+                    }
+                  } : { pathLength: 0, opacity: 0 }}
+                />
+                
+                {/* Pulsing connection nodes */}
+                {[{x: 150, y: 100}, {x: 150, y: 50}, {x: 250, y: 50}, {x: 250, y: 150}].map((node, i) => (
+                  <motion.circle
+                    key={i}
+                    cx={node.x}
+                    cy={node.y}
+                    r="3"
+                    fill="rgba(234, 179, 8, 0.8)"
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={isInView ? {
+                      scale: [0, 1, 1.5, 1],
+                      opacity: [0, 1, 0.5, 1],
+                      transition: {
+                        duration: 1,
+                        delay: 2.2 + (i * 0.2),
+                        repeat: Infinity,
+                        repeatDelay: 4
+                      }
+                    } : { scale: 0, opacity: 0 }}
+                  />
+                ))}
+              </motion.svg>
+              
+              {/* Floating tech particles */}
+              {[...Array(8)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-1 h-1 bg-yellow-500/60 rounded-full"
+                  style={{
+                    left: `${20 + (i * 10)}%`,
+                    top: `${30 + (i % 3) * 20}%`,
+                  }}
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={isInView ? {
+                    opacity: [0, 1, 0],
+                    scale: [0, 1, 0],
+                    y: [-20, -40, -60],
+                    transition: {
+                      duration: 3,
+                      delay: 2.5 + (i * 0.3),
+                      repeat: Infinity,
+                      repeatDelay: 5
+                    }
+                  } : { opacity: 0, scale: 0 }}
+                />
+              ))}
             </motion.div>
-            
-            <motion.div
+              <motion.div
               style={{ y: subtitleY, opacity: subtitleOpacity }}
+              initial={{ opacity: 0, y: 60 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+              transition={{ 
+                delay: 0.6,  // Additional delay to ensure it appears after the title
+                duration: 0.8, 
+                type: "spring", 
+                stiffness: 50,
+                damping: 15
+              }}
             >
               <p className="text-xl text-gray-300 font-satoshi">
                 Instacon is a field workforce management tool designed to simplify Employee Attendance,
