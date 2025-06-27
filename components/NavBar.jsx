@@ -189,7 +189,7 @@ const NavBar = () => {
               </Link>
             </li>
             <li className="m-0 py-4 overflow-hidden relative leading-none">              <Link 
-                href="/about" 
+                href="/journey" 
                 onClick={closeMenu}
                 className={`text-white no-underline relative inline-block -tracking-wide uppercase transition-all duration-700 hover-strike ${
                   isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-[120%] opacity-0'
