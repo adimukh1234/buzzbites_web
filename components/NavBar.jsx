@@ -17,6 +17,13 @@ const NavBar = () => {
   const menuOverlayRef = useRef(null);
   const containerRef = useRef(null);
   const fixedMenuRef = useRef(null);
+  
+  // Style for default cursor
+  const navbarStyle = {
+    cursor: 'default',
+    position: 'relative',
+    zIndex: 3 // Ensure Navbar is above Story component
+  };
 
   useEffect(() => {
     // Page load animation
@@ -60,12 +67,15 @@ const NavBar = () => {
   };
 
   return (
-    <>      {/* Tailwind v4 Fixed Left Menu */}      <div 
+    <div style={navbarStyle}>
+      {/* Tailwind v4 Fixed Left Menu */}
+      <div 
         ref={fixedMenuRef} 
         className="fixed top-0 left-0 w-30 h-screen z-20 flex flex-col justify-between items-center py-8 backdrop-blur-lg border-r border-[var(--color-border)] overflow-hidden"
         style={{
           background: 'linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(13, 13, 13, 0.97))',
-          containerType: 'inline-size'
+          containerType: 'inline-size',
+          cursor: 'default'
         }}
       >
         <FuturisticOverlay opacity="low" className="opacity-60" />
@@ -237,7 +247,7 @@ const NavBar = () => {
       <div ref={containerRef} className="navbar-container">
         {/* This will be used for the push animation */}
       </div>
-    </>
+    </div>
   );
 };
 
