@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import Script from 'next/script';
 
 const footerVariants = {
   hidden: { 
@@ -71,6 +72,20 @@ export default function FullPageFooter() {
       controls.start("hidden");
     }
   }, [controls, inView]);
+  
+  // Load Guminert font
+  useEffect(() => {
+    // Add Guminert font CSS
+    const linkEl = document.createElement('link');
+    linkEl.rel = 'stylesheet';
+    linkEl.href = 'https://fonts.cdnfonts.com/css/guminert';
+    document.head.appendChild(linkEl);
+    
+    return () => {
+      // Clean up
+      document.head.removeChild(linkEl);
+    };
+  }, []);
 
   return (
     <>
@@ -126,6 +141,7 @@ export default function FullPageFooter() {
               <motion.h2 
                 variants={itemVariants}
                 className="text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+                style={{ fontFamily: "'Guminert', 'Arial Black', sans-serif" }}
               >
                 BuzzBites
               </motion.h2>
@@ -155,7 +171,7 @@ export default function FullPageFooter() {
             {/* Services */}
             <motion.div variants={itemVariants} className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8">
               <motion.div variants={itemVariants}>
-                <h3 className="font-semibold mb-4 text-xl text-yellow-400">Services</h3>
+                <h3 className="font-semibold mb-4 text-xl text-yellow-400" style={{ fontFamily: "'Guminert', sans-serif" }}>Services</h3>
                 <ul className="space-y-3 text-gray-400">
                   {['Branding', 'UI UX Design', 'Web Design', 'SaaS Design', 'Webflow', 'Build Product (MVP)'].map((item, index) => (
                     <motion.li 
@@ -171,7 +187,7 @@ export default function FullPageFooter() {
                 </ul>
               </motion.div>
               <motion.div variants={itemVariants}>
-                <h3 className="font-semibold mb-4 text-xl text-transparent">Services</h3>
+                <h3 className="font-semibold mb-4 text-xl text-transparent" style={{ fontFamily: "'Guminert', sans-serif" }}>Services</h3>
                 <ul className="space-y-3 text-gray-400">
                   {['Mobile App', 'Design System', 'Webflow', 'Build Product (MVP)', 'Conversion Rate (CRO)'].map((item, index) => (
                     <motion.li 
@@ -191,7 +207,7 @@ export default function FullPageFooter() {
             {/* Case Studies and Contact */}
             <motion.div variants={itemVariants} className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8">
               <motion.div variants={itemVariants}>
-                <h3 className="font-semibold mb-4 text-xl text-yellow-400">Case studies</h3>
+                <h3 className="font-semibold mb-4 text-xl text-yellow-400" style={{ fontFamily: "'Guminert', sans-serif" }}>Case studies</h3>
                 <ul className="space-y-3 text-gray-400">
                   {['Open Hub', 'Better AI', 'Spacebook', 'Kodezi', 'View all work'].map((item, index) => (
                     <motion.li 
@@ -207,7 +223,7 @@ export default function FullPageFooter() {
                 </ul>
               </motion.div>
               <motion.div variants={itemVariants}>
-                <h3 className="font-semibold mb-4 text-xl text-yellow-400">Contact</h3>
+                <h3 className="font-semibold mb-4 text-xl text-yellow-400" style={{ fontFamily: "'Guminert', sans-serif" }}>Contact</h3>
                 <ul className="space-y-3 text-gray-400">
                   {['Clutch', 'Behance', 'Dribbble', 'Awwwards'].map((item, index) => (
                     <motion.li 
@@ -225,8 +241,8 @@ export default function FullPageFooter() {
             </motion.div>
           </motion.div>
 
-          {/* Bottom Section */}
-          <motion.div variants={itemVariants} className="space-y-6">
+          {/* Bottom Section - Moved upward with additional margin-bottom */}
+          <motion.div variants={itemVariants} className="space-y-6 mb-24 md:mb-32 lg:mb-40">
             {/* Social Links */}
             <motion.div 
               variants={itemVariants}
@@ -247,33 +263,11 @@ export default function FullPageFooter() {
                 variants={itemVariants}
                 className="text-gray-400 text-sm"
               >
-                wavespace LLC © 2025
+                BuzzBites LLC © 2025
               </motion.p>
             </motion.div>
 
-            {/* Location and Team */}
-            <motion.div 
-              variants={itemVariants}
-              className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-gray-400 text-sm"
-            >
-              <motion.span variants={itemVariants}>
-                Wavespace is a limited liability company based in 🇵🇱 🇮🇳 🇧🇩
-              </motion.span>
-              <motion.div 
-                variants={itemVariants}
-                className="flex -space-x-2"
-              >
-                {[...Array(6)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    variants={itemVariants}
-                    custom={i}
-                    whileHover={{ scale: 1.1, zIndex: 10 }}
-                    className="w-10 h-10 bg-gradient-to-br from-gray-500 to-gray-700 rounded-full border-2 border-black cursor-pointer"
-                  />
-                ))}
-              </motion.div>
-            </motion.div>
+            
           </motion.div>
         </motion.div>
 
@@ -298,6 +292,49 @@ export default function FullPageFooter() {
               }}
             />
           ))}
+        </div>
+
+        {/* Large half-cut "wavespace" text at bottom - adjusted to be cut exactly through the middle */}
+        <div className="absolute bottom-0 left-0 right-0 overflow-hidden pointer-events-none z-[45] w-full">
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={inView ? { y: 0, opacity: 1 } : { y: 100, opacity: 0 }}
+            transition={{ 
+              duration: 1.5, 
+              ease: [0.25, 0.46, 0.45, 0.94],
+              delay: 0.8 
+            }}
+            className="relative overflow-hidden w-full"
+          >
+            <h2 
+              className="font-black leading-none select-none w-full"
+              style={{
+                fontFamily: "'Satoshi', 'Arial Black', sans-serif",
+                fontSize: 'clamp(80px, 15vw, 20vw)', // Slightly smaller size
+                WebkitTextStroke: '1px rgba(255,255,255,0.2)',
+                color: 'rgba(255,255,255,0.8)',
+                textShadow: '0 0 20px rgba(255,255,255,0.05)',
+                width: '100%',
+                textAlign: 'center',
+                position: 'relative',
+                left: '50%',
+                transform: 'translateX(-50%) translateY(40%)', // Exactly half cut
+                letterSpacing: '0.18em', // Increased spacing (positive value)
+                maxWidth: '100vw',
+                overflow: 'hidden',
+                textTransform: 'uppercase', // Makes it more impactful
+                fontWeight: 700 // Ensure proper weight for Guminert
+              }}
+            >
+              BuzzBites
+            </h2>
+            
+            {/* Subtle gradient overlay for depth - adjusted for exact middle cut */}
+            <div 
+              className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"
+              style={{ transform: 'translateY(50%)' }}
+            />
+          </motion.div>
         </div>
       </motion.footer>
     </>
