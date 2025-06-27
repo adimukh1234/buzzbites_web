@@ -192,7 +192,7 @@ const NavBar = () => {
                   transitionDelay: isMenuOpen ? '0.2s' : '0s'
                 }}
               >
-                About
+                Our Journey
               </Link>
             </li>
             <li className="m-0 py-4 overflow-hidden relative leading-none">              <Link 
