@@ -26,7 +26,6 @@ export default function SplineBackground() {
           onLoad={handleLoad}
           onError={handleError}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-[#1a1a00]/50 to-[#2a2a00]/60" />
       </div>
       {error && (
         <div className="fixed top-4 right-4 bg-red-500 text-white p-4 rounded">

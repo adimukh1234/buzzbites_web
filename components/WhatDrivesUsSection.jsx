@@ -306,14 +306,14 @@ export default function WhatDrivesUsSection() {
                 rotate: 0,
                 transition: { duration: 1.2, ease: "easeOut" }
               }}
-              style={{
-                backgroundImage: `
-                  linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px),
-                  linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)
-                `,
-                backgroundSize: '25px 25px',
-                backgroundPosition: 'center center'
-              }}
+              // style={{
+              //   backgroundImage: `
+              //     linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px),
+              //     linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)
+              //   `,
+              //   backgroundSize: '25px 25px',
+              //   backgroundPosition: 'center center'
+              // }}
             />
 
             {["What", "Drives", "Us"].map((word, wordIndex) => (
@@ -338,7 +338,7 @@ export default function WhatDrivesUsSection() {
               >
                 {/* Scanning line effect - optimized */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/70 to-transparent"
+                  className="absolute inset-0 bg-gradient-to-r from-transparent /70 via-whiteto-transparent"
                   initial={{ x: "-120%", opacity: 0 }}
                   animate={{
                     x: "120%",
@@ -580,7 +580,7 @@ export default function WhatDrivesUsSection() {
                     ></div>
                   </div>
                   
-                  <h3 className="text-2xl font-bold mb-3 group-hover:text-blue-100 transition-colors duration-300">{item.title}</h3>
+                  <h3 className="text-2xl text-white font-bold mb-3 group-hover:text-blue-100 transition-colors duration-300">{item.title}</h3>
                   <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300">{item.description}</p>
                 </div>
               </motion.div>

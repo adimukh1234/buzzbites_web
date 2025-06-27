@@ -108,7 +108,7 @@ export default function FullPageFooter() {
               transition: { duration: 1.2, ease: "easeOut", delay: 0.3 }
             }
           }}
-          className="absolute inset-0 bg-gradient-to-t from-lime-400/15 via-lime-400/5 to-transparent z-30"
+          // className="absolute inset-0 bg-gradient-to-t from-yellow-400/15 via-yellow-400/5 to-transparent z-30"
         />
         
         {/* Main Content */}
@@ -127,7 +127,7 @@ export default function FullPageFooter() {
                 variants={itemVariants}
                 className="text-3xl lg:text-4xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
               >
-                Wavespace
+                BuzzBites
               </motion.h2>
               <motion.p 
                 variants={itemVariants}
@@ -139,7 +139,7 @@ export default function FullPageFooter() {
                 variants={itemVariants}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-lime-400 text-black px-8 py-3 rounded-full font-semibold flex items-center gap-3 hover:shadow-lg hover:shadow-lime-400/25 transition-all duration-300"
+                className="bg-yellow-400 text-black px-8 py-3 rounded-full font-semibold flex items-center gap-3 hover:shadow-lg hover:shadow-yellow-400/25 transition-all duration-300"
               >
                 Company Deck 
                 <motion.span 
@@ -155,7 +155,7 @@ export default function FullPageFooter() {
             {/* Services */}
             <motion.div variants={itemVariants} className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8">
               <motion.div variants={itemVariants}>
-                <h3 className="font-semibold mb-4 text-xl text-lime-400">Services</h3>
+                <h3 className="font-semibold mb-4 text-xl text-yellow-400">Services</h3>
                 <ul className="space-y-3 text-gray-400">
                   {['Branding', 'UI UX Design', 'Web Design', 'SaaS Design', 'Webflow', 'Build Product (MVP)'].map((item, index) => (
                     <motion.li 
@@ -191,7 +191,7 @@ export default function FullPageFooter() {
             {/* Case Studies and Contact */}
             <motion.div variants={itemVariants} className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8">
               <motion.div variants={itemVariants}>
-                <h3 className="font-semibold mb-4 text-xl text-lime-400">Case studies</h3>
+                <h3 className="font-semibold mb-4 text-xl text-yellow-400">Case studies</h3>
                 <ul className="space-y-3 text-gray-400">
                   {['Open Hub', 'Better AI', 'Spacebook', 'Kodezi', 'View all work'].map((item, index) => (
                     <motion.li 
@@ -207,7 +207,7 @@ export default function FullPageFooter() {
                 </ul>
               </motion.div>
               <motion.div variants={itemVariants}>
-                <h3 className="font-semibold mb-4 text-xl text-lime-400">Contact</h3>
+                <h3 className="font-semibold mb-4 text-xl text-yellow-400">Contact</h3>
                 <ul className="space-y-3 text-gray-400">
                   {['Clutch', 'Behance', 'Dribbble', 'Awwwards'].map((item, index) => (
                     <motion.li 
@@ -282,7 +282,7 @@ export default function FullPageFooter() {
           {[...Array(20)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-1 h-1 bg-lime-400 rounded-full"
+              className="absolute w-1 h-1 bg-yellow-400 rounded-full"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
