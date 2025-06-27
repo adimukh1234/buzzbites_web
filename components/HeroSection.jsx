@@ -31,7 +31,7 @@ export default function HeroSection() {
                 alt="BuzzBites Logo" 
                 width={600} 
                 height={600} 
-                className="w-full h-auto max-w-none object-contain drop-shadow-[0_0_15px_rgba(255,255,0,0.6)]"
+                className="w-full h-auto max-w-none object-contain drop-shadow-[0.2_0_15px_rgba(0,0,0,0.6)]"
                 onLoad={() => setLoaded(true)}
               />
             </div>
