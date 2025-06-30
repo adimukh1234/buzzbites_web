@@ -28,7 +28,7 @@ const ExploreButton = ({ visible }) => {
     setTimeout(() => {
       setIsPressed(false);
       // You could add navigation logic here
-      window.open('/about', '_self'); // Example: navigate to about page
+      window.open('/journey', '_self'); // Example: navigate to about page
     }, 600);
   };
 

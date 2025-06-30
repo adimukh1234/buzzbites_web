@@ -149,7 +149,7 @@ export default function FullPageFooter() {
                 variants={itemVariants}
                 className="text-gray-300 mb-6 text-lg leading-relaxed"
               >
-                Wavespace is a global UI/UX design agency that boosts brand value with user-friendly, effective designs for web, mobile, and SaaS platforms.
+                 A product-first company crafting digital tools for smarter workforce management. Built in Kolkata. Driven by purpose.
               </motion.p>
               <motion.button 
                 variants={itemVariants}
@@ -168,34 +168,18 @@ export default function FullPageFooter() {
               </motion.button>
             </motion.div>
 
-            {/* Services */}
-            <motion.div variants={itemVariants} className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Quick Links - Expanded */}
+            <motion.div variants={itemVariants} className="flex-1 max-w-lg">
               <motion.div variants={itemVariants}>
-                <h3 className="font-semibold mb-4 text-xl text-yellow-400" style={{ fontFamily: "'Guminert', sans-serif" }}>Services</h3>
-                <ul className="space-y-3 text-gray-400">
-                  {['Branding', 'UI UX Design', 'Web Design', 'SaaS Design', 'Webflow', 'Build Product (MVP)'].map((item, index) => (
+                <h3 className="font-semibold mb-6 text-2xl lg:text-3xl text-yellow-400" style={{ fontFamily: "'Guminert', sans-serif" }}>Quick Links</h3>
+                <ul className="space-y-5 text-gray-400">
+                  {['Home', 'Our Journey', 'Instacon', 'Contact'].map((item, index) => (
                     <motion.li 
                       key={item}
                       variants={itemVariants}
                       custom={index}
-                      whileHover={{ x: 5, color: '#a3e635' }}
-                      className="cursor-pointer transition-colors duration-200"
-                    >
-                      {item}
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
-              <motion.div variants={itemVariants}>
-                <h3 className="font-semibold mb-4 text-xl text-transparent" style={{ fontFamily: "'Guminert', sans-serif" }}>Services</h3>
-                <ul className="space-y-3 text-gray-400">
-                  {['Mobile App', 'Design System', 'Webflow', 'Build Product (MVP)', 'Conversion Rate (CRO)'].map((item, index) => (
-                    <motion.li 
-                      key={item}
-                      variants={itemVariants}
-                      custom={index}
-                      whileHover={{ x: 5, color: '#a3e635' }}
-                      className="cursor-pointer transition-colors duration-200"
+                      whileHover={{ x: 8, color: '#a3e635', scale: 1.02 }}
+                      className="cursor-pointer transition-all duration-300 text-lg lg:text-xl font-medium py-2 px-3 rounded-lg hover:bg-gray-900/50"
                     >
                       {item}
                     </motion.li>
@@ -204,34 +188,38 @@ export default function FullPageFooter() {
               </motion.div>
             </motion.div>
 
-            {/* Case Studies and Contact */}
-            <motion.div variants={itemVariants} className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Download - Expanded */}
+            <motion.div variants={itemVariants} className="flex-1 max-w-lg">
               <motion.div variants={itemVariants}>
-                <h3 className="font-semibold mb-4 text-xl text-yellow-400" style={{ fontFamily: "'Guminert', sans-serif" }}>Case studies</h3>
-                <ul className="space-y-3 text-gray-400">
-                  {['Open Hub', 'Better AI', 'Spacebook', 'Kodezi', 'View all work'].map((item, index) => (
+                <h3 className="font-semibold mb-6 text-2xl lg:text-3xl text-yellow-400" style={{ fontFamily: "'Guminert', sans-serif" }}>Download Our App</h3>
+                <ul className="space-y-5 text-gray-400">
+                  {['Google Play Store', 'App Store'].map((item, index) => (
                     <motion.li 
                       key={item}
                       variants={itemVariants}
                       custom={index}
-                      whileHover={{ x: 5, color: '#a3e635' }}
-                      className="cursor-pointer transition-colors duration-200"
+                      whileHover={{ x: 8, color: '#a3e635', scale: 1.02 }}
+                      className="cursor-pointer transition-all duration-300 text-lg lg:text-xl font-medium py-2 px-3 rounded-lg hover:bg-gray-900/50"
                     >
                       {item}
                     </motion.li>
                   ))}
                 </ul>
               </motion.div>
+            </motion.div>
+
+            {/* Legal - New Section */}
+            <motion.div variants={itemVariants} className="flex-1 max-w-lg">
               <motion.div variants={itemVariants}>
-                <h3 className="font-semibold mb-4 text-xl text-yellow-400" style={{ fontFamily: "'Guminert', sans-serif" }}>Contact</h3>
-                <ul className="space-y-3 text-gray-400">
-                  {['Clutch', 'Behance', 'Dribbble', 'Awwwards'].map((item, index) => (
+                <h3 className="font-semibold mb-6 text-2xl lg:text-3xl text-yellow-400" style={{ fontFamily: "'Guminert', sans-serif" }}>Legal</h3>
+                <ul className="space-y-5 text-gray-400">
+                  {['Privacy Policy', 'Terms of Use'].map((item, index) => (
                     <motion.li 
                       key={item}
                       variants={itemVariants}
                       custom={index}
-                      whileHover={{ x: 5, color: '#a3e635' }}
-                      className="cursor-pointer transition-colors duration-200"
+                      whileHover={{ x: 8, color: '#a3e635', scale: 1.02 }}
+                      className="cursor-pointer transition-all duration-300 text-lg lg:text-xl font-medium py-2 px-3 rounded-lg hover:bg-gray-900/50"
                     >
                       {item}
                     </motion.li>
@@ -263,7 +251,9 @@ export default function FullPageFooter() {
                 variants={itemVariants}
                 className="text-gray-400 text-sm"
               >
-                BuzzBites LLC © 2025
+                © 2025 Buzzbites Media & Entertainment Pvt. Ltd.<br></br>
+ All rights reserved. | Crafted with purpose in Kolkata
+
               </motion.p>
             </motion.div>
 
