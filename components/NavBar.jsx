@@ -6,11 +6,6 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import Link from 'next/link';
 import FuturisticOverlay from './FuturisticOverlay';
 
-// Register GSAP plugins
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuButtonRef = useRef(null);
@@ -26,6 +21,9 @@ const NavBar = () => {
   };
 
   useEffect(() => {
+    // Register GSAP plugins on client side only
+    gsap.registerPlugin(ScrollTrigger);
+
     // Page load animation
     if (fixedMenuRef.current) {
       gsap.fromTo(
@@ -34,7 +32,9 @@ const NavBar = () => {
         { x: 0, opacity: 1, duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96], delay: 0.1 }
       );
     }
+  }, []); // Remove isMenuOpen dependency to prevent re-registering GSAP
 
+  useEffect(() => {
     // ESC key listener
     const handleKeyDown = (event) => {
       if (event.key === "Escape" && isMenuOpen) {

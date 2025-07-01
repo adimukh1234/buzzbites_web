@@ -12,8 +12,38 @@ export default function LetsTalkSection() {
   const formRef = useRef(null);
   const particlesRef = useRef([]);
   const timelineRef = useRef(null);
+  const [particles, setParticles] = useState([]);
   
   const { isInitialized } = useScrollContext();
+
+  // Generate particles on client side only
+  useEffect(() => {
+    const generatedParticles = [];
+    const colors = ['white', 'gray-200', 'gray-300', 'gray-400', 'gray-100'];
+    const shapes = ['rounded-full', 'rounded-md', 'rounded-sm', 'rounded-full', 'rounded-xl'];
+    
+    for (let i = 0; i < 20; i++) {
+      const size = Math.random() * 15 + 3;
+      const x = Math.random() * 100;
+      const y = Math.random() * 100;
+      const opacity = Math.random() * 0.5 + 0.1;
+      const colorIndex = Math.floor(Math.random() * colors.length);
+      const shapeIndex = Math.floor(Math.random() * shapes.length);
+      
+      generatedParticles.push({ 
+        size, 
+        x, 
+        y, 
+        opacity, 
+        color: colors[colorIndex], 
+        shape: shapes[shapeIndex],
+        blur: Math.random() > 0.5,
+        rotation: Math.random() * 180
+      });
+    }
+    
+    setParticles(generatedParticles);
+  }, []);
   
   // Form animation variants
   const formVariants = {
@@ -27,30 +57,7 @@ export default function LetsTalkSection() {
       }
     }
   };
-    // Create enhanced particles with monochromatic shapes
-  const particles = [];
-  const colors = ['white', 'gray-200', 'gray-300', 'gray-400', 'gray-100'];
-  const shapes = ['rounded-full', 'rounded-md', 'rounded-sm', 'rounded-full', 'rounded-xl'];
-  
-  for (let i = 0; i < 20; i++) { // More particles
-    const size = Math.random() * 15 + 3; // More varied sizes
-    const x = Math.random() * 100;
-    const y = Math.random() * 100;
-    const opacity = Math.random() * 0.5 + 0.1;
-    const colorIndex = Math.floor(Math.random() * colors.length);
-    const shapeIndex = Math.floor(Math.random() * shapes.length);
     
-    particles.push({ 
-      size, 
-      x, 
-      y, 
-      opacity, 
-      color: colors[colorIndex], 
-      shape: shapes[shapeIndex],
-      blur: Math.random() > 0.5
-    });
-  }
-  
   // Set up ScrollTrigger animations
   useEffect(() => {
     if (!isInitialized || !sectionRef.current) return;
@@ -274,7 +281,7 @@ export default function LetsTalkSection() {
               top: `${particle.y}%`,
               opacity: 0,
               filter: 'none',
-              transform: `rotate(${Math.random() * 180}deg)`
+              transform: `rotate(${particle.rotation}deg)`
             }}
             data-opacity={particle.opacity}
           ></div>

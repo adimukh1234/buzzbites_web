@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Script from 'next/script';
@@ -58,12 +58,27 @@ const itemVariants = {
 
 export default function FullPageFooter() {
   const controls = useAnimation();
+  const [stars, setStars] = useState([]);
   
   const [ref, inView] = useInView({ 
     triggerOnce: false,
     threshold: 0.1,
     rootMargin: "0px 0px -50% 0px"
   });
+
+  // Generate stars on client side only
+  useEffect(() => {
+    const generatedStars = [];
+    for (let i = 0; i < 20; i++) {
+      generatedStars.push({
+        id: i,
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        delay: Math.random() * 3
+      });
+    }
+    setStars(generatedStars);
+  }, []);
 
   useEffect(() => {
     if (inView) {
@@ -263,13 +278,13 @@ export default function FullPageFooter() {
 
         {/* Animated background elements */}
         <div className="absolute inset-0 pointer-events-none z-30">
-          {[...Array(20)].map((_, i) => (
+          {stars.map((star) => (
             <motion.div
-              key={i}
+              key={star.id}
               className="absolute w-1 h-1 bg-yellow-400 rounded-full"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
+                left: `${star.left}%`,
+                top: `${star.top}%`,
               }}
               animate={{
                 opacity: [0, 1, 0],
@@ -278,7 +293,7 @@ export default function FullPageFooter() {
               transition={{
                 duration: 3,
                 repeat: Infinity,
-                delay: Math.random() * 3,
+                delay: star.delay,
               }}
             />
           ))}

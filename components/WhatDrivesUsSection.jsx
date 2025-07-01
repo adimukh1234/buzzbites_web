@@ -13,8 +13,41 @@ export default function WhatDrivesUsSection() {
   const textSectionRef = useRef(null);
   const particlesRef = useRef([]);
   const timelineRef = useRef(null);
+  const [particles, setParticles] = useState([]);
   
   const { isInitialized, refreshScrollTriggers } = useScrollContext();
+
+  // Generate particles on client side only
+  useEffect(() => {
+    const generatedParticles = [];
+    const colors = ['blue-500', 'indigo-400', 'purple-500', 'cyan-400', 'sky-500'];
+    const shapes = ['rounded-full', 'rounded-md', 'rounded-sm', 'rounded-full', 'rounded-xl'];
+    
+    for (let i = 0; i < 30; i++) {
+      const size = Math.random() * 15 + 3;
+      const x = Math.random() * 100;
+      const y = Math.random() * 100;
+      const opacity = Math.random() * 0.5 + 0.2;
+      const colorIndex = Math.floor(Math.random() * colors.length);
+      const shapeIndex = Math.floor(Math.random() * shapes.length);
+      const blur = Math.random() > 0.7;
+      const glow = Math.random() > 0.8;
+      
+      generatedParticles.push({ 
+        size, 
+        x, 
+        y, 
+        opacity, 
+        color: colors[colorIndex], 
+        shape: shapes[shapeIndex],
+        blur,
+        glow,
+        rotation: Math.random() * 360
+      });
+    }
+    
+    setParticles(generatedParticles);
+  }, []);
   
   // Text animation variants
   const textVariants = {
@@ -41,33 +74,6 @@ export default function WhatDrivesUsSection() {
       }
     })
   };
-    // Create enhanced particles with varied styles
-  const particles = [];
-  const colors = ['blue-500', 'indigo-400', 'purple-500', 'cyan-400', 'sky-500'];
-  const shapes = ['rounded-full', 'rounded-md', 'rounded-sm', 'rounded-full', 'rounded-xl'];
-  
-  for (let i = 0; i < 30; i++) { // More particles
-    const size = Math.random() * 15 + 3; // More varied sizes
-    const x = Math.random() * 100;
-    const y = Math.random() * 100;
-    const opacity = Math.random() * 0.5 + 0.2;
-    const colorIndex = Math.floor(Math.random() * colors.length);
-    const shapeIndex = Math.floor(Math.random() * shapes.length);
-    const blur = Math.random() > 0.7;
-    const glow = Math.random() > 0.8;
-    
-    particles.push({ 
-      size, 
-      x, 
-      y, 
-      opacity, 
-      color: colors[colorIndex], 
-      shape: shapes[shapeIndex],
-      blur,
-      glow,
-      rotation: Math.random() * 360
-    });
-  }
   
   // Set up ScrollTrigger animations
   useEffect(() => {
