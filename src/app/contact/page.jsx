@@ -5,7 +5,6 @@ import TechScrollbar from '../../../components/TechScrollbar';
 import ContactHero from '../../../components/ContactHero';
 import ContactForm from '../../../components/ContactForm';
 import OfficeLocation from '../../../components/OfficeLocation';
-import FullPageFooter from '../../../components/FullPageFooter';
 
 export default function ContactPage() {
   return (
@@ -17,7 +16,6 @@ export default function ContactPage() {
         <ContactHero />
         <ContactForm />
         <OfficeLocation />
-        <FullPageFooter />
       </main>
     </>
   );

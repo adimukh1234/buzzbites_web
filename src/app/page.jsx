@@ -9,8 +9,6 @@ import MetricCards from '../../components/MetricCards';
 import TechScrollbar from '../../components/TechScrollbar';
 import AnimatedTimeline from '../../components/AnimatedTimeline';
 import ScrollSections from '../../components/ScrollSections';
-import FullPageFooter from '../../components/FullPageFooter';
-
 import './globals.css';
 
 export default function Home() {
@@ -40,8 +38,7 @@ export default function Home() {
         
         <ScrollSections />
         
-        {/* Full Page Footer - positioned after ScrollSections */}
-        <FullPageFooter />
+        
       </main>
     </>
   );

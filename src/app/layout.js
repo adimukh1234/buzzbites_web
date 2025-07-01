@@ -2,6 +2,7 @@ import "./globals.css";
 import SmoothScroll from "../../components/SmoothScroll";
 import FuturisticOverlay from "../../components/FuturisticOverlay";
 import PreLoader from "../../components/PreLoader";
+import FullPageFooter from "../../components/FullPageFooter";
 
 export const metadata = {
   title: "BuzzBites",
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
           <div className="relative z-10">
             {children}
           </div>
+          <FullPageFooter />
         </SmoothScroll>
       </body>
     </html>
