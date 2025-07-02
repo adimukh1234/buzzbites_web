@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useScrollContext } from './ScrollContext';
 import gsap from 'gsap';
+import Link from 'next/link';
 
 export default function LetsTalkSection() {
   const sectionRef = useRef(null);
@@ -558,20 +559,23 @@ export default function LetsTalkSection() {
                   variants={formVariants}
                   className="relative"
                 >
-                  <button 
-                    className="px-12 py-5 bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white text-lg font-medium rounded-lg border border-white/20 hover:bg-gray-800 transition duration-300 flex items-center justify-center gap-3 group relative overflow-hidden mx-auto"
-                  >
-                    {/* Animated hover effect */}
-                    <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-gray-800 via-white/10 to-gray-800 opacity-0 group-hover:opacity-50 transition-opacity duration-300 transform scale-x-0 group-hover:scale-x-100 origin-left"></span>
-                    
-                    {/* Button shine effect */}
-                    <span className="absolute inset-0 w-1/4 h-full bg-white/20 skew-x-[45deg] -translate-x-full group-hover:translate-x-[400%] transition-transform duration-700 ease-in-out"></span>
-                    
-                    <span className="relative z-10 font-bold tracking-wide text-xl">Contact Us</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 relative z-10 group-hover:translate-x-1 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
-                  </button>
+
+                  <Link href="/contact">
+                    <button 
+                      className="px-12 py-5 bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white text-lg font-medium rounded-lg border border-white/20 hover:bg-gray-800 transition duration-300 flex items-center justify-center gap-3 group relative overflow-hidden mx-auto"
+                    >
+                      {/* Animated hover effect */}
+                      <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-gray-800 via-white/10 to-gray-800 opacity-0 group-hover:opacity-50 transition-opacity duration-300 transform scale-x-0 group-hover:scale-x-100 origin-left"></span>
+                      
+                      {/* Button shine effect */}
+                      <span className="absolute inset-0 w-1/4 h-full bg-white/20 skew-x-[45deg] -translate-x-full group-hover:translate-x-[400%] transition-transform duration-700 ease-in-out"></span>
+                      
+                      <span className="relative z-10 font-bold tracking-wide text-xl">Contact Us</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 relative z-10 group-hover:translate-x-1 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </button>
+                  </Link>
                 </motion.div>
               </div>
             </motion.div>

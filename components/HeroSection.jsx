@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import FuturisticOverlay from './FuturisticOverlay';
 import ScrambleButton from './ScrambleButton';
+import Link from 'next/link';
 
 export default function HeroSection() {
   const [loaded, setLoaded] = useState(false);
@@ -14,7 +15,10 @@ export default function HeroSection() {
     }, 300);
 
     return () => clearTimeout(timer);
-  }, []);  return (    
+  }, []); 
+  
+    
+  return (    
     <section className="relative flex flex-col items-center justify-center min-h-screen w-full text-center pt-20 pb-20 overflow-hidden bg-gradient-to-b from-black/20 to-black/40">
       {/* Enhanced futuristic background overlays for hero section */}
       <FuturisticOverlay opacity="medium" className="z-0" />
@@ -51,10 +55,13 @@ export default function HeroSection() {
           <span className="opacity-90">we build tools that transform how teams work.</span>
         </p>          <div className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000 delay-1600 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         
-          <ScrambleButton 
-            text="Explore Instacon →" 
-            className="glow text-base font-satoshi font-bold bg-yellow-500 hover:bg-yellow-600"
-          />
+          
+          <Link href="/product">
+            <ScrambleButton 
+              text="Explore Instacon →" 
+              className="glow text-base font-satoshi font-bold bg-yellow-500 hover:bg-yellow-600"
+            />
+          </Link>
         </div>
       </div>
     </section>

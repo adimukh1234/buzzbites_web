@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import Link from 'next/link';
 import Script from 'next/script';
 
 const footerVariants = {
@@ -188,15 +189,26 @@ export default function FullPageFooter() {
               <motion.div variants={itemVariants}>
                 <h3 className="font-semibold mb-6 text-2xl lg:text-3xl text-yellow-400" style={{ fontFamily: "'Guminert', sans-serif" }}>Quick Links</h3>
                 <ul className="space-y-5 text-gray-400">
-                  {['Home', 'Our Journey', 'Instacon', 'Contact'].map((item, index) => (
+                  {[
+                    { name: 'Home', href: '/' },
+                    { name: 'Our Journey', href: '/journey' },
+                    { name: 'Instacon', href: '/product' },
+                    { name: 'Contact', href: '/contact' }
+                  ].map((item, index) => (
                     <motion.li 
-                      key={item}
+                      key={item.name}
                       variants={itemVariants}
                       custom={index}
-                      whileHover={{ x: 8, color: '#a3e635', scale: 1.02 }}
-                      className="cursor-pointer transition-all duration-300 text-lg lg:text-xl font-medium py-2 px-3 rounded-lg hover:bg-gray-900/50"
+                      className="text-lg lg:text-xl font-medium"
                     >
-                      {item}
+                      <Link href={item.href}>
+                        <motion.span
+                          whileHover={{ x: 8, color: '#a3e635', scale: 1.02 }}
+                          className="cursor-pointer transition-all duration-300 py-2 px-3 rounded-lg hover:bg-gray-900/50 block"
+                        >
+                          {item.name}
+                        </motion.span>
+                      </Link>
                     </motion.li>
                   ))}
                 </ul>
