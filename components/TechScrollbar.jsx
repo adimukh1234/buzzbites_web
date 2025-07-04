@@ -121,7 +121,7 @@ const TechScrollbar = () => {
           className="absolute left-0 top-0 h-full rounded-full"
           style={{
             width: `${scrollPercentage}%`,
-            background: 'linear-gradient(90deg, #EABA08 0%, #4ade80 50%, #3b82f6 100%)',
+            background: '#fcfc03',
           }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         />
