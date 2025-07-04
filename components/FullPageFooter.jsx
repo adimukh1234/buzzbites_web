@@ -167,21 +167,7 @@ export default function FullPageFooter() {
               >
                  A product-first company crafting digital tools for smarter workforce management. Built in Kolkata. Driven by purpose.
               </motion.p>
-              <motion.button 
-                variants={itemVariants}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-yellow-400 text-black px-8 py-3 rounded-full font-semibold flex items-center gap-3 hover:shadow-lg hover:shadow-yellow-400/25 transition-all duration-300"
-              >
-                Company Deck 
-                <motion.span 
-                  animate={{ y: [0, -2, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="text-xl"
-                >
-                  ⬇️
-                </motion.span>
-              </motion.button>
+              
             </motion.div>
 
             {/* Quick Links - Expanded */}
