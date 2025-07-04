@@ -1311,7 +1311,13 @@ export default function InstaconProduct() {
               damping: 15 
             }}
           >
-            <ScrambleButton text="🔘 Book A Demo" className="text-xl px-8 py-4" />
+            <a 
+              href="https://calendly.com/buzzbites/instacon"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ScrambleButton text="🔘 Book A Demo" className="text-xl px-8 py-4" />
+            </a>
           </motion.div>
         </div>
 

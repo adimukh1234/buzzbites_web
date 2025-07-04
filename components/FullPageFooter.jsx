@@ -220,17 +220,36 @@ export default function FullPageFooter() {
               <motion.div variants={itemVariants}>
                 <h3 className="font-semibold mb-6 text-2xl lg:text-3xl text-yellow-400" style={{ fontFamily: "'Guminert', sans-serif" }}>Download Our App</h3>
                 <ul className="space-y-5 text-gray-400">
-                  {['Google Play Store', 'App Store'].map((item, index) => (
-                    <motion.li 
-                      key={item}
-                      variants={itemVariants}
-                      custom={index}
-                      whileHover={{ x: 8, color: '#a3e635', scale: 1.02 }}
-                      className="cursor-pointer transition-all duration-300 text-lg lg:text-xl font-medium py-2 px-3 rounded-lg hover:bg-gray-900/50"
+                  <motion.li 
+                    variants={itemVariants}
+                    custom={0}
+                    whileHover={{ x: 8, color: '#a3e635', scale: 1.02 }}
+                    className="cursor-pointer transition-all duration-300 text-lg lg:text-xl font-medium py-2 px-3 rounded-lg hover:bg-gray-900/50"
+                  >
+                    <a 
+                      href="https://play.google.com/store/apps/details?id=com.buzzbites.instacon&hl=en&gl=US"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block"
                     >
-                      {item}
-                    </motion.li>
-                  ))}
+                      Google Play Store
+                    </a>
+                  </motion.li>
+                  <motion.li 
+                    variants={itemVariants}
+                    custom={1}
+                    whileHover={{ x: 8, color: '#a3e635', scale: 1.02 }}
+                    className="cursor-pointer transition-all duration-300 text-lg lg:text-xl font-medium py-2 px-3 rounded-lg hover:bg-gray-900/50"
+                  >
+                    <a 
+                      href="https://apps.apple.com/in/app/instacon/id1585127082"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block"
+                    >
+                      App Store
+                    </a>
+                  </motion.li>
                 </ul>
               </motion.div>
             </motion.div>
@@ -240,17 +259,20 @@ export default function FullPageFooter() {
               <motion.div variants={itemVariants}>
                 <h3 className="font-semibold mb-6 text-2xl lg:text-3xl text-yellow-400" style={{ fontFamily: "'Guminert', sans-serif" }}>Legal</h3>
                 <ul className="space-y-5 text-gray-400">
-                  {['Privacy Policy', 'Terms of Use'].map((item, index) => (
-                    <motion.li 
-                      key={item}
-                      variants={itemVariants}
-                      custom={index}
-                      whileHover={{ x: 8, color: '#a3e635', scale: 1.02 }}
-                      className="cursor-pointer transition-all duration-300 text-lg lg:text-xl font-medium py-2 px-3 rounded-lg hover:bg-gray-900/50"
+                  <motion.li 
+                    variants={itemVariants}
+                    custom={0}
+                    whileHover={{ x: 8, color: '#a3e635', scale: 1.02 }}
+                    className="cursor-pointer transition-all duration-300 text-lg lg:text-xl font-medium py-2 px-3 rounded-lg hover:bg-gray-900/50"
+                  >
+                    <Link 
+                      href="/privacy"
+                      className="block"
                     >
-                      {item}
-                    </motion.li>
-                  ))}
+                      Privacy Policy
+                    </Link>
+                  </motion.li>
+                  
                 </ul>
               </motion.div>
             </motion.div>
@@ -264,15 +286,33 @@ export default function FullPageFooter() {
               className="flex flex-col md:flex-row justify-between items-start md:items-center border-t border-gray-800 pt-6 gap-4"
             >
               <div className="flex flex-wrap gap-6 text-gray-400">
-                {['Instagram', 'Facebook', 'LinkedIn', 'Twitter'].map((social) => (
-                  <motion.span 
-                    key={social}
-                    whileHover={{ color: '#a3e635', y: -2 }}
-                    className="cursor-pointer transition-colors duration-200 hover:underline"
-                  >
-                    {social}
-                  </motion.span>
-                ))}
+                <motion.a 
+                  href="https://www.instagram.com/buzzbitesofficial/?hl=en"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ color: '#a3e635', y: -2 }}
+                  className="cursor-pointer transition-colors duration-200 hover:underline"
+                >
+                  Instagram
+                </motion.a>
+                <motion.a 
+                  href="https://www.facebook.com/buzzbitesofficial/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ color: '#a3e635', y: -2 }}
+                  className="cursor-pointer transition-colors duration-200 hover:underline"
+                >
+                  Facebook
+                </motion.a>
+                <motion.a 
+                  href="https://www.linkedin.com/company/buzzbites/?viewAsMember=true"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ color: '#a3e635', y: -2 }}
+                  className="cursor-pointer transition-colors duration-200 hover:underline"
+                >
+                  LinkedIn
+                </motion.a>
               </div>
               <motion.p 
                 variants={itemVariants}
@@ -311,7 +351,7 @@ export default function FullPageFooter() {
           ))}
         </div>
 
-        {/* Large half-cut "wavespace" text at bottom - adjusted to be cut exactly through the middle */}
+        {/* Large half-cut "BUZZBITES" text at bottom - adjusted to be cut exactly through the middle */}
         <div className="absolute bottom-0 left-0 right-0 overflow-hidden pointer-events-none z-[45] w-full">
           <motion.div
             initial={{ y: 100, opacity: 0 }}
@@ -343,7 +383,11 @@ export default function FullPageFooter() {
                 fontWeight: 700 // Ensure proper weight for Guminert
               }}
             >
-              BuzzBites
+              {/* Make the two Z yellow */}
+              {'BU'}
+              <span style={{ color: '#fcfc03' }}>Z</span>
+              <span style={{ color: '#fcfc03' }}>Z</span>
+              {'BITES'}
             </h2>
             
             {/* Subtle gradient overlay for depth - adjusted for exact middle cut */}

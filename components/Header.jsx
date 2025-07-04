@@ -13,10 +13,16 @@ export default function Header() {
         <span>BUZZ</span>
         <span className="text-yellow-500">BITES</span>
         <span className="text-yellow-500 text-lg align-super ml-1">●</span>
-      </div>      <ScrambleButton 
-        text="Book a Demo →" 
-        className="ml-6 px-5 py-2 rounded-full font-satoshi font-bold text-white bg-yellow-500 shadow-[0_0_20px_0_rgba(255,255,0,0.4)] hover:bg-yellow-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 relative overflow-hidden"
-      />
+      </div>      <a 
+        href="https://calendly.com/buzzbites/instacon"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <ScrambleButton 
+          text="Book a Demo →" 
+          className="ml-6 px-5 py-2 rounded-full font-satoshi font-bold text-white bg-yellow-500 shadow-[0_0_20px_0_rgba(255,255,0,0.4)] hover:bg-yellow-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 relative overflow-hidden"
+        />
+      </a>
       <div className="md:hidden">
         {/* Mobile menu button (optional for future) */}
       </div>
