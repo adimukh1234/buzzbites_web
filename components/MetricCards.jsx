@@ -123,156 +123,323 @@ const AnimatedCounter = ({
 };
 
 // Bar chart for industries metric
-const BarChart = ({ isActive }) => {
-  const chartData = [60, 40, 75, 50, 65, 80, 45, 70, 55, 60];
+const BarChart = ({ isActive, accentColor }) => {
+  const chartData = [
+    { value: 60, label: 'Pharma' },
+    { value: 40, label: 'FMCG' },
+    { value: 75, label: 'Logistics' },
+    { value: 50, label: 'Retail' },
+    { value: 65, label: 'Field Sales' },
+    { value: 80, label: 'Manufacturing' },
+    { value: 45, label: 'Healthcare' },
+    { value: 70, label: 'Technology' },
+    { value: 55, label: 'Education' },
+    { value: 60, label: 'Others' }
+  ];
   
   return (
-    <div className="h-[50px] flex items-end space-x-1 justify-center">
-      {chartData.map((value, i) => (
-        <motion.div
-          key={i}
-          className="relative w-[6px]"
-          style={{
-            height: `${value}%`,
-          }}
-        >
-          <motion.div 
-            className="absolute bottom-0 w-full"
-            style={{ 
-              backgroundColor: '#4ade80',
-              borderRadius: "2px 2px 0 0",
-              boxShadow: `0 0 10px 0 rgba(74, 222, 128, 0.3)`
-            }}
-            initial={{ height: 0 }}            
-            animate={isActive ? { 
-              height: "100%",
-              transition: { 
-                delay: 0.2 + (i * 0.05), 
-                duration: 0.8,
-                ease: [0.43, 0.13, 0.23, 0.96] // Easing curve equivalent to power2.out
-              }
-            } : { height: 0 }}
-          />
-        </motion.div>
-      ))}
+    <div className="h-[120px] w-full">
+      <div className="h-full flex items-end justify-center space-x-2">
+        {chartData.map((item, i) => (
+          <div key={i} className="flex flex-col items-center">
+            <motion.div
+              className="relative w-[12px] mb-2"
+              style={{
+                height: `${item.value}%`,
+              }}
+            >
+              <motion.div 
+                className="absolute bottom-0 w-full rounded-t-lg"
+                style={{ 
+                  backgroundColor: accentColor || '#4ade80',
+                  borderRadius: "6px 6px 0 0",
+                  boxShadow: `0 0 15px 2px ${accentColor || '#4ade80'}40`
+                }}
+                initial={{ height: 0 }}            
+                animate={isActive ? { 
+                  height: "100%",
+                  transition: { 
+                    delay: 0.2 + (i * 0.1), 
+                    duration: 1.2,
+                    ease: [0.43, 0.13, 0.23, 0.96]
+                  }
+                } : { height: 0 }}
+              />
+              {/* Glow effect */}
+              <motion.div 
+                className="absolute top-0 w-full h-2 rounded-full opacity-60"
+                style={{ 
+                  backgroundColor: accentColor || '#4ade80',
+                  filter: 'blur(4px)'
+                }}
+                initial={{ opacity: 0 }}
+                animate={isActive ? { 
+                  opacity: 0.6,
+                  transition: { 
+                    delay: 0.2 + (i * 0.1) + 0.5, 
+                    duration: 0.8
+                  }
+                } : { opacity: 0 }}
+              />
+            </motion.div>
+            <motion.div
+              className="text-xs text-white/60 text-center transform -rotate-45 origin-center"
+              style={{ fontSize: '8px', width: '40px' }}
+              initial={{ opacity: 0 }}
+              animate={isActive ? { 
+                opacity: 1,
+                transition: { 
+                  delay: 0.2 + (i * 0.1) + 0.8, 
+                  duration: 0.5
+                }
+              } : { opacity: 0 }}
+            >
+              {item.label}
+            </motion.div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
 // Pie chart for accuracy rate
-const PieChart = ({ percentage, isActive }) => {
-  const radius = 30;
+const PieChart = ({ percentage, isActive, accentColor }) => {
+  const radius = 50;
+  const strokeWidth = 8;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference * (1 - percentage / 100);
   
   return (
-    <div className="flex justify-center my-2">
-      <svg width="70" height="70" viewBox="0 0 70 70">
-        {/* Background circle */}
-        <circle cx="35" cy="35" r={radius} fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="6" />
+    <div className="flex flex-col items-center justify-center h-[120px] w-full">
+      <div className="relative">
+        <svg width="140" height="140" viewBox="0 0 140 140">
+          {/* Background circle */}
+          <circle 
+            cx="70" 
+            cy="70" 
+            r={radius} 
+            fill="none" 
+            stroke="rgba(255,255,255,0.1)" 
+            strokeWidth={strokeWidth}
+            strokeDasharray="4 4"
+          />
+          
+          {/* Percentage fill */}
+          <motion.circle
+            cx="70"
+            cy="70"
+            r={radius}
+            fill="none"
+            stroke={accentColor || "#3b82f6"}
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            strokeDasharray={circumference}
+            initial={{ strokeDashoffset: circumference }}          
+            animate={isActive ? {
+              strokeDashoffset,
+              transition: {
+                delay: 0.3,
+                duration: 2,
+                ease: [0.43, 0.13, 0.23, 0.96]
+              }
+            } : { strokeDashoffset: circumference }}
+            style={{ 
+              transformOrigin: "center",
+              transform: "rotate(-90deg)",
+              filter: `drop-shadow(0 0 8px ${accentColor || "#3b82f6"})`
+            }}
+          />
+          
+          {/* Glowing center */}
+          <motion.circle
+            cx="70"
+            cy="70"
+            r="20"
+            fill={`${accentColor || "#3b82f6"}20`}
+            stroke={accentColor || "#3b82f6"}
+            strokeWidth="2"
+            initial={{ opacity: 0, scale: 0 }}
+            animate={isActive ? {
+              opacity: 1,
+              scale: 1,
+              transition: {
+                delay: 1,
+                duration: 0.8
+              }
+            } : { opacity: 0, scale: 0 }}
+          />
+          
+          {/* Center percentage text */}
+          <motion.text
+            x="70"
+            y="70"
+            textAnchor="middle"
+            dominantBaseline="middle"
+            className="text-white font-bold text-lg"
+            fill="white"
+            initial={{ opacity: 0 }}
+            animate={isActive ? {
+              opacity: 1,
+              transition: {
+                delay: 1.2,
+                duration: 0.5
+              }
+            } : { opacity: 0 }}
+          >
+            {percentage}%
+          </motion.text>
+        </svg>
         
-        {/* Percentage fill */}
-        <motion.circle
-          cx="35"
-          cy="35"
-          r={radius}
-          fill="none"
-          stroke="#3b82f6"
-          strokeWidth="6"
-          strokeLinecap="round"
-          strokeDasharray={circumference}
-          initial={{ strokeDashoffset: circumference }}          
-          animate={isActive ? {
-            strokeDashoffset,
-            transition: {
-              delay: 0.3,
-              duration: 1.5,
-              ease: [0.43, 0.13, 0.23, 0.96] // Easing curve equivalent to power2.out
-            }
-          } : { strokeDashoffset: circumference }}
-          style={{ 
-            transformOrigin: "center",
-            transform: "rotate(-90deg)",
-            filter: "drop-shadow(0 0 2px #3b82f6)"
-          }}
-        />
-      </svg>
+        {/* Accuracy indicators */}
+        <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1">
+          {[...Array(5)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="w-2 h-2 rounded-full"
+              style={{ backgroundColor: accentColor || "#3b82f6" }}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={isActive ? {
+                opacity: i < 5 ? 1 : 0.3,
+                scale: 1,
+                transition: {
+                  delay: 1.5 + (i * 0.1),
+                  duration: 0.3
+                }
+              } : { opacity: 0, scale: 0 }}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
 
 // Star rating visualization
-const StarRating = ({ rating, isActive }) => {
+const StarRating = ({ rating, isActive, accentColor }) => {
   const fullStars = Math.floor(rating);
   const partialStar = rating - fullStars;
   const emptyStars = 5 - Math.ceil(rating);
   
   return (
-    <div className="flex justify-center items-center space-x-1">
-      {[...Array(fullStars)].map((_, i) => (
-        <motion.div 
-          key={`full-${i}`}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={isActive ? { 
-            opacity: 1, 
-            scale: 1,
-            transition: {
-              delay: 0.2 + (i * 0.1),
-              type: "spring",
-              stiffness: 300,
-              damping: 10
-            }
-          } : { opacity: 0, scale: 0 }}
-        >
-          <AiFillStar className="text-yellow-500 text-xl" />
-        </motion.div>
-      ))}
+    <div className="flex flex-col items-center justify-center h-[120px] w-full">
+      {/* Large star display */}
+      <div className="flex justify-center items-center space-x-2 mb-4">
+        {[...Array(fullStars)].map((_, i) => (
+          <motion.div 
+            key={`full-${i}`}
+            initial={{ opacity: 0, scale: 0, rotate: -180 }}
+            animate={isActive ? { 
+              opacity: 1, 
+              scale: 1,
+              rotate: 0,
+              transition: {
+                delay: 0.2 + (i * 0.15),
+                type: "spring",
+                stiffness: 200,
+                damping: 10
+              }
+            } : { opacity: 0, scale: 0, rotate: -180 }}
+          >
+            <AiFillStar 
+              className="text-3xl"
+              style={{ color: accentColor || '#f97316' }}
+            />
+          </motion.div>
+        ))}
+        
+        {partialStar > 0 && (
+          <motion.div 
+            className="relative"
+            initial={{ opacity: 0, scale: 0, rotate: -180 }}
+            animate={isActive ? { 
+              opacity: 1, 
+              scale: 1,
+              rotate: 0,
+              transition: {
+                delay: 0.2 + (fullStars * 0.15),
+                type: "spring",
+                stiffness: 200,
+                damping: 10
+              }
+            } : { opacity: 0, scale: 0, rotate: -180 }}
+          >
+            <AiFillStar className="text-gray-400 text-3xl" />
+            <div className="absolute top-0 left-0 overflow-hidden" style={{ width: `${partialStar * 100}%` }}>
+              <AiFillStar 
+                className="text-3xl"
+                style={{ color: accentColor || '#f97316' }}
+              />
+            </div>
+          </motion.div>
+        )}
+        
+        {[...Array(emptyStars)].map((_, i) => (
+          <motion.div 
+            key={`empty-${i}`}
+            initial={{ opacity: 0, scale: 0, rotate: -180 }}
+            animate={isActive ? { 
+              opacity: 1, 
+              scale: 1,
+              rotate: 0,
+              transition: {
+                delay: 0.2 + ((fullStars + (partialStar > 0 ? 1 : 0) + i) * 0.15),
+                type: "spring",
+                stiffness: 200,
+                damping: 10
+              }
+            } : { opacity: 0, scale: 0, rotate: -180 }}
+          >
+            <AiFillStar className="text-gray-400 text-3xl" />
+          </motion.div>
+        ))}
+      </div>
       
-      {partialStar > 0 && (
-        <motion.div 
-          className="relative"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={isActive ? { 
-            opacity: 1, 
-            scale: 1,
-            transition: {
-              delay: 0.2 + (fullStars * 0.1),
-              type: "spring",
-              stiffness: 300,
-              damping: 10
-            }
-          } : { opacity: 0, scale: 0 }}
-        >
-          <AiFillStar className="text-gray-400 text-xl" />
-          <div className="absolute top-0 left-0 overflow-hidden" style={{ width: `${partialStar * 100}%` }}>
-            <AiFillStar className="text-yellow-500 text-xl" />
-          </div>
-        </motion.div>
-      )}
-      
-      {[...Array(emptyStars)].map((_, i) => (
-        <motion.div 
-          key={`empty-${i}`}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={isActive ? { 
-            opacity: 1, 
-            scale: 1,
-            transition: {
-              delay: 0.2 + ((fullStars + (partialStar > 0 ? 1 : 0) + i) * 0.1),
-              type: "spring",
-              stiffness: 300,
-              damping: 10
-            }
-          } : { opacity: 0, scale: 0 }}
-        >
-          <AiFillStar className="text-gray-400 text-xl" />
-        </motion.div>
-      ))}
+      {/* Rating breakdown */}
+      <div className="flex flex-col space-y-1 w-full">
+        {[5, 4, 3, 2, 1].map((star, i) => (
+          <motion.div
+            key={star}
+            className="flex items-center space-x-2 text-xs"
+            initial={{ opacity: 0, x: -20 }}
+            animate={isActive ? {
+              opacity: 1,
+              x: 0,
+              transition: {
+                delay: 1 + (i * 0.1),
+                duration: 0.5
+              }
+            } : { opacity: 0, x: -20 }}
+          >
+            <span className="text-white/60 w-2">{star}</span>
+            <div className="flex-1 h-1 bg-white/10 rounded-full overflow-hidden">
+              <motion.div
+                className="h-full rounded-full"
+                style={{ 
+                  backgroundColor: accentColor || '#f97316',
+                  width: `${star === 5 ? 85 : star === 4 ? 10 : star === 3 ? 3 : star === 2 ? 1 : 1}%`
+                }}
+                initial={{ width: 0 }}
+                animate={isActive ? {
+                  width: `${star === 5 ? 85 : star === 4 ? 10 : star === 3 ? 3 : star === 2 ? 1 : 1}%`,
+                  transition: {
+                    delay: 1.2 + (i * 0.1),
+                    duration: 0.8
+                  }
+                } : { width: 0 }}
+              />
+            </div>
+            <span className="text-white/40 text-xs w-8 text-right">
+              {star === 5 ? '85%' : star === 4 ? '10%' : star === 3 ? '3%' : star === 2 ? '1%' : '1%'}
+            </span>
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 };
 
-// Metric Card Component
+// Expandable Metric Card Component
 const MetricCard = ({ 
   metric, 
   description, 
@@ -282,8 +449,8 @@ const MetricCard = ({
   accentColor,
   isActive,
   isVisible,
-  stackIndex = 0,
-  scrollProgress = 0
+  isExpanded = false,
+  onClick
 }) => {
   const [hovered, setHovered] = useState(false);
   const shouldAnimate = isActive && isVisible;
@@ -296,22 +463,14 @@ const MetricCard = ({
   // Get numeric value without suffix
   const numericValue = metric.replace(/[+%★]/g, '');
 
-  // Calculate stack effect transforms based on stackIndex and scroll progress
-  const stackTransform = {
-    translateY: `${stackIndex * -10 - (scrollProgress * 15 * stackIndex)}px`,
-    scale: Math.max(0.85, 1 - (stackIndex * 0.05)),
-    rotateX: `${stackIndex * -1.5 - (scrollProgress * 2)}deg`, 
-    rotateY: `${(index % 2 === 0 ? 1 : -1) * stackIndex * 0.5 * scrollProgress}deg`
-  };
-
   const renderChart = () => {
     switch (chartType) {
       case 'bar':
-        return <BarChart isActive={shouldAnimate} />;
+        return <BarChart isActive={shouldAnimate} accentColor={accentColor} />;
       case 'pie':
-        return <PieChart percentage={parseFloat(numericValue)} isActive={shouldAnimate} />;
+        return <PieChart percentage={parseFloat(numericValue)} isActive={shouldAnimate} accentColor={accentColor} />;
       case 'rating':
-        return <StarRating rating={parseFloat(numericValue)} isActive={shouldAnimate} />;
+        return <StarRating rating={parseFloat(numericValue)} isActive={shouldAnimate} accentColor={accentColor} />;
       default:
         return null;
     }
@@ -319,181 +478,178 @@ const MetricCard = ({
 
   return (
     <motion.div
-      className="relative"
+      className={`relative overflow-hidden cursor-pointer transition-all duration-700 ease-in-out ${
+        isExpanded ? 'flex-grow-[10000] max-w-[600px] mx-0' : 'flex-grow min-w-[80px] mx-2'
+      }`}
+      style={{
+        minHeight: '400px',
+        borderRadius: isExpanded ? '40px' : '30px',
+        backgroundImage: `linear-gradient(135deg, ${accentColor}20, ${accentColor}05)`,
+        border: `2px solid ${accentColor}30`,
+        transformOrigin: 'bottom center',
+      }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{
-        perspective: "1200px",
-        transformStyle: "preserve-3d",
-        zIndex: 100 - stackIndex * 10
-      }}
+      onClick={onClick}
+      initial={false}
       animate={{
-        translateY: stackTransform.translateY,
-        scale: hovered ? Math.min(1.02, stackTransform.scale + 0.02) : stackTransform.scale,
-        rotateX: stackTransform.rotateX,
-        rotateY: stackTransform.rotateY,
-        opacity: Math.max(0.5, 1 - (stackIndex * 0.1)),
-        filter: `blur(${stackIndex * 0.5}px)`
+        scale: hovered ? 1.02 : 1,
       }}
       transition={{
         type: "spring",
-        stiffness: 300, 
+        stiffness: 400,
         damping: 30,
-        mass: 1
       }}
-    >      <motion.div 
-        className={`
-          p-6 relative overflow-hidden rounded-2xl
-          bg-gradient-to-br from-gray-900/90 via-black/95 to-gray-900/90
-          border-2 backdrop-blur-lg
-          transition-all transform
-          ${hovered ? 'shadow-lg' : ''}
-          ${stackIndex === 0 ? 'shadow-xl' : ''}
-        `}
+    >
+      {/* Background Pattern */}
+      <motion.div
+        className="absolute inset-0 opacity-10"
         style={{
-          borderColor: `${accentColor}50`,
-          boxShadow: hovered ? `0 0 20px ${accentColor}40` : 
-                    (stackIndex === 0 ? `0 10px 20px rgba(0,0,0,0.3), 0 0 10px ${accentColor}30` : 
-                    `0 ${5 - stackIndex}px ${10 - stackIndex * 2}px rgba(0,0,0,0.2)`),
-          transformStyle: "preserve-3d",
+          backgroundImage: `
+            linear-gradient(90deg, ${accentColor} 1px, transparent 1px),
+            linear-gradient(${accentColor} 1px, transparent 1px)
+          `,
+          backgroundSize: '20px 20px'
         }}
-        transition={{ duration: 0.3 }}
-      >
-        <FuturisticOverlay opacity="low" className={`opacity-20 ${hovered ? 'opacity-30' : ''}`} />
-        
-        {/* Card Content with Modern Dashboard Layout */}
-        <div className="relative z-10">          {/* Icon with glow effect */}
+        animate={{
+          backgroundPosition: isExpanded ? '20px 20px' : '0px 0px'
+        }}
+        transition={{ duration: 0.7 }}
+      />
+
+      {/* Shadow Overlay */}
+      <motion.div
+        className="absolute inset-0"
+        style={{
+          background: isExpanded 
+            ? 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 30%, transparent 100%)'
+            : 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 40%)',
+        }}
+        animate={{
+          opacity: isExpanded ? 1 : 0.7,
+        }}
+        transition={{ duration: 0.7 }}
+      />
+
+      <FuturisticOverlay opacity="low" className={`opacity-20 ${hovered ? 'opacity-30' : ''}`} />
+      
+      {/* Card Content */}
+      <div className={`absolute ${isExpanded ? 'bottom-8 left-8 right-8' : 'bottom-4 left-4 right-4'} z-10`}>
+        <div className="flex items-end">
+          {/* Icon */}
           <motion.div
-            className="p-4 rounded-xl bg-black/30 backdrop-blur-sm border inline-block mb-6"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ 
-              scale: shouldAnimate ? 1 : 0, 
-              opacity: shouldAnimate ? 1 : 0,
-              transition: {
-                delay: 0.3,
-                type: "spring",
-                stiffness: 300,
-                damping: 15
-              }
-            }}
+            className="flex items-center justify-center rounded-full bg-white/90 backdrop-blur-sm"
             style={{
-              borderColor: `${accentColor}30`,
-              boxShadow: hovered ? `0 0 15px 0 ${accentColor}40` : 'none',
-              transition: 'box-shadow 0.3s ease'
+              width: '50px',
+              height: '50px',
+              color: accentColor,
             }}
+            animate={{
+              scale: isExpanded ? 1.1 : 1,
+            }}
+            transition={{ duration: 0.7 }}
           >
-            <Icon size={28} style={{ color: accentColor }} />
+            <Icon size={24} />
           </motion.div>
-          
-          {/* Metric number with enhanced animation */}
+
+          {/* Content */}
           <motion.div
-            className="mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ 
-              opacity: shouldAnimate ? 1 : 0, 
-              y: shouldAnimate ? 0 : 20,
-              transition: {
-                delay: 0.5,
-                duration: 0.6
-              }
+            className="ml-4 flex-1"
+            initial={false}
+            animate={{
+              opacity: isExpanded ? 1 : 0,
+              x: isExpanded ? 0 : 20,
             }}
+            transition={{ duration: 0.7, delay: isExpanded ? 0.2 : 0 }}
           >
-            <div className="text-5xl font-satoshi font-black leading-none" style={{ 
-                color: accentColor,
-                textShadow: `0 0 10px ${accentColor}70`
-              }}>
+            {/* Metric Number */}
+            <div className="text-4xl md:text-5xl font-satoshi font-black text-white leading-none mb-2" style={{ 
+              textShadow: `0 0 20px ${accentColor}70`
+            }}>
               <AnimatedCounter 
                 value={numericValue} 
                 suffix={suffix}
-                duration={shouldAnimate ? 2 : 0}
+                duration={shouldAnimate && isExpanded ? 2 : 0}
                 accentColor={accentColor}
                 withAnimation={true}
               />
             </div>
-          </motion.div>
-            {/* Chart visualization */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ 
-              opacity: shouldAnimate ? 1 : 0,
-              transition: { delay: 0.7 }
-            }}
-            className="my-6"
-          >
-            {renderChart()}
-          </motion.div>
-          
-          {/* Description */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ 
-              opacity: shouldAnimate ? 1 : 0, 
-              y: shouldAnimate ? 0 : 10,
-              transition: {
-                delay: 0.9,
-                duration: 0.5
-              }
-            }}
-          >
-            <h3 className="font-satoshi font-semibold text-white/90 text-base leading-tight" style={{
+
+            {/* Description */}
+            <h3 className="font-satoshi font-semibold text-white/90 text-lg leading-tight mb-4" style={{
               textShadow: '0 2px 4px rgba(0,0,0,0.8)'
             }}>
               {description}
             </h3>
+
+            {/* Chart */}
+            <div className="mb-6 mt-4">
+              {renderChart()}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Compact view - show only icon and metric */}
+        <motion.div
+          className="absolute inset-0 flex flex-col items-center justify-center"
+          initial={false}
+          animate={{
+            opacity: isExpanded ? 0 : 1,
+          }}
+          transition={{ duration: 0.7 }}
+        >
+          {/* Icon positioned at top center */}
+          <motion.div
+            className="flex items-center justify-center rounded-full bg-white/90 backdrop-blur-sm mb-4"
+            style={{
+              width: '40px',
+              height: '40px',
+              color: accentColor,
+            }}
+            animate={{
+              scale: isExpanded ? 0.8 : 1,
+            }}
+            transition={{ duration: 0.7 }}
+          >
+            <Icon size={20} />
           </motion.div>
           
-          {/* Animated corners */}
-          <svg className="absolute top-0 left-0 w-8 h-8 opacity-50" viewBox="0 0 24 24">
-            <motion.path
-              d="M0,0 L12,0 L0,12 Z"
-              fill="none"
-              stroke={accentColor}
-              strokeWidth="1"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ 
-                pathLength: shouldAnimate ? 1 : 0, 
-                opacity: shouldAnimate ? (hovered ? 0.8 : 0.5) : 0,
-                transition: {
-                  delay: 0.2,
-                  duration: 1,
-                  ease: "easeInOut"
-                }
-              }}
-            />
-          </svg>
-          
-          <svg className="absolute bottom-0 right-0 w-8 h-8 opacity-50" viewBox="0 0 24 24">
-            <motion.path
-              d="M24,24 L12,24 L24,12 Z"
-              fill="none"
-              stroke={accentColor}
-              strokeWidth="1"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ 
-                pathLength: shouldAnimate ? 1 : 0, 
-                opacity: shouldAnimate ? (hovered ? 0.8 : 0.5) : 0,
-                transition: {
-                  delay: 0.3,
-                  duration: 1,
-                  ease: "easeInOut"
-                }
-              }}
-            />
-          </svg>
-        </div>
-      </motion.div>
+          {/* Metric text positioned below icon */}
+          <div className="text-xl font-satoshi font-black text-white text-center" style={{ 
+            color: accentColor,
+            textShadow: `0 0 15px ${accentColor}70`,
+            writingMode: 'vertical-rl',
+            textOrientation: 'mixed'
+          }}>
+            {metric}
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Animated border effect */}
+      <motion.div
+        className="absolute inset-0 rounded-full pointer-events-none"
+        style={{
+          border: `2px solid ${accentColor}`,
+          borderRadius: isExpanded ? '40px' : '30px',
+        }}
+        animate={{
+          boxShadow: isExpanded 
+            ? `0 0 30px ${accentColor}40, inset 0 0 30px ${accentColor}20` 
+            : `0 0 10px ${accentColor}30`,
+        }}
+        transition={{ duration: 0.7 }}
+      />
     </motion.div>
   );
 };
 
-// Main MetricCards Component with Stacking Effect and ScrollTrigger
+// Main MetricCards Component with Expandable Card System
 export default function MetricCards() {
   const containerRef = useRef(null);
   const sectionRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [forceShow, setForceShow] = useState(false);
-  const [stackLevels, setStackLevels] = useState([]);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   
   // Animation controls to manually trigger metric animations
@@ -532,14 +688,11 @@ export default function MetricCards() {
     }
   ];
   
-  // Use scroll trigger to control stacking effect
+  // Use scroll trigger to control animations
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
   });
-  
-  // Transform scroll progress to a usable animation value
-  const scrollProgressTransformed = useTransform(scrollYProgress, [0, 0.7], [0, 1]);
   
   // Use once: false to allow animations to be retriggered when scrolling in/out
   const isInView = useInView(containerRef, { 
@@ -547,14 +700,6 @@ export default function MetricCards() {
     amount: 0.2, 
     margin: "0px 0px -15% 0px" 
   });
-  
-  // Update scroll progress for animation
-  useEffect(() => {
-    const unsubscribe = scrollProgressTransformed.onChange(value => {
-      setScrollProgress(value);
-    });
-    return () => unsubscribe();
-  }, [scrollProgressTransformed]);
   // Auto-play functionality
   useEffect(() => {
     if (!isAutoPlaying || !isInView) return;
@@ -601,59 +746,15 @@ export default function MetricCards() {
     return () => clearTimeout(timer);
   }, []);
   
-  // Calculate stack levels based on active index
-  const updateStackLevels = (currentIndex) => {
-    const newStackLevels = metrics.map((_, idx) => {
-      // Active card has level 0, others increase based on distance
-      const distance = Math.abs(idx - currentIndex);
-      return distance;
-    });
-    
-    setStackLevels(newStackLevels);
-  };
-  
-  // Initialize stack levels when active index changes
-  useEffect(() => {
-    updateStackLevels(activeIndex);
-  }, [activeIndex]);
-  
-  // Initialize stack levels
-  useEffect(() => {
-    const initialStackLevels = metrics.map((_, idx) => Math.abs(idx - activeIndex));
-    setStackLevels(initialStackLevels);
-  }, []);
-    // Function to navigate in the stack
-  const scroll = (direction) => {
-    pauseAutoPlay(); // Pause auto-play when user interacts
-    
-    const newIndex = direction === 'left' 
-      ? Math.max(0, activeIndex - 1)
-      : Math.min(metrics.length - 1, activeIndex + 1);
-    
-    navigateToCard(newIndex);
-  };
-  
-  // Navigate to a specific card in the stack
+  // Navigate to a specific card
   const navigateToCard = (index) => {
-    pauseAutoPlay(); // Pause auto-play when user interacts
-    
     setActiveIndex(index);
-    updateStackLevels(index);
+    setIsAutoPlaying(false);
     
-    // Scroll the section slightly to trigger animation if needed
-    if (sectionRef.current) {
-      window.scrollBy({
-        top: 1,
-        behavior: 'smooth'
-      });
-      
-      setTimeout(() => {
-        window.scrollBy({
-          top: -1,
-          behavior: 'smooth'
-        });
-      }, 100);
-    }
+    // Resume auto-play after 8 seconds of no interaction
+    setTimeout(() => {
+      setIsAutoPlaying(true);
+    }, 8000);
   };
   
   // Initialize animation controls for each metric
@@ -854,93 +955,52 @@ export default function MetricCards() {
           />
         </motion.h2>
 
-        <div className="relative max-w-4xl mx-auto">
-          {/* Navigation Arrows */}
-          <div className="absolute inset-y-0 left-0 md:left-4 z-50 flex items-center">
-            <motion.button 
-              onClick={() => scroll('left')} 
-              className="bg-black/40 backdrop-blur-sm hover:bg-black/60 p-2 md:p-3 rounded-full text-white border border-gray-600 shadow-lg transform -translate-x-1 md:translate-x-0"
-              aria-label="Previous card"
-              initial={{ opacity: 0, x: 20 }}
-              animate={isInView ? { opacity: activeIndex > 0 ? 1 : 0.3, x: 0 } : { opacity: 0, x: 20 }}
-              transition={{ delay: 0.5 }}
-              whileHover={activeIndex > 0 ? { scale: 1.1 } : {}}
-              whileTap={activeIndex > 0 ? { scale: 0.95 } : {}}
-              disabled={activeIndex === 0}
-              style={{ opacity: activeIndex === 0 ? 0.3 : 1 }}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </motion.button>
-          </div>
-          
-          <div className="absolute inset-y-0 right-0 md:right-4 z-50 flex items-center">
-            <motion.button 
-              onClick={() => scroll('right')} 
-              className="bg-black/40 backdrop-blur-sm hover:bg-black/60 p-2 md:p-3 rounded-full text-white border border-gray-600 shadow-lg transform translate-x-1 md:translate-x-0"
-              aria-label="Next card"
-              initial={{ opacity: 0, x: -20 }}
-              animate={isInView ? { opacity: activeIndex < metrics.length - 1 ? 1 : 0.3, x: 0 } : { opacity: 0, x: -20 }}
-              transition={{ delay: 0.5 }}
-              whileHover={activeIndex < metrics.length - 1 ? { scale: 1.1 } : {}}
-              whileTap={activeIndex < metrics.length - 1 ? { scale: 0.95 } : {}}
-              disabled={activeIndex === metrics.length - 1}
-              style={{ opacity: activeIndex === metrics.length - 1 ? 0.3 : 1 }}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </motion.button>
-          </div>          {/* Stacked Cards Container */}
-          <div className="relative min-h-[450px] flex items-center justify-center pb-8">
-            <div className="absolute w-full max-w-2xl mx-auto">
-              {metrics.map((metric, index) => (
-                <div
-                  key={index}
-                  className="absolute w-full left-0 right-0"
-                  style={{
-                    zIndex: 100 - (stackLevels[index] || 0) * 10,
-                    pointerEvents: stackLevels[index] === 0 ? 'auto' : 'none',
-                  }}
-                >
-                  <MetricCard
-                    {...metric}
-                    index={index}
-                    isActive={isInView || forceShow}
-                    isVisible={stackLevels[index] === 0}
-                    stackIndex={stackLevels[index] || 0}
-                    scrollProgress={scrollProgress}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>          {/* Indicator Dots */}
-          <motion.div 
-            className="flex justify-center mt-10 space-x-3"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ delay: 0.7 }}
-          >
-            {metrics.map((metric, index) => (
-              <motion.button
-                key={index}
-                onClick={() => navigateToCard(index)}
-                className={`w-4 h-4 rounded-full transition-all duration-300`}
-                style={{
-                  backgroundColor: stackLevels[index] === 0 ? metric.accentColor : 'rgba(107, 114, 128, 0.4)',
-                  boxShadow: stackLevels[index] === 0 ? `0 0 8px ${metric.accentColor}80` : 'none'
-                }}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-                animate={stackLevels[index] === 0 ? { scale: 1.2 } : { scale: 1 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                aria-label={`View metric ${index + 1}`}
-                aria-current={stackLevels[index] === 0 ? "true" : "false"}
-              />
-            ))}
-          </motion.div>
-        </div>
+        {/* Expandable Cards Container */}
+        <motion.div 
+          className="flex items-stretch overflow-hidden min-w-[600px] max-w-[900px] w-full mx-auto pt-8 pl-8 pr-8"
+          style={{ height: '450px' }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+        >
+          {metrics.map((metric, index) => (
+            <MetricCard
+              key={index}
+              {...metric}
+              index={index}
+              isActive={isInView || forceShow}
+              isVisible={true}
+              isExpanded={activeIndex === index}
+              onClick={() => navigateToCard(index)}
+            />
+          ))}
+        </motion.div>
+
+        {/* Indicator Dots */}
+        <motion.div 
+          className="flex justify-center mt-10 space-x-3"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ delay: 0.7 }}
+        >
+          {metrics.map((metric, index) => (
+            <motion.button
+              key={index}
+              onClick={() => navigateToCard(index)}
+              className={`w-4 h-4 rounded-full transition-all duration-300`}
+              style={{
+                backgroundColor: activeIndex === index ? metric.accentColor : 'rgba(107, 114, 128, 0.4)',
+                boxShadow: activeIndex === index ? `0 0 8px ${metric.accentColor}80` : 'none'
+              }}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+              animate={activeIndex === index ? { scale: 1.2 } : { scale: 1 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              aria-label={`View metric ${index + 1}`}
+              aria-current={activeIndex === index ? "true" : "false"}
+            />
+          ))}
+        </motion.div>
       </div>
     </section>
   );
