@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -11,11 +12,55 @@ export default function ContactForm() {
     message: '',
     consent: false
   });
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
+    
+    if (!formData.consent) {
+      setSubmitStatus('error');
+      return;
+    }
+    
+    setIsSubmitting(true);
+    setSubmitStatus('');
+    
+    try {
+      // EmailJS configuration - These will be loaded from environment variables
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+      
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error('EmailJS configuration missing. Please check your .env.local file.');
+      }
+      
+      const templateParams = {
+        from_name: formData.fullName,
+        from_email: formData.email,
+        interest: formData.interest,
+        message: formData.message,
+        to_name: 'BuzzBites Team',
+      };
+      
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      
+      setSubmitStatus('success');
+      setFormData({
+        fullName: '',
+        email: '',
+        interest: '',
+        message: '',
+        consent: false
+      });
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -128,11 +173,29 @@ export default function ContactForm() {
               </label>
             </div>
 
+            {/* Status Messages */}
+            {submitStatus === 'success' && (
+              <div className="p-4 bg-green-900/50 border border-green-500 rounded-lg text-green-300 text-center">
+                ✓ Message sent successfully! We'll get back to you soon.
+              </div>
+            )}
+            
+            {submitStatus === 'error' && (
+              <div className="p-4 bg-red-900/50 border border-red-500 rounded-lg text-red-300 text-center">
+                ✗ Failed to send message. Please check the console for EmailJS configuration or try again.
+              </div>
+            )}
+
             <button
               type="submit"
-              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-cyber-yellow to-cyber-gold text-black font-bold rounded-lg hover:from-cyber-gold hover:to-cyber-yellow transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyber-yellow/50 text-sm sm:text-base"
+              disabled={isSubmitting || !formData.consent}
+              className={`w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 font-bold rounded-lg transition-all duration-300 transform focus:outline-none focus:ring-2 focus:ring-cyber-yellow/50 text-sm sm:text-base ${
+                isSubmitting || !formData.consent
+                  ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                  : 'bg-gradient-to-r from-cyber-yellow to-cyber-gold text-black hover:from-cyber-gold hover:to-cyber-yellow hover:scale-105'
+              }`}
             >
-              SUBMIT FORM
+              {isSubmitting ? 'SENDING...' : 'SUBMIT FORM'}
             </button>
           </form>
         </motion.div>
