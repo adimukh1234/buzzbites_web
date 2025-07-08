@@ -16,7 +16,7 @@ const TechScrollbar = () => {
   
   // Update scroll percentage when scrollYProgress changes
   useEffect(() => {
-    const unsubscribe = scrollYProgress.onChange((latest) => {
+    const unsubscribe = scrollYProgress.on("change", (latest) => {
       setScrollPercentage(latest * 100);
     });
     

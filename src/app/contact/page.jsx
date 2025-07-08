@@ -12,7 +12,7 @@ export default function ContactPage() {
       <TechScrollbar />
       <NavBar />
       
-      <main className="min-h-screen bg-black text-white">
+      <main className="min-h-screen bg-black text-white md:ml-20 lg:ml-24 transition-all duration-300">
         <ContactHero />
         <ContactForm />
         <OfficeLocation />

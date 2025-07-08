@@ -9,6 +9,15 @@ module.exports = {
   ],
   theme: {
   	extend: {
+  		screens: {
+  			'xs': '320px',
+  			'sm': '640px',
+  			'md': '768px',
+  			'lg': '1024px',
+  			'xl': '1280px',
+  			'2xl': '1536px',
+  			'3xl': '1920px',
+  		},
   		fontFamily: {
   			sans: [
   				'Satoshi',
@@ -31,6 +40,9 @@ module.exports = {
   		colors: {
   			'cyber-yellow': '#ffff00',
   			'cyber-gold': '#ffd700',
+  			'accent-yellow': '#eab308',
+  			'accent-yellow-light': '#facc15',
+  			'accent-yellow-dark': '#ca8a04',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -83,6 +95,13 @@ module.exports = {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
+  		},
+  		spacing: {
+  			'12': '3rem',
+  			'16': '4rem',
+  			'20': '5rem',
+  			'24': '6rem',
+  			'30': '7.5rem',
   		}
   	}
   },

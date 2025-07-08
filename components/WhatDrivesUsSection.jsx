@@ -20,7 +20,7 @@ export default function WhatDrivesUsSection() {
   // Generate particles on client side only
   useEffect(() => {
     const generatedParticles = [];
-    const colors = ['blue-500', 'indigo-400', 'purple-500', 'cyan-400', 'sky-500'];
+    const colors = ['yellow-500', 'yellow-400', 'white/50', 'yellow-300', 'white/30'];
     const shapes = ['rounded-full', 'rounded-md', 'rounded-sm', 'rounded-full', 'rounded-xl'];
     
     for (let i = 0; i < 30; i++) {
@@ -246,25 +246,25 @@ export default function WhatDrivesUsSection() {
         className="absolute inset-0 z-0"
       >
         {/* Base gradient - more visible */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/45 to-purple-900/45 opacity-85"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900/45 to-black/45 opacity-85"></div>
         
         {/* Secondary gradient layer for depth */}
-        <div className="absolute inset-0 bg-gradient-to-tl from-cyan-800/35 to-indigo-900/35 opacity-75"></div>
+        <div className="absolute inset-0 bg-gradient-to-tl from-yellow-900/35 to-gray-900/35 opacity-75"></div>
         
         {/* Radial gradients for depth - more intense */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(56,189,248,0.25),transparent_60%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(124,58,237,0.25),transparent_60%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(255,255,0,0.25),transparent_60%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(255,255,0,0.15),transparent_60%)]"></div>
         
         {/* Central glow - more prominent */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/3 h-2/3 bg-blue-600/12 rounded-full blur-[120px] animate-pulse"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/3 h-2/3 bg-yellow-600/12 rounded-full blur-[120px] animate-pulse"></div>
         
         {/* Grid pattern overlay - more visible */}
         <div className="absolute inset-0 opacity-15 overflow-hidden">
-          <div className="absolute -inset-full bg-[linear-gradient(to_right,rgba(99,102,241,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(99,102,241,0.08)_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+          <div className="absolute -inset-full bg-[linear-gradient(to_right,rgba(255,255,0,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,0,0.08)_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
         </div>
         
-        {/* Additional blue wash for consistency */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-950/25 via-transparent to-purple-950/25"></div>
+        {/* Additional yellow wash for consistency */}
+        <div className="absolute inset-0 bg-gradient-to-r from-yellow-950/25 via-transparent to-yellow-950/25"></div>
         
         {/* Subtle noise texture - more visible */}
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=')] opacity-25"></div>
@@ -492,16 +492,16 @@ export default function WhatDrivesUsSection() {
           className="max-w-4xl mx-auto text-center"
         >          <div className="relative max-w-3xl mx-auto">
             {/* Subtle highlight behind the text */}
-            <div className="absolute -inset-x-10 -inset-y-6 bg-gradient-to-r from-blue-500/5 via-indigo-500/5 to-purple-500/5 rounded-2xl blur-lg"></div>
+            <div className="absolute -inset-x-10 -inset-y-6 bg-gradient-to-r from-yellow-500/5 via-yellow-500/5 to-yellow-500/5 rounded-2xl blur-lg"></div>
             
             <motion.p 
-              className="text-xl md:text-2xl mb-12 relative leading-relaxed font-light text-blue-50"
+              className="text-xl md:text-2xl mb-12 relative leading-relaxed font-light text-gray-50"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.8 }}
               variants={textVariants}
             >
-              We&apos;re passionate about creating <span className="text-blue-400 font-medium">digital experiences</span> that push boundaries and <span className="text-indigo-400 font-medium">redefine what&apos;s possible</span> on the web.
+              We&apos;re passionate about creating <span className="text-yellow-400 font-medium">digital experiences</span> that push boundaries and <span className="text-yellow-300 font-medium">redefine what&apos;s possible</span> on the web.
             </motion.p>
           </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
@@ -509,50 +509,49 @@ export default function WhatDrivesUsSection() {
               {
                 title: "Innovation",
                 description: "We embrace cutting-edge technologies and creative solutions to solve complex problems.",
-                icon: (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                icon: (                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
                   </svg>
                 ),
-                gradient: "from-blue-600/20 to-cyan-600/20",
-                border: "border-blue-500/20",
-                glow: "#3b82f6"
+                gradient: "from-yellow-600/20 to-yellow-500/20",
+                border: "border-yellow-500/20",
+                glow: "#eab308"
               },
               {
                 title: "Excellence",
                 description: "We strive for perfection in every pixel, animation, and interaction.",
                 icon: (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-purple-400" viewBox="0 0 20 20" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
                 ),
-                gradient: "from-purple-600/20 to-indigo-600/20",
-                border: "border-purple-500/20",
-                glow: "#8b5cf6"
+                gradient: "from-yellow-600/20 to-yellow-500/20",
+                border: "border-yellow-500/20",
+                glow: "#eab308"
               },
               {
                 title: "Impact",
                 description: "We create experiences that leave a lasting impression and drive real business results.",
                 icon: (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-indigo-400" viewBox="0 0 20 20" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M3.707 2.293a1 1 0 00-1.414 1.414l6.921 6.922c.05.062.105.118.168.167l6.91 6.911a1 1 0 001.415-1.414l-.675-.675a9.001 9.001 0 00-.668-11.982A1 1 0 1014.95 5.05a7.002 7.002 0 01.657 9.143l-1.435-1.435a5.002 5.002 0 00-.636-6.294A1 1 0 0012.12 7.88c.924.923 1.12 2.3.587 3.415l-1.992-1.992a.922.922 0 00-.018-.018l-6.99-6.991zM3.238 8.187a1 1 0 00-1.933.516c-.004.067-.003.135 0 .203a7 7 0 007.843 6.996 1 1 0 00.277-1.98 5.001 5.001 0 01-5.596-5.023 1 1 0 00-.59-.712z" />
                   </svg>
                 ),
-                gradient: "from-indigo-600/20 to-blue-600/20",
-                border: "border-indigo-500/20",
-                glow: "#6366f1"
+                gradient: "from-white/20 to-gray-600/20",
+                border: "border-white/20",
+                glow: "#ffffff"
               },
               {
                 title: "Collaboration",
                 description: "We believe the best work comes from diverse teams working together toward a shared vision.",
                 icon: (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-sky-400" viewBox="0 0 20 20" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
                   </svg>
                 ),
-                gradient: "from-sky-600/20 to-cyan-600/20",
-                border: "border-sky-500/20",
-                glow: "#0ea5e9"
+                gradient: "from-yellow-600/20 to-yellow-400/20",
+                border: "border-yellow-500/20",
+                glow: "#eab308"
               }
             ].map((item, index) => (
               <motion.div 

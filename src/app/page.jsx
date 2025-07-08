@@ -16,7 +16,7 @@ export default function Home() {
     <>
       <TechScrollbar />
       <NavBar />
-      <main className="main-content">
+      <main className="main-content md:ml-20 lg:ml-24">
         <SplineBackground />
         <MouseParallax strength={0.02}>
           <HeroSection />

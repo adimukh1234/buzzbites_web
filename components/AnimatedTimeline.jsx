@@ -51,16 +51,17 @@ const ExploreButton = ({ visible }) => {
     >
       <motion.button
         className={`
-          relative overflow-hidden px-10 py-5 rounded-full 
-          bg-gradient-to-r from-blue-600 to-purple-600
-          text-white font-satoshi font-bold text-lg
+          relative overflow-hidden px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full 
+          bg-gradient-to-r from-yellow-500 to-yellow-600
+          text-black font-satoshi font-bold text-sm sm:text-base md:text-lg
           shadow-lg transform transition-all duration-300
-          border-2 border-white/10 backdrop-blur-sm
+          border-2 border-yellow-400/30 backdrop-blur-sm
+          min-h-[44px] touch-manipulation
         `}
         style={{
           boxShadow: isHovered ? 
-            '0 0 25px 5px rgba(139, 92, 246, 0.5), inset 0 0 15px rgba(139, 92, 246, 0.5)' : 
-            '0 0 15px 2px rgba(139, 92, 246, 0.3), inset 0 0 10px rgba(139, 92, 246, 0.2)'
+            '0 0 25px 5px rgba(255, 255, 0, 0.5), inset 0 0 15px rgba(255, 255, 0, 0.5)' : 
+            '0 0 15px 2px rgba(255, 255, 0, 0.3), inset 0 0 10px rgba(255, 255, 0, 0.2)'
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -80,7 +81,7 @@ const ExploreButton = ({ visible }) => {
               {[...Array(5)].map((_, i) => (
                 <motion.div
                   key={i}
-                  className="absolute w-1 h-1 rounded-full bg-white"
+                  className="absolute w-1 h-1 rounded-full bg-yellow-300"
                   initial={{ 
                     x: "50%", 
                     y: "50%", 
@@ -132,7 +133,7 @@ const ExploreButton = ({ visible }) => {
             initial={{ opacity: 1, scale: 1 }}
             animate={{ opacity: 0, scale: 1.2 }}
             transition={{ duration: 0.5 }}
-            style={{ borderColor: 'rgba(147, 51, 234, 0.5)' }}
+            style={{ borderColor: 'rgba(255, 255, 0, 0.5)' }}
           />
         )}
       </motion.button>
@@ -309,7 +310,7 @@ const TimelineItem = ({ item, index }) => {
   return (
     <motion.div
       ref={ref}
-      className={`timeline-item flex items-center justify-center relative ${
+      className={`timeline-item flex items-center justify-center relative px-4 sm:px-6 ${
         item.position === 'left' ? 'md:justify-start' : 'md:justify-end'
       }`}
       initial={{ opacity: 0 }}
@@ -319,14 +320,14 @@ const TimelineItem = ({ item, index }) => {
       <div
         ref={itemRef}
         data-speed={index * 0.1}
-        className={`relative max-w-lg mx-4 ${
+        className={`relative max-w-sm sm:max-w-md md:max-w-lg mx-2 sm:mx-4 ${
           item.position === 'left' ? 'md:mr-auto md:ml-0' : 'md:ml-auto md:mr-0'
         }`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-      >        {/* Year floating element with enhanced effects */}
+      >        {/* Year floating element with enhanced effects - responsive */}
         <motion.div
-          className="timeline-year absolute -top-8 left-0 text-6xl md:text-9xl font-black text-white/5 pointer-events-none z-0"
+          className="timeline-year absolute -top-4 sm:-top-6 md:-top-8 left-0 text-4xl sm:text-5xl md:text-6xl lg:text-9xl font-black text-white/5 pointer-events-none z-0"
           animate={isMounted ? {
             y: isInView ? [-8, 8, -8] : 0,
             rotate: isInView ? [0, 1, 0, -1, 0] : 0,
@@ -339,20 +340,20 @@ const TimelineItem = ({ item, index }) => {
           }}
         >
           {item.year}
-        </motion.div>        {/* Dynamic connection line */}
+        </motion.div>        {/* Dynamic connection line - hidden on mobile */}
         <motion.div 
-          className={`hidden md:block absolute top-1/2 w-24 h-1 rounded-full ${
+          className={`hidden lg:block absolute top-1/2 w-16 sm:w-20 md:w-24 h-1 rounded-full ${
             item.position === 'left' 
               ? 'right-0 translate-x-full' 
               : 'left-0 -translate-x-full'
           }`}
           initial={{ 
-            background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent)' 
+            background: 'linear-gradient(90deg, transparent, rgba(255, 255, 0, 0.3), transparent)' 
           }}
           animate={isMounted ? { 
             background: isInView 
-              ? `linear-gradient(90deg, transparent, ${item.position === 'left' ? 'rgba(59, 130, 246, 0.8)' : 'rgba(147, 51, 234, 0.8)'}, transparent)`
-              : 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent)'
+              ? `linear-gradient(90deg, transparent, ${item.position === 'left' ? 'rgba(255, 255, 0, 0.8)' : 'rgba(255, 255, 0, 0.8)'}, transparent)`
+              : 'linear-gradient(90deg, transparent, rgba(255, 255, 0, 0.3), transparent)'
           } : {}}
           transition={{ duration: 1 }}
         />        {/* Main content card with enhanced styling */}
@@ -368,7 +369,7 @@ const TimelineItem = ({ item, index }) => {
             {isMounted && [...Array(5)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute w-2 h-2 bg-blue-400 rounded-full"
+                className="absolute w-2 h-2 bg-yellow-400 rounded-full"
                 style={{
                   left: `${20 + i * 15}%`,
                   top: `${10 + i * 10}%`,
@@ -386,7 +387,7 @@ const TimelineItem = ({ item, index }) => {
             ))}
           </div>          {/* Enhanced glow effect */}
           <motion.div 
-            className="absolute inset-0 bg-gradient-to-r from-blue-500/30 to-purple-500/30 rounded-3xl blur-xl"
+            className="absolute inset-0 bg-gradient-to-r from-yellow-500/30 to-yellow-600/30 rounded-3xl blur-xl"
             animate={isMounted ? {
               opacity: isHovered ? 0.8 : 0.4,
               scale: isHovered ? 1.1 : 1
@@ -396,7 +397,7 @@ const TimelineItem = ({ item, index }) => {
           
           <div className="relative z-10">            {/* Enhanced Icon with rotation */}
             <motion.div 
-              className="timeline-icon w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-3xl mb-6 shadow-lg"
+              className="timeline-icon w-20 h-20 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center text-3xl mb-6 shadow-lg"
               animate={isMounted ? {
                 rotate: isHovered ? 180 : 0,
                 scale: isHovered ? 1.05 : 1
@@ -409,11 +410,11 @@ const TimelineItem = ({ item, index }) => {
               {item.icon}
             </motion.div>            {/* Year badge with pulse */}
             <motion.div 
-              className="timeline-detail inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white px-5 py-2 rounded-full text-sm font-bold mb-4"
+              className="timeline-detail inline-block bg-gradient-to-r from-yellow-500 to-yellow-600 text-black px-5 py-2 rounded-full text-sm font-bold mb-4"
               animate={isMounted ? {
                 boxShadow: isInView 
-                  ? ['0 0 0 0 rgba(59, 130, 246, 0.4)', '0 0 0 10px rgba(59, 130, 246, 0)', '0 0 0 0 rgba(59, 130, 246, 0)']
-                  : '0 0 0 0 rgba(59, 130, 246, 0)'
+                  ? ['0 0 0 0 rgba(255, 255, 0, 0.4)', '0 0 0 10px rgba(255, 255, 0, 0)', '0 0 0 0 rgba(255, 255, 0, 0)']
+                  : '0 0 0 0 rgba(255, 255, 0, 0)'
               } : {}}
               transition={{ duration: 2, repeat: Infinity }}
             >
@@ -421,12 +422,12 @@ const TimelineItem = ({ item, index }) => {
             </motion.div>
 
             {/* Enhanced Title */}
-            <h3 className="timeline-detail text-xl md:text-2xl font-bold text-white mb-4 leading-tight">
+            <h3 className="timeline-detail text-lg sm:text-xl md:text-2xl font-bold text-white mb-3 sm:mb-4 leading-tight">
               {item.title}
             </h3>
 
             {/* Enhanced Description */}
-            <p className="timeline-detail text-gray-300 text-sm md:text-base leading-relaxed">
+            <p className="timeline-detail text-gray-300 text-sm sm:text-base leading-relaxed">
               {item.description}
             </p>            {/* Progress bar */}
             <motion.div 
@@ -436,7 +437,7 @@ const TimelineItem = ({ item, index }) => {
               transition={{ duration: 1, delay: 0.5 }}
             >
               <motion.div 
-                className="h-full bg-gradient-to-r from-blue-500 to-purple-600"
+                className="h-full bg-gradient-to-r from-yellow-500 to-yellow-600"
                 initial={{ x: '-100%' }}
                 animate={isMounted ? { x: isInView ? '0%' : '-100%' } : {}}
                 transition={{ duration: 1.5, delay: 0.7 }}
@@ -444,7 +445,7 @@ const TimelineItem = ({ item, index }) => {
             </motion.div>
           </div>          {/* Enhanced decorative elements */}
           <motion.div 
-            className="absolute top-4 right-4 w-3 h-3 bg-blue-400 rounded-full"
+            className="absolute top-4 right-4 w-3 h-3 bg-yellow-400 rounded-full"
             animate={isMounted ? {
               scale: [1, 1.5, 1],
               opacity: [0.6, 1, 0.6]
@@ -452,7 +453,7 @@ const TimelineItem = ({ item, index }) => {
             transition={{ duration: 2, repeat: Infinity }}
           />
           <motion.div 
-            className="absolute bottom-4 left-4 w-2 h-2 bg-purple-400 rounded-full"
+            className="absolute bottom-4 left-4 w-2 h-2 bg-yellow-400 rounded-full"
             animate={isMounted ? {
               scale: [1, 1.8, 1],
               opacity: [0.4, 1, 0.4]
@@ -738,9 +739,9 @@ const AnimatedTimeline = () => {
           <div
             key={particle.id}
             className={`floating-particle absolute rounded-full ${particle.size} ${
-              particle.type === 'purple' ? 'bg-purple-400' : 
-              particle.type === 'blue' ? 'bg-blue-400' :
-              'bg-cyan-400'
+              particle.type === 'yellow' ? 'bg-yellow-400' : 
+              particle.type === 'white' ? 'bg-white/30' :
+              'bg-yellow-300'
             }`}
             style={{
               left: `${particle.left}%`,
@@ -750,19 +751,19 @@ const AnimatedTimeline = () => {
         ))}
         
         {/* Animated background shapes */}
-        <div className="bg-element absolute top-20 left-10 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl"></div>
-        <div className="bg-element absolute bottom-40 right-20 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
-        <div className="bg-element absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-blue-500/5 to-transparent rounded-full"></div>
+        <div className="bg-element absolute top-20 left-10 w-64 h-64 bg-yellow-500/5 rounded-full blur-3xl"></div>
+        <div className="bg-element absolute bottom-40 right-20 w-96 h-96 bg-yellow-600/5 rounded-full blur-3xl"></div>
+        <div className="bg-element absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-yellow-500/5 to-transparent rounded-full"></div>
           {/* Enhanced gradient backgrounds */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-blue-950/10 to-purple-950/10"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/10 via-transparent to-purple-900/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-950/10 to-black"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-yellow-900/5 via-transparent to-black"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Enhanced Header */}
         <div className="text-center mb-24">
           <motion.div
-            className="timeline-decoration w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8 rounded-full"
+            className="timeline-decoration w-20 h-1 bg-gradient-to-r from-yellow-500 to-yellow-600 mx-auto mb-8 rounded-full"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             transition={{ duration: 1.5, ease: 'easeInOut' }}
@@ -770,7 +771,7 @@ const AnimatedTimeline = () => {
           />
           
           <motion.h2 
-            className="timeline-title text-4xl md:text-6xl lg:text-8xl font-black text-white mb-6 bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent"
+            className="timeline-title text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-8xl font-black text-white mb-4 sm:mb-6 bg-gradient-to-r from-white via-yellow-100 to-white bg-clip-text text-transparent px-4"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: 'easeOut' }}
@@ -780,7 +781,7 @@ const AnimatedTimeline = () => {
           </motion.h2>
           
           <motion.p 
-            className="timeline-subtitle text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed"
+            className="timeline-subtitle text-lg sm:text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed px-4 sm:px-6"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3, ease: 'easeOut' }}
@@ -790,7 +791,7 @@ const AnimatedTimeline = () => {
           </motion.p>
           
           <motion.div
-            className="timeline-decoration w-32 h-0.5 bg-gradient-to-r from-transparent via-purple-500 to-transparent mx-auto mt-8"
+            className="timeline-decoration w-32 h-0.5 bg-gradient-to-r from-transparent via-yellow-500 to-transparent mx-auto mt-8"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             transition={{ duration: 2, delay: 0.5, ease: 'easeInOut' }}
@@ -802,7 +803,7 @@ const AnimatedTimeline = () => {
                style={{ top: '0px', height: '100%', paddingBottom: '12px' }}>
             <motion.div 
               ref={timelineLineRef}
-              className="absolute inset-0 bg-gradient-to-b from-blue-500 via-purple-500 to-cyan-400 origin-top rounded-full shadow-lg shadow-blue-500/20"
+              className="absolute inset-0 bg-gradient-to-b from-yellow-500 via-yellow-400 to-yellow-600 origin-top rounded-full shadow-lg shadow-yellow-500/20"
               style={{ 
                 height: springLineHeight, 
                 top: 0, 
@@ -833,14 +834,14 @@ const AnimatedTimeline = () => {
             />
           </div>{/* Enhanced central elements - Starting dot */}
           <motion.div 
-            className="hidden md:block absolute left-1/2 top-0 transform -translate-x-1/2 w-5 h-5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full shadow-lg shadow-blue-500/40 z-20"
+            className="hidden md:block absolute left-1/2 top-0 transform -translate-x-1/2 w-5 h-5 bg-gradient-to-r from-yellow-500 to-yellow-400 rounded-full shadow-lg shadow-yellow-500/40 z-20"
             style={{ left: 'calc(50% - 10px)' }}
             animate={{
               scale: [1, 1.2, 1],
               boxShadow: [
-                '0 0 0 0 rgba(59, 130, 246, 0.4)',
-                '0 0 0 15px rgba(59, 130, 246, 0)',
-                '0 0 0 0 rgba(59, 130, 246, 0)'
+                '0 0 0 0 rgba(255, 255, 0, 0.4)',
+                '0 0 0 15px rgba(255, 255, 0, 0)',
+                '0 0 0 0 rgba(255, 255, 0, 0)'
               ]
             }}
             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}          />          {/* Timeline items - Reduced spacing for better timeline completion */}          <div ref={timelineContentRef} className="space-y-20 md:space-y-28">
@@ -849,21 +850,21 @@ const AnimatedTimeline = () => {
             ))}
           </div>{/* Enhanced bottom dot positioned at the absolute bottom */}
           <motion.div 
-            className="hidden md:block timeline-bottom-dot absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full shadow-lg shadow-purple-600/40 z-20"
+            className="hidden md:block timeline-bottom-dot absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-gradient-to-r from-yellow-600 to-yellow-500 rounded-full shadow-lg shadow-yellow-600/40 z-20"
             style={{ left: 'calc(50% - 10px)', bottom: '0px' }}
             animate={{
               scale: [1, 1.15, 1],
               boxShadow: [
-                '0 0 0 0 rgba(147, 51, 234, 0.4)',
-                '0 0 0 12px rgba(147, 51, 234, 0)',
-                '0 0 0 0 rgba(147, 51, 234, 0)'
+                '0 0 0 0 rgba(255, 255, 0, 0.4)',
+                '0 0 0 12px rgba(255, 255, 0, 0)',
+                '0 0 0 0 rgba(255, 255, 0, 0)'
               ]
             }}
             transition={{ duration: 3.5, repeat: Infinity, delay: 1.5, ease: 'easeInOut' }}          />
         </div>
         
         {/* Add explore button at the end of the timeline content */}        <div className="mt-24 pt-8 pb-24 text-center relative z-20">          <motion.div 
-            className="w-32 h-0.5 bg-gradient-to-r from-transparent via-purple-500 to-transparent mx-auto mb-10"
+            className="w-32 h-0.5 bg-gradient-to-r from-transparent via-yellow-500 to-transparent mx-auto mb-10"
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: showExploreButton ? 1 : 0, opacity: showExploreButton ? 1 : 0 }}
             transition={{ duration: 1.5, delay: 0.3 }}
@@ -876,7 +877,7 @@ const AnimatedTimeline = () => {
               <motion.div
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full"
                 style={{
-                  background: "radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, rgba(59, 130, 246, 0.1) 40%, transparent 70%)",
+                  background: "radial-gradient(circle, rgba(255, 255, 0, 0.2) 0%, rgba(255, 255, 0, 0.1) 40%, transparent 70%)",
                 }}
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -887,8 +888,8 @@ const AnimatedTimeline = () => {
           </div>
         </div>
       </div>      {/* Enhanced bottom effects */}
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[500px] h-80 bg-gradient-radial from-purple-600/15 via-blue-600/8 to-transparent rounded-full blur-3xl"></div>
-      <motion.div        className="absolute bottom-20 left-1/4 w-24 h-24 bg-blue-400/8 rounded-full blur-2xl"
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[500px] h-80 bg-gradient-radial from-yellow-600/15 via-yellow-600/8 to-transparent rounded-full blur-3xl"></div>
+      <motion.div        className="absolute bottom-20 left-1/4 w-24 h-24 bg-yellow-400/8 rounded-full blur-2xl"
         animate={{
           y: [-15, 15, -15],
           x: [-8, 8, -8],
@@ -896,7 +897,7 @@ const AnimatedTimeline = () => {
         }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
       />      <motion.div 
-        className="absolute bottom-32 right-1/4 w-20 h-20 bg-purple-400/8 rounded-full blur-2xl"
+        className="absolute bottom-32 right-1/4 w-20 h-20 bg-yellow-400/8 rounded-full blur-2xl"
         animate={{
           y: [15, -15, 15],
           x: [8, -8, 8],

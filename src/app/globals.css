@@ -1245,7 +1245,7 @@ html.lenis {
 /* Tailwind v3 Utilities */
 @layer utilities {
   .w-30 {
-    width: 7.5rem;
+    width: 7.5rem; /* 120px */
   }
 
   .ml-30 {
@@ -1344,110 +1344,208 @@ html.lenis {
   }
 }
 
-/* Animations */
-@keyframes gradientFlow {
-  0% {
-    transform: translate(0%, 0%) rotate(0deg);
+/* Responsive Utilities */
+@layer utilities {
+  /* Mobile-first responsive font sizes */
+  .text-responsive-xs {
+    @apply text-xs sm:text-sm md:text-base;
   }
-  100% {
-    transform: translate(10%, 10%) rotate(15deg);
+  
+  .text-responsive-sm {
+    @apply text-sm sm:text-base md:text-lg;
+  }
+  
+  .text-responsive-base {
+    @apply text-base sm:text-lg md:text-xl;
+  }
+  
+  .text-responsive-lg {
+    @apply text-lg sm:text-xl md:text-2xl;
+  }
+  
+  .text-responsive-xl {
+    @apply text-xl sm:text-2xl md:text-3xl;
+  }
+  
+  .text-responsive-2xl {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
+  }
+  
+  .text-responsive-3xl {
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl;
+  }
+  
+  /* Responsive spacing */
+  .p-responsive {
+    @apply p-4 sm:p-6 md:p-8 lg:p-12;
+  }
+  
+  .px-responsive {
+    @apply px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16;
+  }
+  
+  .py-responsive {
+    @apply py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24;
+  }
+
+  /* Mobile-optimized containers */
+  .container-responsive {
+    @apply w-full max-w-full px-4 sm:px-6 md:px-8 lg:max-w-6xl xl:max-w-7xl mx-auto;
+  }
+
+  /* Touch-friendly buttons */
+  .btn-touch {
+    @apply min-h-[44px] min-w-[44px] touch-manipulation;
+  }
+
+  /* Mobile-optimized navbar utilities */
+  @layer utilities {
+    /* Touch-friendly button sizing */
+    .btn-touch-mobile {
+      min-height: 44px;
+      min-width: 44px;
+      touch-action: manipulation;
+    }
+
+    /* Mobile navbar widths */
+    .navbar-mobile {
+      width: 3rem; /* 48px */
+    }
+    
+    .navbar-tablet {
+      width: 4rem; /* 64px */
+    }
+    
+    .navbar-desktop {
+      width: 5rem; /* 80px */
+    }
+
+    /* Performance optimizations for mobile */
+    .mobile-optimized {
+      transform: translateZ(0);
+      will-change: transform;
+      backface-visibility: hidden;
+    }
+
+    /* Reduced motion for mobile battery saving */
+    @media (max-width: 640px) {
+      .navbar-minimal-animation {
+        animation-duration: 0.3s !important;
+        transition-duration: 0.3s !important;
+      }
+    }
+
+    /* Safe area handling for mobile devices */
+    .navbar-safe-area {
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+      padding-left: env(safe-area-inset-left);
+    }
+
+    /* Mobile landscape optimization */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .navbar-landscape {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+      }
+      
+      .navbar-landscape .navbar-brand {
+        font-size: 0.75rem;
+      }
+    }
+  }
+
+  /* Responsive grid layouts */
+  .grid-responsive-1 {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+  }
+  
+  .grid-responsive-2 {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+  }
+
+  /* Safe area for mobile devices */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }
 
-/* Responsive Design */
-@media (max-width: 991px) {
-  .overlay-content {
-    padding-left: 8.75rem; /* 140px */
-  }
-
-  .overlay-content a {
-    font-size: clamp(40px, 10vw, 100px);
-  }
-
-  .navbar-fixed {
-    width: 6.25rem; /* 100px */
-  }
-
+/* Mobile-specific optimizations */
+@media (max-width: 767px) {
   .main-content {
-    margin-left: 6.25rem;
+    margin-left: 0; /* Full width on mobile - no left margin */
   }
-
-  .navbar-title {
-    font-size: 1rem;
+  
+  /* Reduce animations on mobile for better performance */
+  .reduced-motion {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
-@media (max-width: 768px) {
-  .overlay-content {
-    padding-left: 6.25rem; /* 100px */
-  }
-
-  .overlay-content a {
-    font-size: clamp(30px, 8vw, 80px);
-  }
-
-  .navbar-fixed {
-    width: 5rem; /* 80px */
-  }
-
+@media (min-width: 768px) and (max-width: 1024px) {
   .main-content {
-    margin-left: 5rem;
-  }
-
-  .navbar-title {
-    font-size: 0.9rem;
+    margin-left: 5rem; /* 20 on tablets */
   }
 }
 
-/* Dashboard-style metric cards styling */
-.dashboard-metric-card {
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  position: relative;
-  isolation: isolate;
+@media (min-width: 1025px) {
+  .main-content {
+    margin-left: 6rem; /* 24 on desktop */
+  }
 }
 
-.dashboard-metric-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.1), transparent 70%);
-  z-index: -1;
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .high-dpi-optimized {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
 }
 
-/* Dashboard glowing elements */
-.glow-accent {
-  filter: drop-shadow(0 0 5px var(--accent-color, rgba(234, 179, 8, 0.6)));
+/* Landscape mobile optimizations */
+@media (max-height: 500px) and (orientation: landscape) {
+  .min-h-screen {
+    min-height: 100vh;
+  }
+  
+  .landscape-compress {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
 }
 
-.glow-accent-text {
-  text-shadow: 0 0 8px var(--accent-color, rgba(234, 179, 8, 0.5));
+/* Tablet and desktop hover states */
+@media (hover: hover) and (pointer: fine) {
+  .hover-enhance:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
 }
 
-/* Enhanced metric section animations */
-@keyframes glowPulse {
-  0%, 100% { opacity: 0.4; filter: blur(4px); }
-  50% { opacity: 1; filter: blur(2px); }
+/* Accessibility: Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
-.glow-pulse {
-  animation: glowPulse 3s infinite ease-in-out;
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+  .auto-dark {
+    color-scheme: dark;
+  }
 }
-
-/* Animated background patterns for metrics */
-.metric-backdrop {
-  background-image: 
-    radial-gradient(circle at 20% 80%, rgba(234, 179, 8, 0.1) 0%, transparent 20%),
-    radial-gradient(circle at 80% 20%, rgba(234, 179, 8, 0.1) 0%, transparent 20%);
-  background-size: 100% 100%;
-  animation: metricBackgroundShift 10s infinite alternate ease-in-out;
-}
-
-@keyframes metricBackgroundShift {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 10% 20%; }
-}
-
-
 
 @layer base {
   * {

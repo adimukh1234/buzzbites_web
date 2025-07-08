@@ -479,11 +479,11 @@ const MetricCard = ({
   return (
     <motion.div
       className={`relative overflow-hidden cursor-pointer transition-all duration-700 ease-in-out ${
-        isExpanded ? 'flex-grow-[10000] max-w-[600px] mx-0' : 'flex-grow min-w-[80px] mx-2'
+        isExpanded ? 'flex-grow-[10000] max-w-[300px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] mx-0' : 'flex-grow min-w-[60px] sm:min-w-[70px] md:min-w-[80px] mx-1 sm:mx-2'
       }`}
       style={{
-        minHeight: '400px',
-        borderRadius: isExpanded ? '40px' : '30px',
+        minHeight: '300px',
+        borderRadius: isExpanded ? '20px' : '15px',
         backgroundImage: `linear-gradient(135deg, ${accentColor}20, ${accentColor}05)`,
         border: `2px solid ${accentColor}30`,
         transformOrigin: 'bottom center',
@@ -534,14 +534,14 @@ const MetricCard = ({
       <FuturisticOverlay opacity="low" className={`opacity-20 ${hovered ? 'opacity-30' : ''}`} />
       
       {/* Card Content */}
-      <div className={`absolute ${isExpanded ? 'bottom-8 left-8 right-8' : 'bottom-4 left-4 right-4'} z-10`}>
+      <div className={`absolute ${isExpanded ? 'bottom-4 sm:bottom-6 md:bottom-8 left-4 sm:left-6 md:left-8 right-4 sm:right-6 md:right-8' : 'bottom-2 sm:bottom-3 md:bottom-4 left-2 sm:left-3 md:left-4 right-2 sm:right-3 md:right-4'} z-10`}>
         <div className="flex items-end">
           {/* Icon */}
           <motion.div
             className="flex items-center justify-center rounded-full bg-white/90 backdrop-blur-sm"
             style={{
-              width: '50px',
-              height: '50px',
+              width: isExpanded ? '40px' : '30px',
+              height: isExpanded ? '40px' : '30px',
               color: accentColor,
             }}
             animate={{
@@ -549,12 +549,12 @@ const MetricCard = ({
             }}
             transition={{ duration: 0.7 }}
           >
-            <Icon size={24} />
+            <Icon size={isExpanded ? 20 : 16} />
           </motion.div>
 
           {/* Content */}
           <motion.div
-            className="ml-4 flex-1"
+            className="ml-2 sm:ml-3 md:ml-4 flex-1"
             initial={false}
             animate={{
               opacity: isExpanded ? 1 : 0,
@@ -563,7 +563,7 @@ const MetricCard = ({
             transition={{ duration: 0.7, delay: isExpanded ? 0.2 : 0 }}
           >
             {/* Metric Number */}
-            <div className="text-4xl md:text-5xl font-satoshi font-black text-white leading-none mb-2" style={{ 
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-satoshi font-black text-white leading-none mb-1 sm:mb-2" style={{ 
               textShadow: `0 0 20px ${accentColor}70`
             }}>
               <AnimatedCounter 
@@ -576,14 +576,14 @@ const MetricCard = ({
             </div>
 
             {/* Description */}
-            <h3 className="font-satoshi font-semibold text-white/90 text-lg leading-tight mb-4" style={{
+            <h3 className="font-satoshi font-semibold text-white/90 text-sm sm:text-base md:text-lg leading-tight mb-2 sm:mb-3 md:mb-4" style={{
               textShadow: '0 2px 4px rgba(0,0,0,0.8)'
             }}>
               {description}
             </h3>
 
             {/* Chart */}
-            <div className="mb-6 mt-4">
+            <div className="mb-4 sm:mb-5 md:mb-6 mt-2 sm:mt-3 md:mt-4">
               {renderChart()}
             </div>
           </motion.div>
@@ -600,10 +600,10 @@ const MetricCard = ({
         >
           {/* Icon positioned at top center */}
           <motion.div
-            className="flex items-center justify-center rounded-full bg-white/90 backdrop-blur-sm mb-4"
+            className="flex items-center justify-center rounded-full bg-white/90 backdrop-blur-sm mb-2 sm:mb-3 md:mb-4"
             style={{
-              width: '40px',
-              height: '40px',
+              width: '30px',
+              height: '30px',
               color: accentColor,
             }}
             animate={{
@@ -611,11 +611,11 @@ const MetricCard = ({
             }}
             transition={{ duration: 0.7 }}
           >
-            <Icon size={20} />
+            <Icon size={16} />
           </motion.div>
           
           {/* Metric text positioned below icon */}
-          <div className="text-xl font-satoshi font-black text-white text-center" style={{ 
+          <div className="text-sm sm:text-base md:text-lg lg:text-xl font-satoshi font-black text-white text-center" style={{ 
             color: accentColor,
             textShadow: `0 0 15px ${accentColor}70`,
             writingMode: 'vertical-rl',
@@ -631,7 +631,7 @@ const MetricCard = ({
         className="absolute inset-0 rounded-full pointer-events-none"
         style={{
           border: `2px solid ${accentColor}`,
-          borderRadius: isExpanded ? '40px' : '30px',
+          borderRadius: isExpanded ? '20px' : '15px',
         }}
         animate={{
           boxShadow: isExpanded 
@@ -640,6 +640,159 @@ const MetricCard = ({
         }}
         transition={{ duration: 0.7 }}
       />
+    </motion.div>
+  );
+};
+
+// Simple mobile card component
+const SimpleMetricCard = ({ 
+  metric, 
+  description, 
+  icon: Icon, 
+  index,
+  accentColor,
+  isActive,
+  chartType
+}) => {
+  const shouldAnimate = isActive;
+
+  // Determine if metric has special characters like + or %
+  const suffix = metric.includes('+') ? '+' : 
+                metric.includes('%') ? '%' : 
+                metric.includes('★') ? '★' : '';
+  
+  // Get numeric value without suffix
+  const numericValue = metric.replace(/[+%★]/g, '');
+
+  const renderSimpleChart = () => {
+    switch (chartType) {
+      case 'bar':
+        return (
+          <div className="flex items-end space-x-1 h-8">
+            {[60, 40, 75, 50, 65].map((height, i) => (
+              <motion.div
+                key={i}
+                className="w-2 rounded-sm"
+                style={{ backgroundColor: accentColor }}
+                initial={{ height: 0 }}
+                animate={shouldAnimate ? { height: `${height}%` } : { height: 0 }}
+                transition={{ delay: 0.5 + i * 0.1, duration: 0.5 }}
+              />
+            ))}
+          </div>
+        );
+      case 'pie':
+        return (
+          <div className="relative w-12 h-12">
+            <svg width="48" height="48" viewBox="0 0 48 48">
+              <circle 
+                cx="24" 
+                cy="24" 
+                r="20" 
+                fill="none" 
+                stroke="rgba(255,255,255,0.2)" 
+                strokeWidth="4"
+              />
+              <motion.circle
+                cx="24"
+                cy="24"
+                r="20"
+                fill="none"
+                stroke={accentColor}
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeDasharray={125.6}
+                initial={{ strokeDashoffset: 125.6 }}
+                animate={shouldAnimate ? { 
+                  strokeDashoffset: 125.6 * (1 - parseFloat(numericValue) / 100) 
+                } : { strokeDashoffset: 125.6 }}
+                transition={{ delay: 0.5, duration: 1 }}
+                style={{ 
+                  transformOrigin: "center",
+                  transform: "rotate(-90deg)"
+                }}
+              />
+            </svg>
+          </div>
+        );
+      case 'rating':
+        return (
+          <div className="flex space-x-1">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <motion.div
+                key={star}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={shouldAnimate ? { 
+                  opacity: star <= Math.floor(parseFloat(numericValue)) ? 1 : 0.3, 
+                  scale: 1 
+                } : { opacity: 0, scale: 0 }}
+                transition={{ delay: 0.5 + star * 0.1, duration: 0.3 }}
+              >
+                <AiFillStar 
+                  size={16} 
+                  style={{ color: star <= Math.floor(parseFloat(numericValue)) ? accentColor : '#666' }}
+                />
+              </motion.div>
+            ))}
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <motion.div
+      className="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-800/50"
+      style={{
+        borderColor: `${accentColor}30`,
+        background: `linear-gradient(135deg, ${accentColor}10, rgba(17, 24, 39, 0.8))`
+      }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      whileHover={{ 
+        scale: 1.02,
+        borderColor: `${accentColor}60`,
+      }}
+    >
+      <div className="flex items-start justify-between">
+        <div className="flex-1">
+          {/* Icon and Metric */}
+          <div className="flex items-center space-x-4 mb-4">
+            <div 
+              className="w-12 h-12 rounded-lg flex items-center justify-center"
+              style={{ backgroundColor: `${accentColor}20` }}
+            >
+              <Icon size={24} style={{ color: accentColor }} />
+            </div>
+            <div>
+              <div 
+                className="text-3xl font-satoshi font-black text-white"
+                style={{ color: accentColor, textShadow: `0 0 10px ${accentColor}50` }}
+              >
+                <AnimatedCounter 
+                  value={numericValue} 
+                  suffix={suffix}
+                  duration={shouldAnimate ? 1.5 : 0}
+                  accentColor={accentColor}
+                  withAnimation={true}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Description */}
+          <p className="text-white/80 text-sm font-satoshi leading-relaxed mb-4">
+            {description}
+          </p>
+
+          {/* Chart */}
+          <div className="flex justify-start">
+            {renderSimpleChart()}
+          </div>
+        </div>
+      </div>
     </motion.div>
   );
 };
@@ -663,28 +816,28 @@ export default function MetricCards() {
       description: "Organizations Using Instacon Across India",
       icon: BiBuildings,
       chartType: "bar",
-      accentColor: "#EABA08" // Yellow - more vibrant
+      accentColor: "#EABA08" // Yellow
     },
     {
       metric: "10+",
       description: "Industries Served (Pharma, FMCG, Field Sales, Logistics & more)",
       icon: MdCategory,
       chartType: "bar",
-      accentColor: "#4ade80" // Green
+      accentColor: "#EABA08" // Yellow
     },
     {
       metric: "98.7%",
       description: "Accuracy Rate in GPS-based Attendance",
       icon: TbTargetArrow,
       chartType: "pie",
-      accentColor: "#3b82f6" // Blue
+      accentColor: "#EABA08" // Yellow
     },
     {
       metric: "4.8★",
       description: "User Rating on App Stores",
       icon: AiFillStar, 
       chartType: "rating",
-      accentColor: "#f97316" // Orange
+      accentColor: "#EABA08" // Yellow
     }
   ];
   
@@ -955,10 +1108,30 @@ export default function MetricCards() {
           />
         </motion.h2>
 
-        {/* Expandable Cards Container */}
+        {/* Mobile: Simple Card List */}
         <motion.div 
-          className="flex items-stretch overflow-hidden min-w-[600px] max-w-[900px] w-full mx-auto pt-8 pl-8 pr-8"
-          style={{ height: '450px' }}
+          className="block md:hidden w-full mx-auto pt-4 px-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+        >
+          <div className="grid grid-cols-1 gap-4">
+            {metrics.map((metric, index) => (
+              <SimpleMetricCard
+                key={index}
+                {...metric}
+                index={index}
+                isActive={isInView || forceShow}
+              />
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Desktop: Expandable Cards Container */}
+        <motion.div 
+          className="hidden md:flex items-stretch overflow-hidden w-full mx-auto pt-4 sm:pt-6 md:pt-8 px-4 sm:px-6 md:px-8 
+                     min-w-[600px] max-w-[900px] lg:min-w-[700px] lg:max-w-[1000px] xl:min-w-[800px] xl:max-w-[1200px]"
+          style={{ height: 'auto', minHeight: '350px' }}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
           transition={{ delay: 0.3, duration: 0.8 }}
@@ -976,9 +1149,9 @@ export default function MetricCards() {
           ))}
         </motion.div>
 
-        {/* Indicator Dots */}
+        {/* Indicator Dots - Desktop Only */}
         <motion.div 
-          className="flex justify-center mt-10 space-x-3"
+          className="hidden md:flex justify-center mt-10 space-x-3"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ delay: 0.7 }}
