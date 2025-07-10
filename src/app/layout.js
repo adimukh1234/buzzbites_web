@@ -1,4 +1,5 @@
 import "./globals.css";
+import "./horizontal-scroll-layout.css";
 import SmoothScroll from "../../components/SmoothScroll";
 import FuturisticOverlay from "../../components/FuturisticOverlay";
 import PreLoader from "../../components/PreLoader";
