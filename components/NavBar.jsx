@@ -17,7 +17,7 @@ const NavBar = () => {
   const navbarStyle = {
     cursor: 'default',
     position: 'relative',
-    zIndex: 3 // Ensure Navbar is above Story component
+    zIndex: 50 // Ensure Navbar is above all page sections
   };
 
   useEffect(() => {
@@ -71,7 +71,7 @@ const NavBar = () => {
       {/* Desktop/Tablet Navbar - Hidden on mobile */}
       <div 
         ref={fixedMenuRef} 
-        className="hidden md:flex fixed top-0 left-0 w-20 lg:w-24 h-screen z-20 flex-col justify-between items-center py-6 lg:py-8 backdrop-blur-md border-r border-white/10 overflow-hidden"
+        className="hidden md:flex fixed top-0 left-0 w-20 lg:w-24 h-screen z-50 flex-col justify-between items-center py-6 lg:py-8 backdrop-blur-md border-r border-white/10 overflow-hidden"
         style={{
           background: 'linear-gradient(135deg, rgba(26, 26, 26, 0.98), rgba(13, 13, 13, 0.98))',
           containerType: 'inline-size',
@@ -192,7 +192,7 @@ const NavBar = () => {
       </div>      {/* Responsive Fullscreen Overlay Menu */}
       <div 
         ref={menuOverlayRef} 
-        className={`fixed inset-0 z-10 overflow-hidden backdrop-blur-xl transition-transform duration-[600ms] md:duration-[800ms] ${
+        className={`fixed inset-0 z-40 overflow-hidden backdrop-blur-xl transition-transform duration-[600ms] md:duration-[800ms] ${
           isMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
         style={{
@@ -272,7 +272,7 @@ const NavBar = () => {
                   transitionDelay: isMenuOpen ? '0.2s' : '0s'
                 }}
               >
-                Work
+                INSTACON
               </Link>
             </li>
             <li className="m-0 py-2 md:py-4 overflow-hidden relative leading-none">

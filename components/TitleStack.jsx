@@ -2,51 +2,50 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import Spline from '@splinetool/react-spline';
-import ScrambleNavButton from './ScrambleNavButton';
+import Image from 'next/image';
 
 const sections = [
   {
-    id: 'foundation',
-    label: 'Foundation Models',
-    title: 'Foundation Models',
-    description: 'Scale partners or integrates with all of the leading AI models, from open-source to closed-source, including OpenAI, Google, Meta, Cohere, and more.',
-    splineScene: 'https://prod.spline.design/fiHF2yV8AdTtXjKd/scene.splinecode'
+    id: 'attendance',
+    label: 'Smart Attendance',
+    title: 'GPS + Image-Based Attendance',
+    description: 'Employees check in with geo-tagged selfies — ensuring verified attendance with location proof. No more fake check-ins or buddy punching.',
+    image: '/samples/pexels-alxs-919734.jpg'
   },
   {
-    id: 'enterprise',
-    label: 'Enterprise Data',
-    title: 'Enterprise Data',
-    description: "Scale's Data Engine enables you to integrate your enterprise data into the fold of these models, providing the base for long-term strategic differentiation.",
-    splineScene: 'https://prod.spline.design/xy8peGBv-xACXzFT/scene.splinecode'
+    id: 'tracking',
+    label: 'Real-Time Tracking',
+    title: 'Live Location Monitoring',
+    description: 'Track where your team is, in real-time. Improve field visibility, reduce idle time, and stay in control of your distributed workforce.',
+    image: '/samples/pexels-joshsorenson-1714208.jpg'
   },
   {
-    id: 'evaluation',
-    label: 'Model Evaluation',
-    title: 'Model Evaluation',
-    description: 'Comprehensive testing and evaluation frameworks to ensure your AI models perform reliably across diverse scenarios and use cases.',
-    splineScene: 'https://prod.spline.design/fiHF2yV8AdTtXjKd/scene.splinecode'
+    id: 'reports',
+    label: 'Visit Reports',
+    title: 'Instant Report Submission',
+    description: 'Employees can instantly submit visit summaries, client feedback, or task outcomes — with time, location, and notes all logged automatically.',
+    image: '/samples/pexels-junior-teixeira-1064069-2047905.jpg'
   },
   {
-    id: 'deployment',
-    label: 'AI Deployment',
-    title: 'AI Deployment',
-    description: 'Seamlessly deploy and scale your AI models in production environments with enterprise-grade security and performance monitoring.',
-    splineScene: 'https://prod.spline.design/xy8peGBv-xACXzFT/scene.splinecode'
+    id: 'management',
+    label: 'Workforce Management',
+    title: 'Leave & Shift Management',
+    description: 'Plan better with shift assignments, leave requests, and calendar visibility — all in one place. Streamline your workforce operations.',
+    image: '/samples/pexels-luis-gomes-166706-546819.jpg'
   }
 ];
 
 // Default content when no hover
 const defaultContent = {
-  title: 'Fine-Tuning and RLHF',
-  description: 'Adapt best-in-class foundation models to your business and your specific data to build sustainable, successful AI programs and data from your enterprise.'
+  title: 'Field Workforce Management',
+  description: 'Instacon provides comprehensive tools to manage your field teams with real-time tracking, smart attendance, and seamless reporting — all from one powerful platform.'
 };
 
 export default function TitleStack() {
   const [hoveredSection, setHoveredSection] = useState(null);
   const displayContent = hoveredSection ? sections.find(s => s.id === hoveredSection) : null;
 
-  return (    <section className="bg-black min-h-screen w-full text-white flex items-center justify-center px-6 py-0 pt-10">
+  return (    <section className="bg-black min-h-screen w-full text-white flex items-center justify-center px-6 py-0 pt-10 relative z-10">
       <div className="max-w-7xl w-full grid md:grid-cols-2 gap-16 items-center">
         
         {/* Left Content Block */}
@@ -66,46 +65,56 @@ export default function TitleStack() {
                 {displayContent?.description || defaultContent.description}
               </p>
             </motion.div>
-          </AnimatePresence>          {/* Simple Title List with white bars */}          <div className="flex flex-col gap-1 mt-12">
+          </AnimatePresence>          {/* Simple Title List */}          
+          <div className="flex flex-col gap-1 mt-12">
             {sections.map((section) => (
-              <ScrambleNavButton
+              <button
                 key={section.id}
-                section={section}
-                hoveredSection={hoveredSection}
                 onMouseEnter={() => setHoveredSection(section.id)}
                 onMouseLeave={() => setHoveredSection(null)}
-                className={`text-left py-4 px-0 transition-all duration-300 relative group ${
+                className={`text-left py-4 px-0 transition-all duration-300 relative group border-none bg-transparent cursor-pointer ${
                   hoveredSection === section.id
                     ? 'text-white opacity-100'
                     : hoveredSection && hoveredSection !== section.id
                     ? 'text-gray-600 opacity-30'
                     : 'text-gray-400 opacity-100'
                 }`}
-              />
+              >
+                <div className="flex items-center space-x-4">
+                  <div className={`w-8 h-0.5 transition-all duration-300 ${
+                    hoveredSection === section.id 
+                      ? 'bg-white' 
+                      : 'bg-gray-600'
+                  }`} />
+                  <span className="text-lg font-medium">{section.label}</span>
+                </div>
+              </button>
             ))}
           </div>
 
           {/* Providers section */}
           <div className="pt-8 border-t border-gray-800 mt-8">
-            <p className="text-sm text-gray-500 uppercase tracking-wide mb-4 font-medium">
-              GENERATIVE AI PROVIDERS WE PARTNER WITH:
+            <p className="text-sm text-blue-500 uppercase tracking-wide mb-4 font-medium">
+              TRUSTED BY TEAMS ACROSS INDUSTRIES:
             </p>
             <div className="flex flex-wrap gap-4">
-              {['OpenAI', 'Google', 'Meta', 'Anthropic', 'Cohere'].map((provider) => (
+              {['Sales Teams', 'Logistics', 'FMCG', 'Insurance', 'Field Services'].map((industry, i) => (
                 <span 
-                  key={provider}
-                  className="text-gray-500 text-sm"
+                  key={industry}
+                  className={`text-sm transition-colors duration-300 ${
+                    i % 2 === 0 ? 'text-red-400' : 'text-blue-400'
+                  }`}
                 >
-                  {provider}
+                  {industry}
                 </span>
               ))}
             </div>
           </div>
         </div>
 
-        {/* Right 3D Model Area */}
+        {/* Right Image Area */}
         <div className="flex justify-center items-center relative">
-          <div className="w-full h-[700px] relative overflow-visible">
+          <div className="w-full h-[700px] relative overflow-hidden rounded-lg">
             {hoveredSection ? (
               <AnimatePresence mode="wait">
                 <motion.div
@@ -114,30 +123,36 @@ export default function TitleStack() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.3, ease: 'easeOut' }}
-                  className="w-full h-full"
-                >                  <Spline
-                    scene={displayContent?.splineScene}
-                    data-lenis-prevent
-                    style={{ 
-                      width: '120%', 
-                      height: '120%', 
-                      marginLeft: '-10%', 
-                      marginTop: '-10%',
-                      border: 'none',
-                      outline: 'none',
-                      background: 'transparent',
-                      pointerEvents: 'none'
-                    }} 
+                  className="w-full h-full relative"
+                >
+                  <Image
+                    src={displayContent?.image}
+                    alt={displayContent?.title}
+                    fill
+                    className="object-cover rounded-lg"
+                    style={{
+                      filter: 'brightness(0.8) contrast(1.1)',
+                    }}
                   />
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 rounded-lg" />
+                  
+                  {/* Feature label overlay */}
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <div className="bg-black/50 backdrop-blur-sm rounded-lg p-4 border border-white/10">
+                      <h3 className="text-white font-semibold text-lg mb-2">{displayContent?.title}</h3>
+                      <p className="text-gray-300 text-sm">{displayContent?.description}</p>
+                    </div>
+                  </div>
                 </motion.div>
               </AnimatePresence>
             ) : (
-              <div className="w-full h-full flex items-center justify-center">
+              <div className="w-full h-full flex items-center justify-center bg-gray-900 rounded-lg">
                 <div className="text-center space-y-4">
                   <div className="w-16 h-16 mx-auto rounded-full bg-gray-800 flex items-center justify-center">
-                    <div className="w-8 h-8 bg-gray-600 rounded-full"></div>
+                    <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-red-500 rounded-full"></div>
                   </div>
-                  <p className="text-gray-500 text-lg">Hover over a title to explore</p>
+                  <p className="text-gray-500 text-lg">Hover over a feature to explore</p>
                 </div>
               </div>
             )}
