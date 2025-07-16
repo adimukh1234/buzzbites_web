@@ -10,28 +10,28 @@ const sections = [
     label: 'Smart Attendance',
     title: 'GPS + Image-Based Attendance',
     description: 'Employees check in with geo-tagged selfies — ensuring verified attendance with location proof. No more fake check-ins or buddy punching.',
-    image: '/samples/pexels-alxs-919734.jpg'
+    image: '/smart_attendance.jpg'
   },
   {
     id: 'tracking',
     label: 'Real-Time Tracking',
     title: 'Live Location Monitoring',
     description: 'Track where your team is, in real-time. Improve field visibility, reduce idle time, and stay in control of your distributed workforce.',
-    image: '/samples/pexels-joshsorenson-1714208.jpg'
+    image: '/1080x1350_Real_Time_Tracking.jpg'
   },
   {
     id: 'reports',
     label: 'Visit Reports',
     title: 'Instant Report Submission',
     description: 'Employees can instantly submit visit summaries, client feedback, or task outcomes — with time, location, and notes all logged automatically.',
-    image: '/samples/pexels-junior-teixeira-1064069-2047905.jpg'
+    image: '/1080x1350_visit_Report.jpg'
   },
   {
     id: 'management',
     label: 'Workforce Management',
     title: 'Leave & Shift Management',
     description: 'Plan better with shift assignments, leave requests, and calendar visibility — all in one place. Streamline your workforce operations.',
-    image: '/samples/pexels-luis-gomes-166706-546819.jpg'
+    image: '/1080x1350_workface_Management.jpg'
   }
 ];
 
