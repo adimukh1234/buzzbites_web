@@ -247,87 +247,87 @@ export default function ProductPage() {
         </div>
       </motion.section>
 
-      {/* Transition Area with Floating Elements */}
+      {/* Seamless Transition Area */}
       <motion.div 
-        className="relative h-32 overflow-hidden z-15"
-        style={{ y: useSpring(useTransform(scrollYProgress, [0.3, 0.7], [0, -100]), springConfig) }}
+        className="relative h-16 overflow-hidden z-15 bg-gradient-to-b from-black/50 to-gray-900/50"
+        style={{ y: useSpring(useTransform(scrollYProgress, [0.3, 0.7], [0, -50]), springConfig) }}
       >
-        {[...Array(8)].map((_, i) => (
+        {[...Array(12)].map((_, i) => (
           <motion.div
             key={i}
             className={`absolute w-1 h-1 rounded-full ${
-              i % 2 === 0 ? 'bg-red-400/30' : 'bg-blue-400/30'
+              i % 2 === 0 ? 'bg-red-400/40' : 'bg-blue-400/40'
             }`}
             style={{
-              left: `${10 + i * 10}%`,
-              top: `${20 + Math.sin(i) * 30}%`,
+              left: `${5 + i * 8}%`,
+              top: `${30 + Math.sin(i) * 20}%`,
             }}
             animate={{
-              y: [0, -50, 0],
-              opacity: [0.3, 0.8, 0.3],
-              scale: [1, 1.5, 1],
+              y: [0, -30, 0],
+              opacity: [0.4, 0.8, 0.4],
+              scale: [1, 1.2, 1],
             }}
             transition={{
-              duration: 3 + i * 0.5,
+              duration: 2 + i * 0.3,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: i * 0.2,
+              delay: i * 0.1,
             }}
           />
         ))}
       </motion.div>
 
-      {/* TitleStack Section with Parallax */}
+      {/* TitleStack Section with Seamless Integration */}
       <motion.div 
-        className="relative z-20"
+        className="relative z-20 -mt-4"
         style={{ 
-          y: useSpring(useTransform(scrollYProgress, [0.4, 1], [100, -50]), springConfig),
+          y: useSpring(useTransform(scrollYProgress, [0.4, 1], [30, -15]), springConfig),
           opacity: useSpring(useTransform(scrollYProgress, [0.3, 0.5], [0, 1]), springConfig)
         }}
       >
         <TitleStack />
       </motion.div>
 
-      {/* Additional Content Section */}
+      {/* Key Features Section */}
       <motion.section 
-        className="relative min-h-screen bg-gradient-to-b from-black to-gray-800 z-20 overflow-hidden"
+        className="relative min-h-[80vh] bg-gradient-to-b from-gray-900 via-black to-gray-800 z-20 overflow-hidden -mt-16"
         style={{ 
-          y: useSpring(useTransform(scrollYProgress, [0.6, 1], [200, 0]), springConfig) 
+          y: useSpring(useTransform(scrollYProgress, [0.6, 1], [100, 0]), springConfig) 
         }}
       >
         <div className="absolute inset-0">
           {/* Animated background pattern */}
-          {[...Array(12)].map((_, i) => (
+          {[...Array(10)].map((_, i) => (
             <motion.div
               key={i}
-              className={`absolute w-2 h-2 rounded-full ${
-                i % 2 === 0 ? 'bg-red-500/10' : 'bg-blue-500/10'
+              className={`absolute w-1.5 h-1.5 rounded-full ${
+                i % 2 === 0 ? 'bg-red-500/15' : 'bg-blue-500/15'
               }`}
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
               }}
               animate={{
-                scale: [1, 2, 1],
-                opacity: [0.1, 0.3, 0.1],
+                scale: [1, 1.8, 1],
+                opacity: [0.15, 0.4, 0.15],
                 rotate: [0, 360],
               }}
               transition={{
-                duration: 8 + Math.random() * 4,
+                duration: 6 + Math.random() * 3,
                 repeat: Infinity,
                 ease: "linear",
-                delay: Math.random() * 5,
+                delay: Math.random() * 4,
               }}
             />
           ))}
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-8 py-20">
+        <div className="relative z-10 max-w-7xl mx-auto px-8 py-16">{/* Reduced padding */}
           <motion.div 
-            className="text-center space-y-8"
-            initial={{ opacity: 0, y: 50 }}
+            className="text-center space-y-6"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
             <h2 className="text-4xl lg:text-5xl font-bold text-white">
@@ -338,12 +338,12 @@ export default function ProductPage() {
             </p>
             
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12"
               variants={{
                 hidden: {},
                 visible: {
                   transition: {
-                    staggerChildren: 0.2
+                    staggerChildren: 0.15
                   }
                 }
               }}
@@ -380,14 +380,14 @@ export default function ProductPage() {
               ].map((feature, i) => (
                 <motion.div
                   key={i}
-                  className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg p-6 text-left"
+                  className="bg-gray-900/60 backdrop-blur-sm border border-gray-700 rounded-lg p-5 text-left hover:bg-gray-900/80 transition-all duration-300"
                   variants={{
-                    hidden: { opacity: 0, y: 30 },
+                    hidden: { opacity: 0, y: 20 },
                     visible: { opacity: 1, y: 0 }
                   }}
                   whileHover={{ 
-                    scale: 1.05,
-                    borderColor: i % 2 === 0 ? 'rgba(239, 68, 68, 0.5)' : 'rgba(59, 130, 246, 0.5)',
+                    scale: 1.03,
+                    borderColor: i % 2 === 0 ? 'rgba(239, 68, 68, 0.6)' : 'rgba(59, 130, 246, 0.6)',
                     transition: { duration: 0.2 }
                   }}
                 >
@@ -403,54 +403,54 @@ export default function ProductPage() {
 
       {/* Why Teams Choose Instacon Section */}
       <motion.section 
-        className="relative min-h-screen bg-gradient-to-b from-gray-800 to-black z-20 overflow-hidden"
+        className="relative min-h-[75vh] bg-gradient-to-b from-gray-800 via-gray-900 to-black z-20 overflow-hidden -mt-8"
         style={{ 
-          y: useSpring(useTransform(scrollYProgress, [0.7, 1], [100, 0]), springConfig) 
+          y: useSpring(useTransform(scrollYProgress, [0.7, 1], [50, 0]), springConfig) 
         }}
       >
         <div className="absolute inset-0">
           {/* Animated background pattern */}
-          {[...Array(15)].map((_, i) => (
+          {[...Array(12)].map((_, i) => (
             <motion.div
               key={i}
               className={`absolute w-1 h-1 rounded-full ${
-                i % 3 === 0 ? 'bg-blue-500/20' : i % 3 === 1 ? 'bg-red-500/20' : 'bg-gray-500/20'
+                i % 3 === 0 ? 'bg-blue-500/25' : i % 3 === 1 ? 'bg-red-500/25' : 'bg-gray-500/25'
               }`}
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
               }}
               animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.2, 0.5, 0.2],
-                y: [0, -30, 0],
+                scale: [1, 1.3, 1],
+                opacity: [0.25, 0.5, 0.25],
+                y: [0, -20, 0],
               }}
               transition={{
-                duration: 6 + Math.random() * 4,
+                duration: 4 + Math.random() * 3,
                 repeat: Infinity,
                 ease: "easeInOut",
-                delay: Math.random() * 3,
+                delay: Math.random() * 2,
               }}
             />
           ))}
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-8 py-20">
+        <div className="relative z-10 max-w-7xl mx-auto px-8 py-16">{/* Reduced padding */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             
             {/* Left: Why Teams Choose */}
             <motion.div 
-              className="space-y-8"
-              initial={{ opacity: 0, x: -50 }}
+              className="space-y-6"
+              initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1 }}
+              transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
               <h2 className="text-4xl lg:text-5xl font-bold text-white">
                 Why Teams Choose <span className="text-red-500">Instacon</span>
               </h2>
               
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {/*
                   "Reduces manual reporting",
                   "Eliminates fake attendance",
@@ -462,15 +462,15 @@ export default function ProductPage() {
                   <motion.div
                     key={i}
                     className="flex items-start space-x-3"
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -15 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                    transition={{ duration: 0.4, delay: i * 0.08 }}
                     viewport={{ once: true }}
                   >
-                    <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">
+                    <div className="flex-shrink-0 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs font-bold mt-1">
                       ✓
                     </div>
-                    <p className="text-gray-300 text-lg leading-relaxed">{benefit}</p>
+                    <p className="text-gray-300 leading-relaxed">{benefit}</p>
                   </motion.div>
                 ))}
               </div>
@@ -478,53 +478,53 @@ export default function ProductPage() {
 
             {/* Right: Get Instacon Today */}
             <motion.div 
-              className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg p-8 text-center"
-              initial={{ opacity: 0, x: 50 }}
+              className="bg-gray-900/60 backdrop-blur-sm border border-gray-700 rounded-lg p-6 text-center"
+              initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1 }}
+              transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-3xl font-bold text-white mb-4">
+              <h3 className="text-2xl font-bold text-white mb-3">
                 Get <span className="text-blue-500">Instacon</span> Today
               </h3>
-              <p className="text-gray-300 mb-6">
+              <p className="text-gray-300 mb-5">
                 Available on Android & iOS. Simple to set up. Easy to scale.
                 Let your workforce work smarter — from anywhere.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center mb-5">
                 <motion.button 
-                  className="bg-black text-white px-6 py-3 rounded-lg font-semibold border border-gray-600 hover:border-white transition-all duration-300 flex items-center justify-center space-x-2"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="bg-black text-white px-5 py-2.5 rounded-lg font-semibold border border-gray-600 hover:border-white transition-all duration-300 flex items-center justify-center space-x-2 text-sm"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <span>📱</span>
-                  <span>Download on Play Store</span>
+                  <span>Play Store</span>
                 </motion.button>
                 <motion.button 
-                  className="bg-black text-white px-6 py-3 rounded-lg font-semibold border border-gray-600 hover:border-white transition-all duration-300 flex items-center justify-center space-x-2"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="bg-black text-white px-5 py-2.5 rounded-lg font-semibold border border-gray-600 hover:border-white transition-all duration-300 flex items-center justify-center space-x-2 text-sm"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <span>🍎</span>
-                  <span>Download on App Store</span>
+                  <span>App Store</span>
                 </motion.button>
               </div>
               
               <motion.button 
-                className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-red-500/25 w-full mb-6"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-red-500/25 w-full mb-5"
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
               >
                 Request a Demo
               </motion.button>
               
-              <div className="border-t border-gray-700 pt-6">
-                <h4 className="text-xl font-semibold text-white mb-3">Need a Custom Use Case?</h4>
-                <p className="text-gray-300 mb-4">
+              <div className="border-t border-gray-700 pt-5">
+                <h4 className="text-lg font-semibold text-white mb-2">Need a Custom Use Case?</h4>
+                <p className="text-gray-300 mb-3 text-sm">
                   Whether you're managing 50 or 1,000 field employees, Instacon adapts to your workflow.
                 </p>
-                <div className="space-y-2 text-sm text-gray-400">
+                <div className="space-y-1 text-sm text-gray-400">
                   <p>📩 Email us at: <span className="text-blue-400">support@instacon.co.in</span></p>
                   <p>📞 Contact Us: <span className="text-blue-400">9903294089</span></p>
                 </div>
