@@ -5,7 +5,6 @@ import { useInView } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin';
-import ScrambleButton from './ScrambleButton';
 import { BiFingerprint } from 'react-icons/bi';
 import { MdOutlineLocationOn, MdOutlineTask } from 'react-icons/md';
 import { BsCalendar3 } from 'react-icons/bs';
@@ -554,7 +553,7 @@ const MetricCard = ({
           <div className="flex justify-between items-center mb-4">
             {/* Icon with glow effect */}
             <motion.div
-              className="p-3 rounded-lg bg-black/30 backdrop-blur-sm border glow-accent"
+              className="p-3 rounded-lg bg-black/60 backdrop-blur-sm border glow-accent"
               initial={{ scale: 0, opacity: 0 }}
               animate={isVisible ? { 
                 scale: 1, 
@@ -978,36 +977,14 @@ const FeatureCard = ({ icon: Icon, title, delay, index }) => {
         damping: 20
       }}
     >
-      <div className="relative p-6 rounded-2xl bg-black/30 backdrop-blur-sm border border-yellow-500/10 hover:border-yellow-500/40 transition-all duration-300 h-full flex flex-col items-center text-center">
+      <div className="relative p-6 rounded-2xl bg-black/70 backdrop-blur-md border border-yellow-500/20 hover:border-yellow-500/60 transition-all duration-300 h-full flex flex-col items-center text-center shadow-xl shadow-black/40 hover:shadow-yellow-500/10">
         <FuturisticOverlay opacity="low" className="opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
         
         <div className="p-3 rounded-full bg-yellow-500/10 mb-4 relative">
           <Icon className="w-8 h-8 text-yellow-500" />
-          
-          {/* Animated ring effect */}
-          <motion.div 
-            className="absolute inset-0 rounded-full border-2 border-yellow-500/30"
-            animate={{ 
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.6, 0.3]
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut",
-              delay: index * 0.5
-            }}
-          />
         </div>
         
         <h3 className="text-lg font-satoshi font-bold text-white mb-3">{title}</h3>
-        
-        {/* Tech corner accents */}
-        <div className="absolute top-0 left-0 w-8 h-8 tech-corner-lt opacity-40 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <div className="absolute top-0 right-0 w-8 h-8 tech-corner-rt opacity-40 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <div className="absolute bottom-0 left-0 w-8 h-8 tech-corner-lb opacity-40 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <div className="absolute bottom-0 right-0 w-8 h-8 tech-corner-rb opacity-40 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
     </motion.div>
   );
@@ -1052,221 +1029,15 @@ export default function InstaconProduct() {
               style={{ y: titleY, opacity: titleOpacity }}
               className="mb-8 relative"
             >
-              {/* High-tech animated heading with holographic effect */}
+              {/* Simple heading without effects */}
               <motion.h2 
-                className="text-4xl md:text-5xl font-satoshi font-black text-white mb-6 leading-tight relative z-10"
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                className="text-4xl md:text-5xl font-satoshi font-black text-white mb-6 leading-tight"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                {/* Animated word reveals with holographic scanlines */}
-                <motion.span
-                  className="inline-block relative"
-                  initial={{ opacity: 0, rotateX: -90, z: -100 }}
-                  animate={isInView ? { 
-                    opacity: 1, 
-                    rotateX: 0, 
-                    z: 0,
-                    transition: { 
-                      duration: 0.8, 
-                      delay: 0.3,
-                      type: "spring",
-                      stiffness: 100
-                    }
-                  } : { opacity: 0, rotateX: -90, z: -100 }}
-                  style={{ transformOrigin: "center bottom" }}
-                >
-                  Meet{" "}
-                  {/* Holographic shimmer effect */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent"
-                    initial={{ x: "-100%" }}
-                    animate={isInView ? { 
-                      x: "100%",
-                      transition: { 
-                        duration: 1.5, 
-                        delay: 1.1,
-                        ease: "easeInOut"
-                      }
-                    } : { x: "-100%" }}
-                  />
-                </motion.span>
-                
-                <motion.span 
-                  className="text-yellow-500 inline-block relative glow-text"
-                  initial={{ opacity: 0, scale: 0.5, rotateY: 180 }}
-                  animate={isInView ? { 
-                    opacity: 1, 
-                    scale: 1, 
-                    rotateY: 0,
-                    transition: { 
-                      duration: 1, 
-                      delay: 0.6,
-                      type: "spring",
-                      stiffness: 120
-                    }
-                  } : { opacity: 0, scale: 0.5, rotateY: 180 }}
-                  style={{ 
-                    transformOrigin: "center",
-                    textShadow: "0 0 20px rgba(234, 179, 8, 0.8), 0 0 40px rgba(234, 179, 8, 0.4)"
-                  }}
-                >
-                  Instacon
-                  {/* Pulsing energy ring */}
-                  <motion.div
-                    className="absolute inset-0 border-2 border-yellow-500/50 rounded-lg"
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={isInView ? {
-                      scale: [0, 1.2, 1],
-                      opacity: [0, 0.8, 0],
-                      transition: {
-                        duration: 2,
-                        delay: 1.2,
-                        repeat: Infinity,
-                        repeatDelay: 3
-                      }
-                    } : { scale: 0, opacity: 0 }}
-                  />
-                </motion.span>
-                
-                <motion.span
-                  className="inline-block relative"
-                  initial={{ opacity: 0, y: 50, skewX: 45 }}
-                  animate={isInView ? { 
-                    opacity: 1, 
-                    y: 0, 
-                    skewX: 0,
-                    transition: { 
-                      duration: 0.8, 
-                      delay: 0.9,
-                      type: "spring",
-                      stiffness: 80
-                    }
-                  } : { opacity: 0, y: 50, skewX: 45 }}
-                >
-                  : Your Field Team,{" "}
-                </motion.span>
-                
-                <motion.span 
-                  className="text-yellow-500 inline-block relative"
-                  initial={{ opacity: 0, x: -100, rotateZ: -45 }}
-                  animate={isInView ? { 
-                    opacity: 1, 
-                    x: 0, 
-                    rotateZ: 0,
-                    transition: { 
-                      duration: 1, 
-                      delay: 1.2,
-                      type: "spring",
-                      stiffness: 100
-                    }
-                  } : { opacity: 0, x: -100, rotateZ: -45 }}
-                  style={{ 
-                    textShadow: "0 0 15px rgba(234, 179, 8, 0.6)"
-                  }}
-                >
-                  Fully Connected
-                  {/* Digital matrix effect */}
-                  <motion.div
-                    className="absolute -inset-2 opacity-20"
-                    initial={{ opacity: 0 }}
-                    animate={isInView ? {
-                      opacity: [0, 0.3, 0],
-                      transition: {
-                        duration: 0.3,
-                        delay: 2,
-                        repeat: 3,
-                        repeatDelay: 0.1
-                      }
-                    } : { opacity: 0 }}
-                    style={{
-                      background: `
-                        repeating-linear-gradient(
-                          0deg,
-                          transparent,
-                          transparent 2px,
-                          rgba(234, 179, 8, 0.1) 2px,
-                          rgba(234, 179, 8, 0.1) 4px
-                        )
-                      `
-                    }}
-                  />
-                </motion.span>
+                Meet Instacon: Your Field Team, Fully Connected
               </motion.h2>
-              
-              {/* Circuit board background pattern */}
-              <motion.svg
-                className="absolute inset-0 w-full h-full pointer-events-none opacity-20"
-                viewBox="0 0 400 200"
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 0.2 } : { opacity: 0 }}
-                transition={{ duration: 1, delay: 1.5 }}
-              >
-                {/* Animated circuit paths */}
-                <motion.path
-                  d="M50,100 L150,100 L150,50 L250,50 L250,150 L350,150"
-                  fill="none"
-                  stroke="rgba(234, 179, 8, 0.6)"
-                  strokeWidth="1"
-                  strokeDasharray="4,4"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={isInView ? {
-                    pathLength: 1,
-                    opacity: 0.6,
-                    transition: {
-                      duration: 2,
-                      delay: 1.8,
-                      ease: "easeInOut"
-                    }
-                  } : { pathLength: 0, opacity: 0 }}
-                />
-                
-                {/* Pulsing connection nodes */}
-                {[{x: 150, y: 100}, {x: 150, y: 50}, {x: 250, y: 50}, {x: 250, y: 150}].map((node, i) => (
-                  <motion.circle
-                    key={i}
-                    cx={node.x}
-                    cy={node.y}
-                    r="3"
-                    fill="rgba(234, 179, 8, 0.8)"
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={isInView ? {
-                      scale: [0, 1, 1.5, 1],
-                      opacity: [0, 1, 0.5, 1],
-                      transition: {
-                        duration: 1,
-                        delay: 2.2 + (i * 0.2),
-                        repeat: Infinity,
-                        repeatDelay: 4
-                      }
-                    } : { scale: 0, opacity: 0 }}
-                  />
-                ))}
-              </motion.svg>
-              
-              {/* Floating tech particles */}
-              {[...Array(8)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-1 h-1 bg-yellow-500/60 rounded-full"
-                  style={{
-                    left: `${20 + (i * 10)}%`,
-                    top: `${30 + (i % 3) * 20}%`,
-                  }}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={isInView ? {
-                    opacity: [0, 1, 0],
-                    scale: [0, 1, 0],
-                    y: [-20, -40, -60],
-                    transition: {
-                      duration: 3,
-                      delay: 2.5 + (i * 0.3),
-                      repeat: Infinity,
-                      repeatDelay: 5
-                    }
-                  } : { opacity: 0, scale: 0 }}
-                />
-              ))}
             </motion.div>
               <motion.div
               style={{ y: subtitleY, opacity: subtitleOpacity }}
@@ -1316,7 +1087,20 @@ export default function InstaconProduct() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <ScrambleButton text="🔘 Book A Demo" className="text-xl px-8 py-4" />
+              <button 
+                className="px-12 py-5 bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white text-lg font-medium rounded-lg border border-white/20 hover:bg-gray-800 transition duration-300 flex items-center justify-center gap-3 group relative overflow-hidden mx-auto"
+              >
+                {/* Animated hover effect */}
+                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-gray-800 via-white/10 to-gray-800 opacity-0 group-hover:opacity-50 transition-opacity duration-300 transform scale-x-0 group-hover:scale-x-100 origin-left"></span>
+                
+                {/* Button shine effect */}
+                <span className="absolute inset-0 w-1/4 h-full bg-white/20 skew-x-[45deg] -translate-x-full group-hover:translate-x-[400%] transition-transform duration-700 ease-in-out"></span>
+                
+                <span className="relative z-10 font-bold tracking-wide text-xl">🔘 Book A Demo</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 relative z-10 group-hover:translate-x-1 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </button>
             </a>
           </motion.div>
         </div>

@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import FuturisticOverlay from './FuturisticOverlay';
-import ScrambleButton from './ScrambleButton';
 
 export default function Header() {
   return (
@@ -17,11 +16,9 @@ export default function Header() {
         href="https://calendly.com/buzzbites/instacon"
         target="_blank"
         rel="noopener noreferrer"
+        className="ml-6 px-5 py-2 rounded-full font-satoshi font-bold text-black bg-yellow-500 shadow-[0_0_20px_0_rgba(255,255,0,0.4)] hover:bg-yellow-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 relative overflow-hidden"
       >
-        <ScrambleButton 
-          text="Book a Demo →" 
-          className="ml-6 px-5 py-2 rounded-full font-satoshi font-bold text-white bg-yellow-500 shadow-[0_0_20px_0_rgba(255,255,0,0.4)] hover:bg-yellow-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 relative overflow-hidden"
-        />
+        Book a Demo →
       </a>
       <div className="md:hidden">
         {/* Mobile menu button (optional for future) */}

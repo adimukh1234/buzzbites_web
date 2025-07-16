@@ -484,8 +484,12 @@ const MetricCard = ({
       style={{
         minHeight: '300px',
         borderRadius: isExpanded ? '20px' : '15px',
-        backgroundImage: `linear-gradient(135deg, ${accentColor}20, ${accentColor}05)`,
-        border: `2px solid ${accentColor}30`,
+        backgroundImage: isExpanded 
+          ? `linear-gradient(135deg, ${accentColor}20, ${accentColor}05)`
+          : `linear-gradient(135deg, rgba(75, 85, 99, 0.2), rgba(55, 65, 81, 0.1))`,
+        border: isExpanded 
+          ? `2px solid ${accentColor}30`
+          : `2px solid rgba(107, 114, 128, 0.3)`,
         transformOrigin: 'bottom center',
       }}
       onMouseEnter={() => setHovered(true)}
@@ -505,9 +509,12 @@ const MetricCard = ({
       <motion.div
         className="absolute inset-0 opacity-10"
         style={{
-          backgroundImage: `
+          backgroundImage: isExpanded ? `
             linear-gradient(90deg, ${accentColor} 1px, transparent 1px),
             linear-gradient(${accentColor} 1px, transparent 1px)
+          ` : `
+            linear-gradient(90deg, rgba(156, 163, 175, 0.5) 1px, transparent 1px),
+            linear-gradient(rgba(156, 163, 175, 0.5) 1px, transparent 1px)
           `,
           backgroundSize: '20px 20px'
         }}
@@ -542,7 +549,7 @@ const MetricCard = ({
             style={{
               width: isExpanded ? '40px' : '30px',
               height: isExpanded ? '40px' : '30px',
-              color: accentColor,
+              color: isExpanded ? accentColor : 'rgba(107, 114, 128, 0.8)',
             }}
             animate={{
               scale: isExpanded ? 1.1 : 1,
@@ -604,7 +611,7 @@ const MetricCard = ({
             style={{
               width: '30px',
               height: '30px',
-              color: accentColor,
+              color: isExpanded ? accentColor : 'rgba(107, 114, 128, 0.8)',
             }}
             animate={{
               scale: isExpanded ? 0.8 : 1,
@@ -616,8 +623,10 @@ const MetricCard = ({
           
           {/* Metric text positioned below icon */}
           <div className="text-sm sm:text-base md:text-lg lg:text-xl font-satoshi font-black text-white text-center" style={{ 
-            color: accentColor,
-            textShadow: `0 0 15px ${accentColor}70`,
+            color: isExpanded ? accentColor : 'rgba(156, 163, 175, 0.9)',
+            textShadow: isExpanded 
+              ? `0 0 15px ${accentColor}70`
+              : `0 0 10px rgba(156, 163, 175, 0.3)`,
             writingMode: 'vertical-rl',
             textOrientation: 'mixed'
           }}>
@@ -630,13 +639,15 @@ const MetricCard = ({
       <motion.div
         className="absolute inset-0 rounded-full pointer-events-none"
         style={{
-          border: `2px solid ${accentColor}`,
+          border: isExpanded 
+            ? `2px solid ${accentColor}`
+            : `2px solid rgba(107, 114, 128, 0.4)`,
           borderRadius: isExpanded ? '20px' : '15px',
         }}
         animate={{
           boxShadow: isExpanded 
             ? `0 0 30px ${accentColor}40, inset 0 0 30px ${accentColor}20` 
-            : `0 0 10px ${accentColor}30`,
+            : `0 0 10px rgba(107, 114, 128, 0.2)`,
         }}
         transition={{ duration: 0.7 }}
       />

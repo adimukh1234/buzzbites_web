@@ -2,7 +2,6 @@
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import FuturisticOverlay from './FuturisticOverlay';
-import ScrambleButton from './ScrambleButton';
 import Link from 'next/link';
 
 export default function HeroSection() {
@@ -58,10 +57,9 @@ export default function HeroSection() {
         
           
           <Link href="/product">
-            <ScrambleButton 
-              text="Explore Instacon →" 
-              className="glow text-sm sm:text-base font-satoshi font-bold bg-yellow-500 hover:bg-yellow-600 px-6 py-3 sm:px-8 sm:py-3"
-            />
+            <button className="glow text-sm sm:text-base font-satoshi font-bold bg-yellow-500 hover:bg-yellow-600 px-6 py-3 sm:px-8 sm:py-3 text-black rounded-lg transition-colors duration-300">
+              Explore Instacon →
+            </button>
           </Link>
         </div>
       </div>
