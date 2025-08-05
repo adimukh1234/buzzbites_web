@@ -10,8 +10,8 @@ import NavBar from "../../../components/NavBar";
 // Lazy load Spline to improve initial load time
 const LazySpline = dynamic(() => import('@splinetool/react-spline'), {
   loading: () => (
-    <div className="w-full h-[800px] bg-gray-900/50 animate-pulse rounded-lg flex items-center justify-center">
-      <div className="text-white text-lg">Loading 3D Model...</div>
+    <div className="w-full h-full bg-gray-900/50 animate-pulse rounded-lg flex items-center justify-center">
+      <div className="text-white text-sm sm:text-base md:text-lg">Loading 3D Model...</div>
     </div>
   ),
   ssr: false
@@ -160,12 +160,12 @@ export default function ProductPage() {
           scale: heroScale 
         }}
       >
-        <div className="mx-auto px-8 py-16 max-w-7xl w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16 lg:py-20 max-w-7xl w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
             
             {/* Left Content with Staggered Animation */}
             <motion.div 
-              className="space-y-8"
+              className="space-y-6 sm:space-y-8 text-center lg:text-left order-2 lg:order-1"
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ 
@@ -175,7 +175,7 @@ export default function ProductPage() {
               }}
             >
               <motion.h1 
-                className="text-5xl lg:text-6xl font-bold text-white leading-tight"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-white leading-tight"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -184,7 +184,7 @@ export default function ProductPage() {
               </motion.h1>
               
               <motion.p 
-                className="text-xl text-gray-300 leading-relaxed"
+                className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
@@ -194,33 +194,47 @@ export default function ProductPage() {
               </motion.p>
 
               <motion.div 
-                className="pt-8"
+                className="pt-4 sm:pt-6 md:pt-8"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <motion.button 
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-center lg:justify-start">
+                  <a 
+                    href="https://calendly.com/buzzbites/instacon"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto"
                   >
-                    Request a Demo
-                  </motion.button>
-                  <motion.button 
-                    className="border border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    <motion.button 
+                      className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Request a Demo
+                    </motion.button>
+                  </a>
+                  <a 
+                    href="https://play.google.com/store/apps/details?id=com.buzzbites.instacon&hl=en&gl=US"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto"
                   >
-                    Download App
-                  </motion.button>
+                    <motion.button 
+                      className="w-full sm:w-auto border border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Download App
+                    </motion.button>
+                  </a>
                 </div>
               </motion.div>
             </motion.div>
 
             {/* Right Content - 3D Model with Enhanced Parallax */}
             <motion.div 
-              className="flex justify-center items-center relative"
+              className="flex justify-center items-center relative order-1 lg:order-2"
               style={{ 
                 y: modelY,
                 rotateY: modelRotate,
@@ -228,7 +242,7 @@ export default function ProductPage() {
               }}
             >
               <motion.div 
-                className="w-full h-[800px] relative overflow-visible"
+                className="w-full h-[300px] xs:h-[350px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] 2xl:h-[800px] relative overflow-hidden rounded-lg"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, delay: 0.5 }}
@@ -249,8 +263,8 @@ export default function ProductPage() {
                 
                 {/* 3D Model - Lazy Loaded for Performance */}
                 <Suspense fallback={
-                  <div className="w-full h-[800px] bg-gray-900/50 animate-pulse rounded-lg flex items-center justify-center">
-                    <div className="text-white text-lg">Loading 3D Model...</div>
+                  <div className="w-full h-full bg-gray-900/50 animate-pulse rounded-lg flex items-center justify-center">
+                    <div className="text-white text-sm sm:text-base md:text-lg">Loading 3D Model...</div>
                   </div>
                 }>
                   <LazySpline
@@ -274,7 +288,7 @@ export default function ProductPage() {
 
       {/* Seamless Transition Area - Simplified for performance */}
       <motion.div 
-        className="relative h-16 overflow-hidden z-15 bg-gradient-to-b from-black/50 to-gray-900/50"
+        className="relative h-8 sm:h-12 md:h-16 overflow-hidden z-15 bg-gradient-to-b from-black/50 to-gray-900/50"
         style={{ y: useSpring(useTransform(scrollYProgress, [0.3, 0.7], [0, -50]), springConfig) }}
       >
         {[...Array(6)].map((_, i) => (
@@ -303,7 +317,7 @@ export default function ProductPage() {
 
       {/* TitleStack Section with Seamless Integration */}
       <motion.div 
-        className="relative z-20 -mt-4"
+        className="relative z-20 mt-0"
         style={{ 
           y: useSpring(useTransform(scrollYProgress, [0.4, 1], [30, -15]), springConfig),
           opacity: useSpring(useTransform(scrollYProgress, [0.3, 0.5], [0, 1]), springConfig)
@@ -314,7 +328,7 @@ export default function ProductPage() {
 
       {/* Key Features Section */}
       <motion.section 
-        className="relative min-h-[80vh] bg-gradient-to-b from-gray-900 via-black to-gray-800 z-20 overflow-hidden -mt-16"
+        className="relative min-h-[80vh] bg-gradient-to-b from-gray-900 via-black to-gray-800 z-20 overflow-hidden mt-0"
         style={{ 
           y: useSpring(useTransform(scrollYProgress, [0.6, 1], [100, 0]), springConfig) 
         }}
@@ -345,7 +359,7 @@ export default function ProductPage() {
           ))}
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-8 py-16">{/* Reduced padding */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
           <motion.div 
             className="text-center space-y-6"
             initial={{ opacity: 0, y: 30 }}
@@ -353,15 +367,15 @@ export default function ProductPage() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl lg:text-5xl font-bold text-white">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white">
               Key <span className="text-blue-500">Features</span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
               Everything you need to manage your field workforce effectively, all in one powerful platform.
             </p>
             
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12"
               variants={{
                 hidden: {},
                 visible: {
@@ -403,7 +417,7 @@ export default function ProductPage() {
               ].map((feature, i) => (
                 <motion.div
                   key={i}
-                  className="bg-gray-900/60 backdrop-blur-sm border border-gray-700 rounded-lg p-5 text-left hover:bg-gray-900/80 transition-all duration-300"
+                  className="bg-gray-900/60 backdrop-blur-sm border border-gray-700 rounded-lg p-4 sm:p-5 text-left hover:bg-gray-900/80 transition-all duration-300"
                   variants={{
                     hidden: { opacity: 0, y: 20 },
                     visible: { opacity: 1, y: 0 }
@@ -414,9 +428,9 @@ export default function ProductPage() {
                     transition: { duration: 0.2 }
                   }}
                 >
-                  <div className="text-3xl mb-4">{feature.icon}</div>
-                  <h3 className="text-xl font-semibold text-white mb-4">{feature.title}</h3>
-                  <p className="text-gray-400">{feature.desc}</p>
+                  <div className="text-2xl sm:text-3xl mb-3 sm:mb-4">{feature.icon}</div>
+                  <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">{feature.title}</h3>
+                  <p className="text-sm sm:text-base text-gray-400">{feature.desc}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -426,7 +440,7 @@ export default function ProductPage() {
 
       {/* Why Teams Choose Instacon Section */}
       <motion.section 
-        className="relative min-h-[75vh] bg-gradient-to-b from-gray-800 via-gray-900 to-black z-20 overflow-hidden -mt-8"
+        className="relative min-h-[75vh] bg-gradient-to-b from-gray-800 via-gray-900 to-black z-20 overflow-hidden mt-0"
         style={{ 
           y: useSpring(useTransform(scrollYProgress, [0.7, 1], [50, 0]), springConfig) 
         }}
@@ -457,33 +471,26 @@ export default function ProductPage() {
           ))}
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-8 py-16">{/* Reduced padding */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
             
             {/* Left: Why Teams Choose */}
             <motion.div 
-              className="space-y-6"
+              className="space-y-6 text-center lg:text-left"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl lg:text-5xl font-bold text-white">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white">
                 Why Teams Choose <span className="text-red-500">Instacon</span>
               </h2>
               
               <div className="space-y-3">
-                {/*
-                  "Reduces manual reporting",
-                  "Eliminates fake attendance",
-                  "Centralizes task updates & location trails",
-                  "Boosts accountability & trust in distributed teams",
-                  "Works seamlessly across industries: Sales, Logistics, FMCG, Insurance, and more"
-                */}
                 {["Reduces manual reporting", "Eliminates fake attendance", "Centralizes task updates & location trails", "Boosts accountability & trust in distributed teams", "Works seamlessly across industries: Sales, Logistics, FMCG, Insurance, and more"].map((benefit, i) => (
                   <motion.div
                     key={i}
-                    className="flex items-start space-x-3"
+                    className="flex items-start space-x-3 justify-center lg:justify-start"
                     initial={{ opacity: 0, x: -15 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.4, delay: i * 0.08 }}
@@ -492,7 +499,7 @@ export default function ProductPage() {
                     <div className="flex-shrink-0 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs font-bold mt-1">
                       ✓
                     </div>
-                    <p className="text-gray-300 leading-relaxed">{benefit}</p>
+                    <p className="text-sm sm:text-base text-gray-300 leading-relaxed text-left">{benefit}</p>
                   </motion.div>
                 ))}
               </div>
@@ -500,53 +507,73 @@ export default function ProductPage() {
 
             {/* Right: Get Instacon Today */}
             <motion.div 
-              className="bg-gray-900/60 backdrop-blur-sm border border-gray-700 rounded-lg p-6 text-center"
+              className="bg-gray-900/60 backdrop-blur-sm border border-gray-700 rounded-lg p-4 sm:p-6 text-center"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-bold text-white mb-3">
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
                 Get <span className="text-blue-500">Instacon</span> Today
               </h3>
-              <p className="text-gray-300 mb-5">
+              <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-5">
                 Available on Android & iOS. Simple to set up. Easy to scale.
                 Let your workforce work smarter — from anywhere.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-3 justify-center mb-5">
-                <motion.button 
-                  className="bg-black text-white px-5 py-2.5 rounded-lg font-semibold border border-gray-600 hover:border-white transition-all duration-300 flex items-center justify-center space-x-2 text-sm"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+              <div className="flex flex-col sm:flex-row gap-3 justify-center mb-4 sm:mb-5">
+                <a 
+                  href="https://play.google.com/store/apps/details?id=com.buzzbites.instacon&hl=en&gl=US"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto"
                 >
-                  <span>📱</span>
-                  <span>Play Store</span>
-                </motion.button>
-                <motion.button 
-                  className="bg-black text-white px-5 py-2.5 rounded-lg font-semibold border border-gray-600 hover:border-white transition-all duration-300 flex items-center justify-center space-x-2 text-sm"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  <motion.button 
+                    className="w-full bg-black text-white px-4 sm:px-5 py-2.5 rounded-lg font-semibold border border-gray-600 hover:border-white transition-all duration-300 flex items-center justify-center space-x-2 text-xs sm:text-sm"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <span>📱</span>
+                    <span>Play Store</span>
+                  </motion.button>
+                </a>
+                <a 
+                  href="https://apps.apple.com/in/app/instacon/id1585127082"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto"
                 >
-                  <span>🍎</span>
-                  <span>App Store</span>
-                </motion.button>
+                  <motion.button 
+                    className="w-full bg-black text-white px-4 sm:px-5 py-2.5 rounded-lg font-semibold border border-gray-600 hover:border-white transition-all duration-300 flex items-center justify-center space-x-2 text-xs sm:text-sm"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <span>🍎</span>
+                    <span>App Store</span>
+                  </motion.button>
+                </a>
               </div>
               
-              <motion.button 
-                className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-red-500/25 w-full mb-5"
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.99 }}
+              <a 
+                href="https://calendly.com/buzzbites/instacon"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Request a Demo
-              </motion.button>
+                <motion.button 
+                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-red-500/25 w-full mb-4 sm:mb-5 text-sm sm:text-base"
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
+                >
+                  Request a Demo
+                </motion.button>
+              </a>
               
-              <div className="border-t border-gray-700 pt-5">
-                <h4 className="text-lg font-semibold text-white mb-2">Need a Custom Use Case?</h4>
-                <p className="text-gray-300 mb-3 text-sm">
+              <div className="border-t border-gray-700 pt-4 sm:pt-5">
+                <h4 className="text-base sm:text-lg font-semibold text-white mb-2">Need a Custom Use Case?</h4>
+                <p className="text-gray-300 mb-3 text-xs sm:text-sm">
                   Whether you're managing 50 or 1,000 field employees, Instacon adapts to your workflow.
                 </p>
-                <div className="space-y-1 text-sm text-gray-400">
+                <div className="space-y-1 text-xs sm:text-sm text-gray-400">
                   <p>📩 Email us at: <span className="text-blue-400">support@instacon.co.in</span></p>
                   <p>📞 Contact Us: <span className="text-blue-400">9903294089</span></p>
                 </div>

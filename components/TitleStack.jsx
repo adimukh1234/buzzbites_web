@@ -62,15 +62,15 @@ export default function TitleStack() {
   // Don't render until client-side to prevent hydration issues
   if (!isClient) {
     return (
-      <section className="relative min-h-screen w-full text-white flex items-center justify-center px-6 py-16 overflow-hidden">
-        <div className="relative z-10 max-w-7xl w-full grid md:grid-cols-2 gap-16 items-center">
-          <div className="flex flex-col gap-8">
+      <section className="relative min-h-screen w-full text-white flex items-center justify-center px-4 sm:px-6 py-8 sm:py-12 md:py-16 overflow-hidden">
+        <div className="relative z-10 max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
+          <div className="flex flex-col gap-6 sm:gap-8 text-center md:text-left">
             <div className="animate-pulse">
-              <div className="h-12 bg-gray-700 rounded mb-4"></div>
-              <div className="h-6 bg-gray-700 rounded mb-8"></div>
+              <div className="h-8 sm:h-10 md:h-12 bg-gray-700 rounded mb-4"></div>
+              <div className="h-4 sm:h-5 md:h-6 bg-gray-700 rounded mb-6 sm:mb-8"></div>
             </div>
           </div>
-          <div className="w-full h-[600px] bg-gray-800 rounded-lg animate-pulse"></div>
+          <div className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] bg-gray-800 rounded-lg animate-pulse"></div>
         </div>
       </section>
     );
@@ -79,7 +79,7 @@ export default function TitleStack() {
   return (
     <section 
       ref={sectionRef}
-      className="relative min-h-screen w-full text-white flex items-center justify-center px-6 py-16 overflow-hidden"
+      className="relative min-h-screen w-full text-white flex items-center justify-center px-4 sm:px-6 py-8 sm:py-12 md:py-16 overflow-hidden"
     >
       {/* Background with gradient to match other sections */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-black to-gray-800 z-0"></div>
@@ -112,11 +112,11 @@ export default function TitleStack() {
       </div>
       
       {/* Content with proper z-index */}
-      <div className="relative z-10 max-w-7xl w-full grid md:grid-cols-2 gap-16 items-center">
+      <div className="relative z-10 max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
         
         {/* Left Content Block */}
         <motion.div 
-          className="flex flex-col gap-8"
+          className="flex flex-col gap-6 sm:gap-8 text-center md:text-left order-2 md:order-1"
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
@@ -132,21 +132,22 @@ export default function TitleStack() {
               transition={{ duration: 0.2, ease: 'easeOut' }}
               style={{ willChange: 'opacity, transform' }}
             >
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-satoshi font-black text-white leading-tight mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-satoshi font-black text-white leading-tight mb-4 sm:mb-6">
                 {displayContent?.title || defaultContent.title}
               </h2>
-              <p className="text-lg font-satoshi font-regular text-gray-300 leading-relaxed max-w-lg">
+              <p className="text-sm sm:text-base md:text-lg font-satoshi font-regular text-gray-300 leading-relaxed max-w-lg mx-auto md:mx-0">
                 {displayContent?.description || defaultContent.description}
               </p>
             </motion.div>
-          </AnimatePresence>          {/* Simple Title List */}          
-          <div className="flex flex-col gap-2 mt-12">
+          </AnimatePresence>          
+          {/* Simple Title List */}          
+          <div className="flex flex-col gap-2 mt-8 sm:mt-12">
             {sections.map((section) => (
               <motion.button
                 key={section.id}
                 onMouseEnter={() => setHoveredSection(section.id)}
                 onMouseLeave={() => setHoveredSection(null)}
-                className={`text-left py-3 px-4 transition-all duration-300 relative group border-none bg-transparent cursor-pointer rounded-lg ${
+                className={`text-left py-2 sm:py-3 px-3 sm:px-4 transition-all duration-300 relative group border-none bg-transparent cursor-pointer rounded-lg ${
                   hoveredSection === section.id
                     ? 'text-white opacity-100 bg-gray-900/30 border-l-2 border-blue-500'
                     : hoveredSection && hoveredSection !== section.id
@@ -156,28 +157,28 @@ export default function TitleStack() {
                 whileHover={{ x: 4 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className="flex items-center space-x-4">
-                  <div className={`w-6 h-0.5 transition-all duration-300 ${
+                <div className="flex items-center space-x-3 sm:space-x-4">
+                  <div className={`w-4 sm:w-6 h-0.5 transition-all duration-300 ${
                     hoveredSection === section.id 
                       ? 'bg-blue-500' 
                       : 'bg-gray-600'
                   }`} />
-                  <span className="text-base font-medium">{section.label}</span>
+                  <span className="text-sm sm:text-base font-medium">{section.label}</span>
                 </div>
               </motion.button>
             ))}
           </div>
 
           {/* Providers section */}
-          <div className="pt-8 border-t border-gray-700 mt-8">
-            <p className="text-sm text-blue-500 uppercase tracking-wide mb-4 font-medium">
+          <div className="pt-6 sm:pt-8 border-t border-gray-700 mt-6 sm:mt-8">
+            <p className="text-xs sm:text-sm text-blue-500 uppercase tracking-wide mb-3 sm:mb-4 font-medium">
               TRUSTED BY TEAMS ACROSS INDUSTRIES:
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-2 sm:gap-4 justify-center md:justify-start">
               {['Sales Teams', 'Logistics', 'FMCG', 'Insurance', 'Field Services'].map((industry, i) => (
                 <span 
                   key={industry}
-                  className={`text-sm transition-colors duration-300 ${
+                  className={`text-xs sm:text-sm transition-colors duration-300 ${
                     i % 2 === 0 ? 'text-red-400' : 'text-blue-400'
                   }`}
                 >
@@ -190,13 +191,13 @@ export default function TitleStack() {
 
         {/* Right Image Area */}
         <motion.div 
-          className="flex justify-center items-center relative"
+          className="flex justify-center items-center relative order-1 md:order-2"
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <div className="w-full h-[600px] relative overflow-hidden rounded-lg border border-gray-700/30">
+          <div className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] relative overflow-hidden rounded-lg border border-gray-700/30">
             <AnimatePresence mode="wait" initial={false}>
               {hoveredSection ? (
                 <motion.div
