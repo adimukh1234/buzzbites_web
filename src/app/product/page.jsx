@@ -1,11 +1,21 @@
 'use client';
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, Suspense } from "react";
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import dynamic from 'next/dynamic';
 import '../globals.css';
-import Spline from '@splinetool/react-spline';
 import TitleStack from "../../../components/TitleStack";
 import NavBar from "../../../components/NavBar";
+
+// Lazy load Spline to improve initial load time
+const LazySpline = dynamic(() => import('@splinetool/react-spline'), {
+  loading: () => (
+    <div className="w-full h-[800px] bg-gray-900/50 animate-pulse rounded-lg flex items-center justify-center">
+      <div className="text-white text-lg">Loading 3D Model...</div>
+    </div>
+  ),
+  ssr: false
+});
 
 export default function ProductPage() {
   const [isClient, setIsClient] = useState(false);
@@ -237,53 +247,55 @@ export default function ProductPage() {
                   }}
                 />
                 
-                {/* 3D Model */}
-                <Spline
-                  scene="/tech_inspired_3_d_assets_location.spline"
-                  data-lenis-prevent
-                  style={{ 
-                    width: '150%', 
-                    height: '120%', 
-                    marginLeft: '-20%', 
-                    marginTop: '-5%',  
-                    transform: 'translateY(-50px) scale(1.1)', 
-                    border: 'none',
-                    outline: 'none',
-                    background: 'transparent',
-                    pointerEvents: 'none' 
-                  }} 
-                />
+                {/* 3D Model - Lazy Loaded for Performance */}
+                <Suspense fallback={
+                  <div className="w-full h-[800px] bg-gray-900/50 animate-pulse rounded-lg flex items-center justify-center">
+                    <div className="text-white text-lg">Loading 3D Model...</div>
+                  </div>
+                }>
+                  <LazySpline
+                    scene="/tech_inspired_3_d_assets_location.spline"
+                    data-lenis-prevent
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      border: 'none',
+                      outline: 'none',
+                      background: 'transparent',
+                      pointerEvents: 'none' 
+                    }} 
+                  />
+                </Suspense>
               </motion.div>
             </motion.div>
           </div>
         </div>
       </motion.section>
 
-      {/* Seamless Transition Area */}
+      {/* Seamless Transition Area - Simplified for performance */}
       <motion.div 
         className="relative h-16 overflow-hidden z-15 bg-gradient-to-b from-black/50 to-gray-900/50"
         style={{ y: useSpring(useTransform(scrollYProgress, [0.3, 0.7], [0, -50]), springConfig) }}
       >
-        {[...Array(12)].map((_, i) => (
+        {[...Array(6)].map((_, i) => (
           <motion.div
             key={i}
             className={`absolute w-1 h-1 rounded-full ${
-              i % 2 === 0 ? 'bg-red-400/40' : 'bg-blue-400/40'
+              i % 2 === 0 ? 'bg-red-400/30' : 'bg-blue-400/30'
             }`}
             style={{
-              left: `${5 + i * 8}%`,
+              left: `${10 + i * 15}%`,
               top: `${30 + Math.sin(i) * 20}%`,
             }}
             animate={{
-              y: [0, -30, 0],
-              opacity: [0.4, 0.8, 0.4],
-              scale: [1, 1.2, 1],
+              y: [0, -20, 0],
+              opacity: [0.3, 0.6, 0.3],
             }}
             transition={{
-              duration: 2 + i * 0.3,
+              duration: 3 + i * 0.2,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: i * 0.1,
+              delay: i * 0.15,
             }}
           />
         ))}
@@ -308,27 +320,26 @@ export default function ProductPage() {
         }}
       >
         <div className="absolute inset-0">
-          {/* Animated background pattern */}
-          {isClient && [...Array(10)].map((_, i) => (
+          {/* Animated background pattern - Reduced for performance */}
+          {isClient && [...Array(5)].map((_, i) => (
             <motion.div
               key={i}
-              className={`absolute w-1.5 h-1.5 rounded-full ${
-                i % 2 === 0 ? 'bg-red-500/15' : 'bg-blue-500/15'
+              className={`absolute w-1 h-1 rounded-full ${
+                i % 2 === 0 ? 'bg-red-500/20' : 'bg-blue-500/20'
               }`}
               style={{
                 left: `${generateConsistentRandom(i * 123) * 100}%`,
                 top: `${generateConsistentRandom(i * 456) * 100}%`,
               }}
               animate={{
-                scale: [1, 1.8, 1],
-                opacity: [0.15, 0.4, 0.15],
-                rotate: [0, 360],
+                scale: [1, 1.3, 1],
+                opacity: [0.2, 0.4, 0.2],
               }}
               transition={{
-                duration: 6 + generateConsistentRandom(i * 789) * 3,
+                duration: 5 + generateConsistentRandom(i * 789) * 2,
                 repeat: Infinity,
-                ease: "linear",
-                delay: generateConsistentRandom(i * 101) * 4,
+                ease: "easeInOut",
+                delay: generateConsistentRandom(i * 101) * 3,
               }}
             />
           ))}
@@ -421,24 +432,23 @@ export default function ProductPage() {
         }}
       >
         <div className="absolute inset-0">
-          {/* Animated background pattern */}
-          {isClient && [...Array(12)].map((_, i) => (
+          {/* Animated background pattern - Reduced for performance */}
+          {isClient && [...Array(6)].map((_, i) => (
             <motion.div
               key={i}
               className={`absolute w-1 h-1 rounded-full ${
-                i % 3 === 0 ? 'bg-blue-500/25' : i % 3 === 1 ? 'bg-red-500/25' : 'bg-gray-500/25'
+                i % 3 === 0 ? 'bg-blue-500/20' : i % 3 === 1 ? 'bg-red-500/20' : 'bg-gray-500/20'
               }`}
               style={{
                 left: `${generateConsistentRandom(i * 234) * 100}%`,
                 top: `${generateConsistentRandom(i * 567) * 100}%`,
               }}
               animate={{
-                scale: [1, 1.3, 1],
-                opacity: [0.25, 0.5, 0.25],
-                y: [0, -20, 0],
+                scale: [1, 1.2, 1],
+                opacity: [0.2, 0.4, 0.2],
               }}
               transition={{
-                duration: 4 + generateConsistentRandom(i * 890) * 3,
+                duration: 5 + generateConsistentRandom(i * 890) * 2,
                 repeat: Infinity,
                 ease: "easeInOut",
                 delay: generateConsistentRandom(i * 202) * 2,
