@@ -1,0 +1,157 @@
+{
+  "images": {
+    "1080x1350_Real_Time_Tracking": {
+      "avif": {
+        "desktop": "\\optimized\\1080x1350_Real_Time_Tracking-desktop.avif",
+        "mobile": "\\optimized\\1080x1350_Real_Time_Tracking-mobile.avif",
+        "tablet": "\\optimized\\1080x1350_Real_Time_Tracking-tablet.avif"
+      },
+      "jpg": {
+        "desktop": "\\optimized\\1080x1350_Real_Time_Tracking-desktop.jpg",
+        "mobile": "\\optimized\\1080x1350_Real_Time_Tracking-mobile.jpg",
+        "tablet": "\\optimized\\1080x1350_Real_Time_Tracking-tablet.jpg"
+      },
+      "webp": {
+        "desktop": "\\optimized\\1080x1350_Real_Time_Tracking-desktop.webp",
+        "mobile": "\\optimized\\1080x1350_Real_Time_Tracking-mobile.webp",
+        "tablet": "\\optimized\\1080x1350_Real_Time_Tracking-tablet.webp"
+      }
+    },
+    "1080x1350_visit_Report": {
+      "avif": {
+        "desktop": "\\optimized\\1080x1350_visit_Report-desktop.avif",
+        "mobile": "\\optimized\\1080x1350_visit_Report-mobile.avif",
+        "tablet": "\\optimized\\1080x1350_visit_Report-tablet.avif"
+      },
+      "jpg": {
+        "desktop": "\\optimized\\1080x1350_visit_Report-desktop.jpg",
+        "mobile": "\\optimized\\1080x1350_visit_Report-mobile.jpg",
+        "tablet": "\\optimized\\1080x1350_visit_Report-tablet.jpg"
+      },
+      "webp": {
+        "desktop": "\\optimized\\1080x1350_visit_Report-desktop.webp",
+        "mobile": "\\optimized\\1080x1350_visit_Report-mobile.webp",
+        "tablet": "\\optimized\\1080x1350_visit_Report-tablet.webp"
+      }
+    },
+    "1080x1350_workface_Management": {
+      "avif": {
+        "desktop": "\\optimized\\1080x1350_workface_Management-desktop.avif",
+        "mobile": "\\optimized\\1080x1350_workface_Management-mobile.avif",
+        "tablet": "\\optimized\\1080x1350_workface_Management-tablet.avif"
+      },
+      "jpg": {
+        "desktop": "\\optimized\\1080x1350_workface_Management-desktop.jpg",
+        "mobile": "\\optimized\\1080x1350_workface_Management-mobile.jpg",
+        "tablet": "\\optimized\\1080x1350_workface_Management-tablet.jpg"
+      },
+      "webp": {
+        "desktop": "\\optimized\\1080x1350_workface_Management-desktop.webp",
+        "mobile": "\\optimized\\1080x1350_workface_Management-mobile.webp",
+        "tablet": "\\optimized\\1080x1350_workface_Management-tablet.webp"
+      }
+    },
+    "adoption": {
+      "undefined": {
+        "momentum": "\\optimized\\adoption-momentum-2023-tablet.webp"
+      }
+    },
+    "al": {
+      "undefined": {
+        "scaling": "\\optimized\\al-scaling-2020-tablet.webp"
+      }
+    },
+    "Buzz_logo": {
+      "undefined": {
+        "01": "\\optimized\\Buzz_logo-01-tablet.webp"
+      }
+    },
+    "foundation": {
+      "undefined": {
+        "2018": "\\optimized\\foundation-2018-tablet.webp"
+      }
+    },
+    "journey": {
+      "undefined": {
+        "hero": "\\optimized\\journey-hero-image-tablet.webp"
+      }
+    },
+    "Logo": {
+      "avif": {
+        "mobile": "\\optimized\\Logo-mobile.avif"
+      },
+      "jpg": {
+        "mobile": "\\optimized\\Logo-mobile.jpg"
+      },
+      "webp": {
+        "mobile": "\\optimized\\Logo-mobile.webp"
+      }
+    },
+    "media": {
+      "undefined": {
+        "tech": "\\optimized\\media-tech-chapter-tablet.webp"
+      }
+    },
+    "only_Text_logo": {
+      "avif": {
+        "mobile": "\\optimized\\only_Text_logo-mobile.avif"
+      },
+      "jpg": {
+        "mobile": "\\optimized\\only_Text_logo-mobile.jpg"
+      },
+      "webp": {
+        "mobile": "\\optimized\\only_Text_logo-mobile.webp"
+      }
+    },
+    "pexels": {
+      "undefined": {
+        "alxs": "\\optimized\\samples\\pexels-alxs-919734-tablet.webp",
+        "joshsorenson": "\\optimized\\samples\\pexels-joshsorenson-1714208-tablet.webp",
+        "junior": "\\optimized\\samples\\pexels-junior-teixeira-1064069-2047905-tablet.webp",
+        "luis": "\\optimized\\samples\\pexels-luis-gomes-166706-546819-tablet.webp"
+      }
+    },
+    "smart_attendance": {
+      "avif": {
+        "desktop": "\\optimized\\smart_attendance-desktop.avif",
+        "mobile": "\\optimized\\smart_attendance-mobile.avif",
+        "tablet": "\\optimized\\smart_attendance-tablet.avif"
+      },
+      "jpg": {
+        "desktop": "\\optimized\\smart_attendance-desktop.jpg",
+        "mobile": "\\optimized\\smart_attendance-mobile.jpg",
+        "tablet": "\\optimized\\smart_attendance-tablet.jpg"
+      },
+      "webp": {
+        "desktop": "\\optimized\\smart_attendance-desktop.webp",
+        "mobile": "\\optimized\\smart_attendance-mobile.webp",
+        "tablet": "\\optimized\\smart_attendance-tablet.webp"
+      }
+    },
+    "strategic": {
+      "undefined": {
+        "pivot": "\\optimized\\strategic-pivot-2021-tablet.webp"
+      }
+    }
+  },
+  "blurDataURLs": {
+    "1080x1350_Real_Time_Tracking": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAABQAwCdASoUABMAPzmGuFO0qSUisAgCkCcJYgDCgDGlwPQiAAD+7hxEzjYf3ap+9PevVUkoaLEeb5xOlnlAAA==",
+    "1080x1350_visit_Report": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAADwBACdASoUABMAPzmGvlcvKCYjsBgIAeAnCWIArAALaCIpicNZsmahONf/sntxUQwA+cu1OsAMFwnFk9ayCJOeUpxMMkXIe2hNpdQKeoc4xWAtkW6mukhapAndhB75G6LPZ82Kz0Myg18wwKa3Ua9Aw7xgAA==",
+    "1080x1350_workface_Management": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAADwBACdASoUABMAPzmSwFmvKaajqAgB4CcJQBOgAhmWkZj+lX8FeAcaJ7uTu+nQ3KAA/rvaaoIK5dSaKc8YVrVJaQ6Vx4yXnOGju1t/U3sxcNfeKafEQkudZ3kJBTbMoozMYceWwadjgAYeAAA=",
+    "adoption-momentum-2023": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAQAwCdASoUAAoAPzmMu1SvKaYjMAgB4CcJQAALe0IbkAAA/udgw5Syf1D1R5P/+HVta5LFhzEyX6Df4P83MEmoLHX5VDwAAAA=",
+    "al-scaling-2020": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADQAwCdASoUAA0APzmYvlYvLCajsAgB4CcJZQDImCHgBWNaJyRCPAAA/ujGmb7vxw69SDH48IWuPi3e4FuuxIR4AAA=",
+    "Buzz_logo-01": "data:image/webp;base64,UklGRk4BAABXRUJQVlA4WAoAAAAQAAAAEwAAEwAAQUxQSLoAAAANgBjJtmlrrfPsb9v/5x+Nbfto7/3tACJiAvAnaV9wjg6i+qnywEgj6+PJRfiIaC/Mx637Vjy4+AjsmWztrspM/fwG9p6hUn48eOgMlLPgQ1r2l9LTZaC9RxjyycngijtIVb7jauUU4u71xKzf9T1VqCiLXe34cH0pNXnKrdEufXoIKNZqBXuK+nCt1e7eisX7J8ijrzY0qrGQU6HgiiVavrpjVUN2ZShV2KgS4j2gBr5VBfGu4V3DvwhWUDggbgAAALADAJ0BKhQAFAA/OY6+V68ppiOoCqngJwlsAMssEQjeKNszvIYAAP5RioULfS0AJfm71M5Zez8sAog551PyHo4bBL9plwwuoOPQDppk1laQxrt6hYm//+iD3S4FjhxBzh+YpwcZzipo/oMylAAA",
+    "foundation-2018": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAACwAwCdASoNABQAPzmIulQvKSWjMAgB4CcJQBYdgtjeE7PaQo8JoAD+yIn4PgVEsqSA0d1L1UGZhUZxEngAc32GHYKs/rgAAAA=",
+    "journey-hero-image": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADQAwCdASoUAA0APzmIvlSvKSajMAgB4CcJZQDKABugnk0IQ0V+7AAA/tj7xkIUSfmMSRmW9hy8TwMgoHpw7a/RP5UAAA==",
+    "Logo": "data:image/webp;base64,UklGRnoBAABXRUJQVlA4WAoAAAAQAAAAEwAAEwAAQUxQSMEAAAANgGTbbhpJX+GkqpmZe9b73wuNGMMcWZPiFUTEBNCqY4LOsVB/c82CyeNKZ8DB/UEZq/681TrNO7nlxyf70v34g04AhZvB/0u2e4CyV5qONm7WtrgD0/Su+asPTk1FoIkWG+H0iR5Ofj50DBARh5GU+vvqXnjxn70/JunEWltHXcSDVWV9eHzkmSqvYTuuMzQsRedYQWRTXzemKDG2+17gUCNg9n1Inhob0pPNChKF70K71sAYBQAiNQqaqDRdabUBAFZQOCCSAAAAcAQAnQEqFAAUAD85iLxUryimIygNUeAnCWwALv/sj4BIzeRRjIxY3+v6ZiAA/c9gm4WlUROblC6CJOeW97tdoJINH9VPLwwVlC3ghwwf/bWyRWdn+yj6bOO+QDCw2DjT4VJxA17KjOoeG5lBDe6us3yqa50SzoXWW/klnddr/N9+5fpbeBUgpNLWoMQlzJlmAAA=",
+    "media-tech-2019": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAQBACdASoUAA0APzmIu1QvKSYjMAgB4CcJbAC7LwAFerB5uJORrezC4AD++mV1UEdGrdxg007XmNNTA+yQ9y2QAkMspIjZ5Z2/NWa20BZE3yHKkwoRmESdq6diP9zLIECg6zhQGAA=",
+    "media-tech-chapter": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAwBACdASoUAA0APzmEuVOvKKWisAgB4CcJaACdMoM0bDUUg568IrDaRKgA4jISvob/C7vyDz4lD2Xje415tZRXOs6V1WPD8tU1p7rfKJLl0kAr1RWaF/h6aBvvZdYhVRTnwEAA",
+    "only_Text_logo": "data:image/webp;base64,UklGRvoAAABXRUJQVlA4WAoAAAAQAAAAEwAAEwAAQUxQSHkAAAANgFvbtmplHcGdAkjpvx1SMkLn2tm4k0fEBPAvGvqCTxp6dbpak0GEFF6zEOe6ua7NrfSY3TZrFTXOXG1ubjl9mCs30Zzm27tRqHXLuve9jSIutXWYra/FpvdZFuTWBbnha8gzawVdFnaFqWoJMGBNEIi3BSDe+A8BAFZQOCBaAAAA0AMAnQEqFAAUAD85jrhWrymlI6gNUeAnCUAABc4tzTGeD167HfAAAP6dmUiUxjRuEfijq2ickD1qRzSYBHR4y7m+oS1ay2XS1GYoheAnpVL4k/as+fwtwgAA",
+    "samples\\pexels-alxs-919734": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAACQAwCdASoUAA0APzmIulQvKSWjMAgB4CcJYgCsAA/cFpXg9y5QAP5xmcrCUYbIZ1o8BHMDEwJaylB2XNu6udAgjjWI5ceXG8G3SCwA",
+    "samples\\pexels-joshsorenson-1714208": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAACQAwCdASoUAA0APzmGuVOvKSWisAgB4CcJZgCdAA6uF0vCpB3QAP2rlvmDPhg9aqfMSRLLUqGerdeu0F4wMA6pL6O4UDKuflOIYAAA",
+    "samples\\pexels-junior-teixeira-1064069-2047905": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAABQAwCdASoNABQAPzmGulOvKKWisAgB4CcJZQAAW+tAwuD+wAD+68uT/LNBTkre/5hMKoAA",
+    "samples\\pexels-luis-gomes-166706-546819": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAAAwAwCdASoUAA0APzmGuVOvKSWisAgB4CcJQAAPWjf2IjUAAP7q3srWrptWCQwXmv+AsICQTtDxvegAAAA=",
+    "smart_attendance": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAABwBACdASoUABMAPzl8uFOvJyUit/VYAeAnCWwArDMYAYXSpwfla/6rgsFPSAD+40nn6/S3+HvNMk8X7ioOSPQh/ua+X/ZULfi0NCIbDq3c7FTJ8Gb7GLzxL9j7ZkVNKP8AAA==",
+    "strategic-pivot-2021": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAAAwAwCdASoUAA0APzmEuVOvKKWisAgB4CcJaWM+ADc1zXIQAP7pf1/LbGGE39sLYcoOe1oUgAA="
+  }
+}

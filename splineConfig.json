@@ -1,0 +1,29 @@
+{
+  "models": {
+    "tech_inspired_3_d_assets_location": {
+      "file": "/tech_inspired_3_d_assets_location.spline",
+      "size": "0.52MB",
+      "lastModified": "2025-06-17T10:36:26.155Z",
+      "recommended": "immediate",
+      "priority": "high"
+    },
+    "web_3_agency_saas_hero_section": {
+      "file": "/web_3_agency_saas_hero_section.spline",
+      "size": "0.12MB",
+      "lastModified": "2025-06-25T08:47:20.356Z",
+      "recommended": "immediate",
+      "priority": "high"
+    }
+  },
+  "loadingStrategy": {
+    "mobile": "lazy",
+    "tablet": "intersection",
+    "desktop": "immediate"
+  },
+  "fallbackImages": {},
+  "optimizationLevel": {
+    "mobile": "low",
+    "tablet": "medium",
+    "desktop": "high"
+  }
+}

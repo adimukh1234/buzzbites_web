@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
 const sections = [
@@ -43,10 +43,44 @@ const defaultContent = {
 
 export default function TitleStack() {
   const [hoveredSection, setHoveredSection] = useState(null);
+  const [isClient, setIsClient] = useState(false);
+  const sectionRef = useRef(null);
   const displayContent = hoveredSection ? sections.find(s => s.id === hoveredSection) : null;
 
+  // Ensure component only renders on client to prevent hydration mismatches
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Clean up any pending animations on unmount
+  useEffect(() => {
+    return () => {
+      setHoveredSection(null);
+    };
+  }, []);
+
+  // Don't render until client-side to prevent hydration issues
+  if (!isClient) {
+    return (
+      <section className="relative min-h-screen w-full text-white flex items-center justify-center px-6 py-16 overflow-hidden">
+        <div className="relative z-10 max-w-7xl w-full grid md:grid-cols-2 gap-16 items-center">
+          <div className="flex flex-col gap-8">
+            <div className="animate-pulse">
+              <div className="h-12 bg-gray-700 rounded mb-4"></div>
+              <div className="h-6 bg-gray-700 rounded mb-8"></div>
+            </div>
+          </div>
+          <div className="w-full h-[600px] bg-gray-800 rounded-lg animate-pulse"></div>
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <section className="relative min-h-screen w-full text-white flex items-center justify-center px-6 py-16 overflow-hidden">
+    <section 
+      ref={sectionRef}
+      className="relative min-h-screen w-full text-white flex items-center justify-center px-6 py-16 overflow-hidden"
+    >
       {/* Background with gradient to match other sections */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-black to-gray-800 z-0"></div>
       
@@ -54,7 +88,7 @@ export default function TitleStack() {
       <div className="absolute inset-0 z-0">
         {[...Array(8)].map((_, i) => (
           <motion.div
-            key={i}
+            key={`particle-${i}`}
             className={`absolute w-1 h-1 rounded-full ${
               i % 2 === 0 ? 'bg-red-500/20' : 'bg-blue-500/20'
             }`}
@@ -89,13 +123,14 @@ export default function TitleStack() {
           viewport={{ once: true }}
         >
           {/* Dynamic Content */}
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={hoveredSection || 'default'}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2, ease: 'easeOut' }}
+              style={{ willChange: 'opacity, transform' }}
             >
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-satoshi font-black text-white leading-tight mb-6">
                 {displayContent?.title || defaultContent.title}
@@ -162,8 +197,8 @@ export default function TitleStack() {
           viewport={{ once: true }}
         >
           <div className="w-full h-[600px] relative overflow-hidden rounded-lg border border-gray-700/30">
-            {hoveredSection ? (
-              <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait" initial={false}>
+              {hoveredSection ? (
                 <motion.div
                   key={hoveredSection}
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -171,14 +206,21 @@ export default function TitleStack() {
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.3, ease: 'easeOut' }}
                   className="w-full h-full relative"
+                  style={{ willChange: 'opacity, transform' }}
                 >
                   <Image
                     src={displayContent?.image}
-                    alt={displayContent?.title}
+                    alt={displayContent?.title || 'Feature image'}
                     fill
                     className="object-cover rounded-lg"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority={hoveredSection === 'attendance'}
                     style={{
                       filter: 'brightness(0.8) contrast(1.1)',
+                    }}
+                    onError={(e) => {
+                      console.warn('Image failed to load:', displayContent?.image);
+                      e.target.style.display = 'none';
                     }}
                   />
                   {/* Gradient overlay */}
@@ -192,17 +234,24 @@ export default function TitleStack() {
                     </div>
                   </div>
                 </motion.div>
-              </AnimatePresence>
-            ) : (
-              <div className="w-full h-full flex items-center justify-center bg-gray-900/50 backdrop-blur-sm rounded-lg border border-gray-700/30">
-                <div className="text-center space-y-4">
-                  <div className="w-16 h-16 mx-auto rounded-full bg-gray-800/50 flex items-center justify-center border border-gray-700/30">
-                    <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-red-500 rounded-full"></div>
+              ) : (
+                <motion.div
+                  key="placeholder"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="w-full h-full flex items-center justify-center bg-gray-900/50 backdrop-blur-sm rounded-lg border border-gray-700/30"
+                  style={{ willChange: 'opacity' }}
+                >
+                  <div className="text-center space-y-4">
+                    <div className="w-16 h-16 mx-auto rounded-full bg-gray-800/50 flex items-center justify-center border border-gray-700/30">
+                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-red-500 rounded-full"></div>
+                    </div>
+                    <p className="text-gray-400 text-lg">Hover over a feature to explore</p>
                   </div>
-                  <p className="text-gray-400 text-lg">Hover over a feature to explore</p>
-                </div>
-              </div>
-            )}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </motion.div>
       </div>

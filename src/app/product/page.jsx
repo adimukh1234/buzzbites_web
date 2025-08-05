@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import '../globals.css';
 import Spline from '@splinetool/react-spline';
@@ -8,6 +8,18 @@ import TitleStack from "../../../components/TitleStack";
 import NavBar from "../../../components/NavBar";
 
 export default function ProductPage() {
+  const [isClient, setIsClient] = useState(false);
+  
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+  
+  // Generate consistent random values for SSR/client consistency
+  const generateConsistentRandom = (seed) => {
+    const x = Math.sin(seed) * 10000;
+    return x - Math.floor(x);
+  };
+  
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -297,15 +309,15 @@ export default function ProductPage() {
       >
         <div className="absolute inset-0">
           {/* Animated background pattern */}
-          {[...Array(10)].map((_, i) => (
+          {isClient && [...Array(10)].map((_, i) => (
             <motion.div
               key={i}
               className={`absolute w-1.5 h-1.5 rounded-full ${
                 i % 2 === 0 ? 'bg-red-500/15' : 'bg-blue-500/15'
               }`}
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
+                left: `${generateConsistentRandom(i * 123) * 100}%`,
+                top: `${generateConsistentRandom(i * 456) * 100}%`,
               }}
               animate={{
                 scale: [1, 1.8, 1],
@@ -313,10 +325,10 @@ export default function ProductPage() {
                 rotate: [0, 360],
               }}
               transition={{
-                duration: 6 + Math.random() * 3,
+                duration: 6 + generateConsistentRandom(i * 789) * 3,
                 repeat: Infinity,
                 ease: "linear",
-                delay: Math.random() * 4,
+                delay: generateConsistentRandom(i * 101) * 4,
               }}
             />
           ))}
@@ -410,15 +422,15 @@ export default function ProductPage() {
       >
         <div className="absolute inset-0">
           {/* Animated background pattern */}
-          {[...Array(12)].map((_, i) => (
+          {isClient && [...Array(12)].map((_, i) => (
             <motion.div
               key={i}
               className={`absolute w-1 h-1 rounded-full ${
                 i % 3 === 0 ? 'bg-blue-500/25' : i % 3 === 1 ? 'bg-red-500/25' : 'bg-gray-500/25'
               }`}
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
+                left: `${generateConsistentRandom(i * 234) * 100}%`,
+                top: `${generateConsistentRandom(i * 567) * 100}%`,
               }}
               animate={{
                 scale: [1, 1.3, 1],
@@ -426,10 +438,10 @@ export default function ProductPage() {
                 y: [0, -20, 0],
               }}
               transition={{
-                duration: 4 + Math.random() * 3,
+                duration: 4 + generateConsistentRandom(i * 890) * 3,
                 repeat: Infinity,
                 ease: "easeInOut",
-                delay: Math.random() * 2,
+                delay: generateConsistentRandom(i * 202) * 2,
               }}
             />
           ))}
